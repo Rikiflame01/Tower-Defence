@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     private GameState currentState;
 
+    public Texture2D customCursorTexture;
+    public Vector2 cursorHotspot = Vector2.zero;
+
     private void Awake()
     {
         if (instance == null)
@@ -34,17 +37,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        SwitchState(GameState.Tutorial); //Initial state
-
-        //Listens to the following events
-        EventManager.instance.onTutorialMode.AddListener(() => SwitchState(GameState.Tutorial));
-        EventManager.instance.onCooldownMode.AddListener(() => SwitchState(GameState.Cooldown));
-        EventManager.instance.onPlacementMode.AddListener(() => SwitchState(GameState.Placement));
-        EventManager.instance.onUpgradeMode.AddListener(() => SwitchState(GameState.Upgrade));
-        EventManager.instance.onWaveMode.AddListener(() => SwitchState(GameState.Wave));
-        EventManager.instance.onPauseMode.AddListener(() => SwitchState(GameState.Pause));
-        EventManager.instance.onGameOverMode.AddListener(() => SwitchState(GameState.GameOver));
-        EventManager.instance.onVictoryMode.AddListener(() => SwitchState(GameState.Victory));
+        SetCustomCursor();
+        SwitchState(GameState.Tutorial);
     }
 
     public void SwitchState(GameState newState)
@@ -91,5 +85,13 @@ public class GameManager : MonoBehaviour
     public GameState GetCurrentState()
     {
         return currentState;
+    }
+
+    private void SetCustomCursor()
+    {
+        if (customCursorTexture != null)
+        {
+            Cursor.SetCursor(customCursorTexture, cursorHotspot, CursorMode.Auto);
+        }
     }
 }

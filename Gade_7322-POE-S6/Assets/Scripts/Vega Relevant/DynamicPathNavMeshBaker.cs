@@ -6,7 +6,7 @@ using Unity.AI.Navigation;
 
 public class DynamicPathNavMeshBaker : MonoBehaviour
 {
-    public float bakeDelay = 2.0f;
+    public float bakeDelay = 5.0f;
 
     void Start()
     {
