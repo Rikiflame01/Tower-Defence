@@ -27,7 +27,7 @@ public class WaveManager : MonoBehaviour
     {
         yield return new WaitUntil(() => gridGenerator != null && gridGenerator.IsGridGenerated());
 
-        List<Vector3> path = pathGenerator.FindPath(pathGenerator.GetRandomPerimeterPosition(), pathGenerator.GetCenterPosition());
+        List<Vector3> path = pathGenerator.FindPath(pathGenerator.StartPathPosition, pathGenerator.GetCenterPosition());
 
         if (path == null || path.Count == 0)
         {
@@ -38,7 +38,7 @@ public class WaveManager : MonoBehaviour
         int spawnCount = 0;
         while (spawnCount < count)
         {
-            Vector3 spawnPosition = GetValidSpawnPosition(path);
+            Vector3 spawnPosition = GetValidSpawnPosition(pathGenerator.StartPathPosition);
             if (spawnPosition != Vector3.zero)
             {
                 Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
@@ -48,17 +48,14 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private Vector3 GetValidSpawnPosition(List<Vector3> path)
+    private Vector3 GetValidSpawnPosition(Vector3 startPosition)
     {
-        foreach (Vector3 pathPosition in path)
-        {
-            Vector3 randomPosition = pathPosition + Random.insideUnitSphere * spawnRadius;
-            randomPosition.y = pathPosition.y;
+        Vector3 randomPosition = startPosition + Random.insideUnitSphere * spawnRadius;
+        randomPosition.y = startPosition.y;
 
-            if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, spawnRadius, NavMesh.AllAreas))
-            {
-                return hit.position;
-            }
+        if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, spawnRadius, NavMesh.AllAreas))
+        {
+            return hit.position;
         }
 
         return Vector3.zero;

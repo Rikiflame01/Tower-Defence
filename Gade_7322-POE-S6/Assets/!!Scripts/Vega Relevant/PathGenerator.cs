@@ -7,6 +7,7 @@ public class PathGenerator : MonoBehaviour
     public GridGenerator gridGenerator;
     public GameObject pathPrefab;
     public float pathSpacing = 1.1f;
+    public Vector3 StartPathPosition { get; private set; }
 
     private List<Vector3> directions = new List<Vector3>
     {
@@ -33,13 +34,13 @@ public class PathGenerator : MonoBehaviour
             yield break;
         }
 
-        Vector3 startPosition = GetRandomPerimeterPosition();
+        StartPathPosition = GetRandomPerimeterPosition();
         Vector3 centerPosition = GetCenterPosition();
 
-        Debug.Log("Start Position: " + startPosition);
+        Debug.Log("Start Position: " + StartPathPosition);
         Debug.Log("Center Position: " + centerPosition);
 
-        List<Vector3> path = FindPath(startPosition, centerPosition);
+        List<Vector3> path = FindPath(StartPathPosition, centerPosition);
 
         if (path == null || path.Count == 0)
         {
