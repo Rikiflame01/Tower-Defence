@@ -25,7 +25,7 @@ public class PathGenerator : MonoBehaviour
 
     private IEnumerator GeneratePath()
     {
-        yield return new WaitUntil(() => gridGenerator != null && gridGenerator.IsGridGenerated()); // Wait for the grid to be generated
+        yield return new WaitUntil(() => gridGenerator != null && gridGenerator.IsGridGenerated());
 
         if (gridGenerator == null)
         {
@@ -63,7 +63,7 @@ public class PathGenerator : MonoBehaviour
         Debug.Log("Path generated successfully.");
     }
 
-    Vector3 GetRandomPerimeterPosition()
+    public Vector3 GetRandomPerimeterPosition()
     {
         List<Vector3> perimeterPositions = new List<Vector3>();
         int maxX = gridGenerator.gridWidth - 1;
@@ -99,7 +99,7 @@ public class PathGenerator : MonoBehaviour
         return perimeterPositions[randomIndex];
     }
 
-    Vector3 GetCenterPosition()
+    public Vector3 GetCenterPosition()
     {
         float centerX = Mathf.Floor((gridGenerator.gridWidth - 1) / 2f) * pathSpacing;
         float centerY = Mathf.Floor((gridGenerator.gridHeight - 1) / 2f) * pathSpacing;
@@ -107,7 +107,7 @@ public class PathGenerator : MonoBehaviour
         return new Vector3(centerX, centerY, centerZ);
     }
 
-    List<Vector3> FindPath(Vector3 start, Vector3 goal)
+    public List<Vector3> FindPath(Vector3 start, Vector3 goal)
     {
         List<Vector3> openSet = new List<Vector3> { start };
         Dictionary<Vector3, Vector3> cameFrom = new Dictionary<Vector3, Vector3>();

@@ -15,7 +15,6 @@ public class DynamicPathNavMeshBaker : MonoBehaviour
 
     private IEnumerator BakeNavMeshesAfterDelay(float delay)
     {
-        // Wait for the specified delay
         yield return new WaitForSeconds(delay);
 
         // Find all NavMeshSurface components in the scene
