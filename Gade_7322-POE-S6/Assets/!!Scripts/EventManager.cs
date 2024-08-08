@@ -40,12 +40,42 @@ public class EventManager : MonoBehaviour
         if (onVictoryMode == null) onVictoryMode = new UnityEvent();
     }
 
-    public void TriggerTutorialMode() => onTutorialMode.Invoke();
-    public void TriggerCooldownMode() => onCooldownMode.Invoke();
-    public void TriggerPlacementMode() => onPlacementMode.Invoke();
-    public void TriggerUpgradeMode() => onUpgradeMode.Invoke();
-    public void TriggerWaveMode() => onWaveMode.Invoke();
-    public void TriggerPauseMode() => onPauseMode.Invoke();
-    public void TriggerGameOverMode() => onGameOverMode.Invoke();
-    public void TriggerVictoryMode() => onVictoryMode.Invoke();
+    public void TriggerTutorialMode()
+    {
+        GameManager.instance.SwitchState(GameManager.GameState.Tutorial);
+        onTutorialMode.Invoke();
+    }
+    public void TriggerCooldownMode()
+    {
+        GameManager.instance.SwitchState(GameManager.GameState.Cooldown);
+        onCooldownMode.Invoke();
+    }
+    public void TriggerPlacementMode() { 
+        GameManager.instance.SwitchState(GameManager.GameState.Placement);
+        onPlacementMode.Invoke(); 
+    }
+    public void TriggerUpgradeMode()
+    {
+        GameManager.instance.SwitchState(GameManager.GameState.Upgrade);
+        onUpgradeMode.Invoke();
+    }
+    public void TriggerWaveMode() { 
+        GameManager.instance.SwitchState(GameManager.GameState.Wave);
+        onWaveMode.Invoke(); 
+    }
+    public void TriggerPauseMode()
+    {
+        GameManager.instance.SwitchState(GameManager.GameState.Pause);
+        onPauseMode.Invoke();
+    }
+    public void TriggerGameOverMode()
+    {
+        GameManager.instance.SwitchState(GameManager.GameState.GameOver);
+        onGameOverMode.Invoke();
+    }
+    public void TriggerVictoryMode()
+    {
+        GameManager.instance.SwitchState(GameManager.GameState.Victory);
+        onVictoryMode.Invoke();
+    }
 }

@@ -144,7 +144,7 @@ public class PathGenerator : MonoBehaviour
 
                 if (!gridGenerator.GetCubeAtPosition(neighbor))
                 {
-                    Debug.Log("Skipped non-existing cube at: " + neighbor);
+                    
                     continue;
                 }
 
@@ -159,7 +159,7 @@ public class PathGenerator : MonoBehaviour
                     if (!openSet.Contains(neighbor))
                     {
                         openSet.Add(neighbor);
-                        Debug.Log("Added neighbor to open set: " + neighbor);
+                        
                     }
                 }
             }

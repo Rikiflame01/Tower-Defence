@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
         Victory
     }
 
-    private GameState currentState;
+    public GameState currentState;
 
     public Texture2D customCursorTexture;
     public Vector2 cursorHotspot = Vector2.zero;
@@ -53,33 +53,39 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Tutorial:
                 // Handle Tutorial mode
+                Debug.Log("GameState set to: " + state + " Actual case executed: " + GameState.Tutorial.ToString());
                 break;
             case GameState.Cooldown:
                 // Handle Cooldown mode
+                Debug.Log("GameState set to: " + state + " Actual case executed: " + GameState.Cooldown.ToString());
                 break;
             case GameState.Placement:
                 // Handle Placement mode
+                Debug.Log("GameState set to: " + state + " Actual case executed: " + GameState.Placement.ToString());
                 break;
             case GameState.Upgrade:
                 // Handle Upgrade mode
+                Debug.Log("GameState set to: " + state + " Actual case executed: " + GameState.Upgrade.ToString());
                 break;
             case GameState.Wave:
                 // Handle Wave mode
+                Debug.Log("GameState set to: " + state + " Actual case executed: " + GameState.Wave.ToString());
                 break;
             case GameState.Pause:
                 // Handle Pause mode
+                Debug.Log("GameState set to: " + state + " Actual case executed: " + GameState.Pause.ToString());
                 break;
             case GameState.GameOver:
                 // Handle Game Over mode
+                Debug.Log("GameState set to: " + state + " Actual case executed: " + GameState.GameOver.ToString());
                 break;
             case GameState.Victory:
                 // Handle Victory mode
+                Debug.Log("GameState set to: " + state + " Actual case executed: " + GameState.Victory.ToString());
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
         }
-
-        Debug.Log("Game state changed to: " + state);
     }
 
     public GameState GetCurrentState()
