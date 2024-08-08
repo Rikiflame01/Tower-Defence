@@ -6,6 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     private void Update()
     {
+        HandlePause();
+    }
+
+    private void HandlePause()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             EventManager.instance.TriggerPauseMode();

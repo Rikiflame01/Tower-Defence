@@ -27,24 +27,32 @@ public class WaveManager : MonoBehaviour
     {
         yield return new WaitUntil(() => gridGenerator != null && gridGenerator.IsGridGenerated());
 
-        List<Vector3> path = pathGenerator.FindPath(pathGenerator.StartPathPosition, pathGenerator.GetCenterPosition());
+        List<Vector3> startPositions = pathGenerator.startPositions;
 
-        if (path == null || path.Count == 0)
+        if (startPositions.Count == 0)
         {
-            Debug.LogError("No valid path found for enemy spawning.");
+            Debug.LogError("No start positions found for enemy spawning.");
             yield break;
         }
 
         int spawnCount = 0;
-        while (spawnCount < count)
+        int pathsCount = startPositions.Count;
+        int enemiesPerPath = count / pathsCount;
+        int remainder = count % pathsCount;
+
+        for (int i = 0; i < pathsCount; i++)
         {
-            Vector3 spawnPosition = GetValidSpawnPosition(pathGenerator.StartPathPosition);
-            if (spawnPosition != Vector3.zero)
+            int enemiesToSpawn = enemiesPerPath + (i < remainder ? 1 : 0);
+            for (int j = 0; j < enemiesToSpawn; j++)
             {
-                Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-                spawnCount++;
+                Vector3 spawnPosition = GetValidSpawnPosition(startPositions[i]);
+                if (spawnPosition != Vector3.zero)
+                {
+                    Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                    spawnCount++;
+                }
+                yield return new WaitForSeconds(1f);
             }
-            yield return new WaitForSeconds(1f);
         }
     }
 

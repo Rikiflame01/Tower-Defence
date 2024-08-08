@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PathGenerator : MonoBehaviour
 {
     public GridGenerator gridGenerator;
     public GameObject pathPrefab;
     public float pathSpacing = 1.1f;
+    public int numberOfPaths = 3;
     public Vector3 StartPathPosition { get; private set; }
 
     private List<Vector3> directions = new List<Vector3>
@@ -19,12 +22,16 @@ public class PathGenerator : MonoBehaviour
         Vector3.down
     };
 
+    public List<Vector3> startPositions = new List<Vector3>();
+    private List<List<Vector3>> allPaths = new List<List<Vector3>>();
+    private Dictionary<Vector3, GameObject> occupiedNodes = new Dictionary<Vector3, GameObject>();
+
     void Start()
     {
-        StartCoroutine(GeneratePath());
+        StartCoroutine(GeneratePaths());
     }
 
-    private IEnumerator GeneratePath()
+    private IEnumerator GeneratePaths()
     {
         yield return new WaitUntil(() => gridGenerator != null && gridGenerator.IsGridGenerated());
 
@@ -34,32 +41,55 @@ public class PathGenerator : MonoBehaviour
             yield break;
         }
 
-        StartPathPosition = GetRandomPerimeterPosition();
-        Vector3 centerPosition = GetCenterPosition();
-
-
-        List<Vector3> path = FindPath(StartPathPosition, centerPosition);
-
-        if (path == null || path.Count == 0)
+        for (int i = 0; i < numberOfPaths; i++)
         {
-            Debug.LogError("Path generation failed.");
-            yield break;
+            bool pathGenerated = false;
+            int attempts = 0;
+            while (!pathGenerated && attempts < 10)
+            {
+                StartPathPosition = GetRandomPerimeterPosition();
+                if (IsPositionFarEnough(StartPathPosition, 4))
+                {
+                    Vector3 centerPosition = GetCenterPosition();
+                    List<Vector3> path = FindPath(StartPathPosition, centerPosition);
+
+                    if (path != null && path.Count > 0)
+                    {
+                        allPaths.Add(path);
+                        startPositions.Add(StartPathPosition);
+                        foreach (Vector3 position in path)
+                        {
+                            if (!occupiedNodes.ContainsKey(position))
+                            {
+                                Transform topNode = gridGenerator.GetTopNodeAtPosition(position);
+                                if (topNode != null)
+                                {
+                                    GameObject pathInstance = Instantiate(pathPrefab, topNode.position, Quaternion.identity, transform);
+                                    occupiedNodes[position] = pathInstance;
+                                }
+                                else
+                                {
+                                    Debug.LogError("Top node not found at position: " + position);
+                                }
+                            }
+                        }
+
+                        Debug.Log("Path " + (i + 1) + " generated successfully.");
+                        pathGenerated = true;
+                    }
+                }
+
+                attempts++;
+            }
+
+            if (!pathGenerated)
+            {
+                Debug.LogError("Failed to generate a non-overlapping path after 10 attempts.");
+            }
         }
 
-        foreach (Vector3 position in path)
-        {
-            Transform topNode = gridGenerator.GetTopNodeAtPosition(position);
-            if (topNode != null)
-            {
-                Instantiate(pathPrefab, topNode.position, Quaternion.identity, transform);
-            }
-            else
-            {
-                Debug.LogError("Top node not found at position: " + position);
-            }
-        }
-
-        Debug.Log("Path generated successfully.");
+        //Ensures only one path has a NavMeshSurface component
+        AssignSingleNavMeshSurface();
     }
 
     public Vector3 GetRandomPerimeterPosition()
@@ -96,6 +126,18 @@ public class PathGenerator : MonoBehaviour
 
         int randomIndex = Random.Range(0, perimeterPositions.Count);
         return perimeterPositions[randomIndex];
+    }
+
+    private bool IsPositionFarEnough(Vector3 newPosition, int minDistance)
+    {
+        foreach (Vector3 existingPosition in startPositions)
+        {
+            if (Vector3.Distance(existingPosition, newPosition) < minDistance * pathSpacing)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Vector3 GetCenterPosition()
@@ -140,9 +182,9 @@ public class PathGenerator : MonoBehaviour
                     Mathf.Round(neighbor.z / pathSpacing) * pathSpacing
                 );
 
-                if (!gridGenerator.GetCubeAtPosition(neighbor))
+                Transform topNode = gridGenerator.GetTopNodeAtPosition(neighbor);
+                if (topNode == null || (topNode.GetComponent<Node>() != null && topNode.GetComponent<Node>().isOccupied))
                 {
-                    
                     continue;
                 }
 
@@ -157,7 +199,6 @@ public class PathGenerator : MonoBehaviour
                     if (!openSet.Contains(neighbor))
                     {
                         openSet.Add(neighbor);
-                        
                     }
                 }
             }
@@ -175,5 +216,34 @@ public class PathGenerator : MonoBehaviour
             totalPath.Insert(0, current);
         }
         return totalPath;
+    }
+
+    private void AssignSingleNavMeshSurface()
+    {
+        if (occupiedNodes.Count == 0)
+        {
+            Debug.LogError("No paths generated to assign NavMeshSurface.");
+            return;
+        }
+
+        int selectedIndex = Random.Range(0, occupiedNodes.Count);
+        int currentIndex = 0;
+
+        foreach (var node in occupiedNodes)
+        {
+            NavMeshSurface navMeshSurface = node.Value.GetComponent<NavMeshSurface>();
+            if (navMeshSurface != null)
+            {
+                if (currentIndex == selectedIndex)
+                {
+                    navMeshSurface.BuildNavMesh();
+                }
+                else
+                {
+                    Destroy(navMeshSurface);
+                }
+            }
+            currentIndex++;
+        }
     }
 }
