@@ -3566,7 +3566,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32ff4db4752806458c505c808490eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
 --- !u!1 &1104835982
 GameObject:
   m_ObjectHideFlags: 0
@@ -3837,7 +3836,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 2178549857542120276, guid: 202a9903b1b87cb4384640a2f0b9f2b3, type: 3}
   gridGenerator: {fileID: 216529751}
   pathGenerator: {fileID: 1913784283}
-  spawnRadius: 1.5
+  spawnRadius: 1.7
 --- !u!1 &1198223108
 GameObject:
   m_ObjectHideFlags: 0
@@ -6455,6 +6454,8 @@ MonoBehaviour:
   gridGenerator: {fileID: 216529751}
   pathPrefab: {fileID: 2948566509452663193, guid: 442315c6aa7c44844ae8d2d2ff5fb058, type: 3}
   pathSpacing: 1
+  numberOfPaths: 3
+  startPositions: []
 --- !u!1001 &1948292460
 PrefabInstance:
   m_ObjectHideFlags: 0
