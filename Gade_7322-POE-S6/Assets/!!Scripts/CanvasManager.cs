@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +17,8 @@ public class CanvasManager : MonoBehaviour
     public GameObject pauseCanvas;
     public GameObject gameOverCanvas;
     public GameObject victoryCanvas;
+
+    private bool isPaused;
 
     public enum GameMode
     {
@@ -40,7 +44,6 @@ public class CanvasManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 
     private void OnEnable()
     {
@@ -71,7 +74,7 @@ public class CanvasManager : MonoBehaviour
         switch (mode)
         {
             case GameMode.Tutorial:
-                if (GameManager.instance.currentState == GameManager.GameState.Tutorial) { ShowCanvas(tutorialCanvas);}
+                if (GameManager.instance.currentState == GameManager.GameState.Tutorial) { ShowCanvas(tutorialCanvas); }
                 else { Debug.Log("This should not be executing: " + mode); }
                 break;
             case GameMode.Cooldown:
@@ -91,8 +94,7 @@ public class CanvasManager : MonoBehaviour
                 else { Debug.Log("This should not be executing: " + mode); }
                 break;
             case GameMode.Pause:
-                if (GameManager.instance.currentState == GameManager.GameState.Pause) { ShowCanvas(pauseCanvas); }
-                else { Debug.Log("This should not be executing: " + mode); }
+                PauseToggle();
                 break;
             case GameMode.GameOver:
                 if (GameManager.instance.currentState == GameManager.GameState.GameOver) { ShowCanvas(gameOverCanvas); }
@@ -119,11 +121,42 @@ public class CanvasManager : MonoBehaviour
 
         canvas.SetActive(true);
     }
+
     private void HideCanvases()
     {
         foreach (GameObject canvas in canvases)
         {
             canvas.SetActive(false);
         }
+    }
+
+    private void PauseToggle()
+    {
+        if (isPaused)
+        {
+            StartCoroutine(UnpauseAfterDelay(0.1f));
+        }
+        else
+        {
+            StartCoroutine(PauseAfterDelay(0.1f));
+        }
+    }
+
+    private IEnumerator PauseAfterDelay(float delay)
+    {
+        ShowCanvas(pauseCanvas);
+        yield return new WaitForSecondsRealtime(delay);
+        Time.timeScale = 0;
+        isPaused = true;
+    }
+
+    private IEnumerator UnpauseAfterDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        Time.timeScale = 1;
+        HideCanvases();
+        GameManager.instance.ResumePreviousState();
+        Debug.Log("Resuming previous state: " + GameManager.instance.GetCurrentState().ToString());
+        isPaused = false;
     }
 }

@@ -30,12 +30,10 @@ public class DynamicPathNavMeshBaker : MonoBehaviour
         // Iterate through each NavMeshSurface and bake the NavMesh
         foreach (NavMeshSurface surface in navMeshSurfaces)
         {
-            Debug.Log($"Baking NavMesh for surface: {surface.gameObject.name}");
 
             if (surface != null)
             {
                 surface.BuildNavMesh();
-                Debug.Log($"NavMesh baked for surface: {surface.gameObject.name}");
             }
             else
             {

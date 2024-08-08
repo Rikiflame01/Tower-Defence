@@ -37,8 +37,6 @@ public class PathGenerator : MonoBehaviour
         StartPathPosition = GetRandomPerimeterPosition();
         Vector3 centerPosition = GetCenterPosition();
 
-        Debug.Log("Start Position: " + StartPathPosition);
-        Debug.Log("Center Position: " + centerPosition);
 
         List<Vector3> path = FindPath(StartPathPosition, centerPosition);
 
