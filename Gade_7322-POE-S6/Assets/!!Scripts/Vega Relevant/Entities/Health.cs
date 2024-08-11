@@ -45,5 +45,9 @@ public class Health : MonoBehaviour, IHealth
     {
         this.gameObject.SetActive(false);
         Debug.Log($"{gameObject.name} has died.");
+        if (gameObject.CompareTag("TownHall"))
+        {
+            EventManager.instance.TriggerGameOverMode();
+        }
     }
 }
