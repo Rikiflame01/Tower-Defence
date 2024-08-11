@@ -714,12 +714,12 @@ GameObject:
   - component: {fileID: 5251216458189981632}
   - component: {fileID: -1173497467789637569}
   - component: {fileID: -5422712897037212778}
-  - component: {fileID: -6990687696684256846}
   - component: {fileID: -2461095732167049076}
   - component: {fileID: -431714032153475831}
+  - component: {fileID: 6181765540267352709}
   m_Layer: 0
   m_Name: Character_Knight_01_Black
-  m_TagString: Untagged
+  m_TagString: KnightMeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -815,28 +815,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &-6990687696684256846
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2178549857542120276}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!114 &-2461095732167049076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,7 +842,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdbc47cc394e53041af61a7fe43a084e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 15
+--- !u!65 &6181765540267352709
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2178549857542120276}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4649489, y: 2.06, z: 1.2554963}
+  m_Center: {x: -0.04644856, y: 1.0799999, z: 0.12774795}
 --- !u!1 &2404078357828703247
 GameObject:
   m_ObjectHideFlags: 0
