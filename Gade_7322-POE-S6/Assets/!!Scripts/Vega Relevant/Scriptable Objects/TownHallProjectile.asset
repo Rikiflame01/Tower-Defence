@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 5
   baseDamage: 3
-  hasHoming: 0
-  hasRicochet: 0
-  ricochetCount: 0
-  hasExplosion: 0
+  hasHoming: 1
+  hasRicochet: 1
+  ricochetCount: 2
+  hasExplosion: 1
