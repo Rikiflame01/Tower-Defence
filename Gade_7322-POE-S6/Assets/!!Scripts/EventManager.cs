@@ -15,6 +15,8 @@ public class EventManager : MonoBehaviour
     public UnityEvent onGameOverMode;
     public UnityEvent onVictoryMode;
 
+    public UnityEvent<GameObject> onEnemySpawned;
+
     private void Awake()
     {
         if (instance == null)
@@ -38,6 +40,7 @@ public class EventManager : MonoBehaviour
         if (onPauseMode == null) onPauseMode = new UnityEvent();
         if (onGameOverMode == null) onGameOverMode = new UnityEvent();
         if (onVictoryMode == null) onVictoryMode = new UnityEvent();
+        if (onEnemySpawned == null) onEnemySpawned = new UnityEvent<GameObject>();
     }
 
     public void TriggerTutorialMode()
@@ -62,6 +65,10 @@ public class EventManager : MonoBehaviour
     public void TriggerWaveMode() { 
         GameManager.instance.SwitchState(GameManager.GameState.Wave);
         onWaveMode.Invoke(); 
+    }
+    public void TriggerEnemySpawned(GameObject enemy)
+    {
+        onEnemySpawned.Invoke(enemy);
     }
     public void TriggerPauseMode()
     {

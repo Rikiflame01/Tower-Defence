@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1283236516298682018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6748135755748351766}
+  - component: {fileID: 2274423991004574271}
+  m_Layer: 0
+  m_Name: TownHallProjSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6748135755748351766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283236516298682018}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.98613, y: -12.609356, z: 0.5076332}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3532108508218382984}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2274423991004574271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283236516298682018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c83ee3b9114cfb468b0b3904c43002b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  townHallLevelData: {fileID: 11400000, guid: 0d1f3f1c54cad2249b45e8571d72d610, type: 2}
+  shootPoints:
+  - {fileID: 6976611359951095133}
+  - {fileID: 2602104773460952930}
+  - {fileID: 3942044235057134120}
+  - {fileID: 2047488674050148063}
+  projectilePrefab: {fileID: 5190568487516353992, guid: 30a416d902c211e4b99ab31f43111788, type: 3}
+  projectileForce: 1000
 --- !u!1 &3524408877133895043
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +87,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6748135755748351766}
   - {fileID: 6976611359951095133}
   - {fileID: 2602104773460952930}
   - {fileID: 3942044235057134120}

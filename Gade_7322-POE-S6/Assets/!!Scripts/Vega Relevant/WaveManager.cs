@@ -48,7 +48,10 @@ public class WaveManager : MonoBehaviour
                 Vector3 spawnPosition = GetValidSpawnPosition(startPositions[i]);
                 if (spawnPosition != Vector3.zero)
                 {
-                    Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                    GameObject enemyInstance = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+                    EventManager.instance.TriggerEnemySpawned(enemyInstance);
+                    Debug.Log("Enemy spawned and event triggered: " + enemyInstance.name);
                     spawnCount++;
                 }
                 yield return new WaitForSeconds(1f);
