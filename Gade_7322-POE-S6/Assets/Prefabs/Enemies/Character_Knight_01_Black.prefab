@@ -715,6 +715,8 @@ GameObject:
   - component: {fileID: -1173497467789637569}
   - component: {fileID: -5422712897037212778}
   - component: {fileID: -6990687696684256846}
+  - component: {fileID: -2461095732167049076}
+  - component: {fileID: -431714032153475831}
   m_Layer: 0
   m_Name: Character_Knight_01_Black
   m_TagString: Untagged
@@ -774,7 +776,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -835,6 +837,34 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &-2461095732167049076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2178549857542120276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed5eb34fec4a3dd409cc66d8262a72d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 1.5
+  damage: 10
+  attackCooldown: 1
+--- !u!114 &-431714032153475831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2178549857542120276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdbc47cc394e53041af61a7fe43a084e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &2404078357828703247
 GameObject:
   m_ObjectHideFlags: 0
