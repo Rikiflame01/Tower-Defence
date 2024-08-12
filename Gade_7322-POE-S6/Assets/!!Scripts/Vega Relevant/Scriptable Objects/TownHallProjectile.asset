@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acb314eac5f06b43a647f671ccfd54f, type: 3}
   m_Name: TownHallProjectile
   m_EditorClassIdentifier: 
-  level: 5
-  baseDamage: 3
-  hasHoming: 1
-  hasRicochet: 1
-  ricochetCount: 2
-  hasExplosion: 1
+  level: 0
+  baseDamage: 5
+  hasHoming: 0
+  hasRicochet: 0
+  ricochetCount: 0
+  hasExplosion: 0

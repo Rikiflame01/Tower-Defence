@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 3942044235057134120}
   - {fileID: 2047488674050148063}
   projectilePrefab: {fileID: 5190568487516353992, guid: 30a416d902c211e4b99ab31f43111788, type: 3}
-  projectileForce: 1000
+  projectileForce: 1500
 --- !u!1 &3524408877133895043
 GameObject:
   m_ObjectHideFlags: 0
