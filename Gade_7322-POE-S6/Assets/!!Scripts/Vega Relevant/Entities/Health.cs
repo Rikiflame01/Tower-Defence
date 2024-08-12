@@ -49,5 +49,9 @@ public class Health : MonoBehaviour, IHealth
         {
             EventManager.instance.TriggerGameOverMode();
         }
+        if (gameObject.CompareTag("KnightMeleeEnemy"))
+        {
+            EnemyManager.instance.RemoveEnemy(this.gameObject);
+        }
     }
 }
