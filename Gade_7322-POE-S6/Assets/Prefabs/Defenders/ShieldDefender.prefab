@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4547996903756009672}
   - component: {fileID: 2210182587300284401}
+  - component: {fileID: 2405343156533725877}
   m_Layer: 0
   m_Name: ShieldDefender
   m_TagString: ShieldDefender
@@ -51,6 +52,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!65 &2405343156533725877
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326183490584516560}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.81, y: 3.38, z: 2.48}
+  m_Center: {x: -0.15, y: 0.08, z: 1.16}
 --- !u!1001 &846251029417352294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,7 +200,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 64256009918868462, guid: b1ad8ef6890687249a641abef8e26baf, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
