@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Node
   - KnightMeleeEnemy
+  - ShieldDefender
   layers:
   - Default
   - TransparentFX
