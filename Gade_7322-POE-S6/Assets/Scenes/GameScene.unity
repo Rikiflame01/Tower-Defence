@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5b0e7535304364a927e270ed877e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 2381361127320216285, guid: f5f236bb375c26e42ab7a6646c9383eb, type: 3}
+  cubePrefab: {fileID: 4966884218177259122, guid: 31b38ed0b71438b41b2ef9bd35da549c, type: 3}
   gridWidth: 40
   gridHeight: 1
   gridDepth: 40
@@ -3187,6 +3187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced70bf4820afb84eb0820cf05a26722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placementRadius: 2
+  requiredDistanceFromPath: 1
 --- !u!4 &880486589
 Transform:
   m_ObjectHideFlags: 0
@@ -5842,7 +5844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridGenerator: {fileID: 216529751}
   towerPrefab: {fileID: 3524408877133895043, guid: e7950346b06ff0243b77b899d9520669, type: 3}
-  yOffset: 1
+  yOffset: 0
 --- !u!4 &1747185012
 Transform:
   m_ObjectHideFlags: 0

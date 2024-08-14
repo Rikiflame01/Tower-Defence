@@ -4,7 +4,7 @@ using UnityEngine;
 public class TownHallProjectileSO : ScriptableObject
 {
     public int level;
-    public float baseDamage = 3f;
+    public float baseDamage = 5f;
     public bool hasHoming = false;
     public bool hasRicochet = false;
     public int ricochetCount = 0;

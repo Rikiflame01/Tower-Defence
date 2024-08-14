@@ -41,15 +41,18 @@ public class THProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == target)
+        if (collision.gameObject.tag == "KnightMeleeEnemy")
         {
             IHealth health = collision.gameObject.GetComponent<IHealth>();
             if (health != null)
             {
                 health.TakeDamage(projectileData.GetDamage());
             }
-
-            Destroy(gameObject);
+            else
+            {
+                Debug.LogWarning("No IHealth component found on target.");
+            }
         }
+
     }
 }

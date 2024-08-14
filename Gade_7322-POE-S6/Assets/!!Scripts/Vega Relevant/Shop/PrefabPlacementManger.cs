@@ -1,8 +1,16 @@
 using UnityEngine;
 
+/// <summary>
+/// Manages the placement of building prefabs in the game. Ensures that buildings are placed on valid ground locations, 
+/// sufficiently far from the path, and that placement is properly handled with preview and rotation functionalities.
+/// Automatically refunds gold if the game state changes before placement is confirmed.
+/// </summary>
 public class PrefabPlacementManager : MonoBehaviour
 {
     public static PrefabPlacementManager instance;
+
+    [SerializeField] private float placementRadius = 1f;
+    [SerializeField] private float requiredDistanceFromPath = 1.0f;
 
     private GameObject currentPrefab;
     private GameObject previewInstance;
@@ -27,6 +35,11 @@ public class PrefabPlacementManager : MonoBehaviour
         {
             HandlePlacementInput();
             UpdatePreview();
+        }
+        else if (previewInstance != null)
+        {
+            CancelPlacement();
+            Debug.LogWarning("Placement canceled: Game state changed before placement was confirmed.");
         }
     }
 
@@ -61,25 +74,100 @@ public class PrefabPlacementManager : MonoBehaviour
             return;
         }
 
-        placementPosition = GetMouseWorldPosition();
-        previewInstance.transform.position = placementPosition;
+        Vector3 newPosition = GetMouseWorldPosition();
+
+        if (IsValidPlacementPosition(newPosition))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            {
+                Transform bottomTransform = previewInstance.transform.Find("Bottom");
+                if (bottomTransform != null)
+                {
+                    Vector3 offset = previewInstance.transform.position - bottomTransform.position;
+                    newPosition = hit.point + offset;
+                    previewInstance.transform.position = newPosition;
+                    previewInstance.SetActive(true);
+                }
+                else
+                {
+                    Debug.LogError("No 'Bottom' child object found on the preview instance.");
+                }
+            }
+            else
+            {
+                previewInstance.SetActive(false);
+            }
+        }
+        else
+        {
+            previewInstance.SetActive(false);
+        }
     }
+
+    private void PlacePrefab()
+    {
+        if (previewInstance != null && previewInstance.activeSelf)
+        {
+            Transform bottomTransform = previewInstance.transform.Find("Bottom");
+            if (bottomTransform != null)
+            {
+                Vector3 finalPosition = previewInstance.transform.position;
+
+                Instantiate(currentPrefab, finalPosition, previewInstance.transform.rotation);
+
+                Destroy(previewInstance);
+                previewInstance = null;
+                currentPrefab = null;
+
+                GameManager.instance.ResumePreviousState();
+            }
+            else
+            {
+                Debug.LogError("Cannot place prefab: Preview instance has no 'Bottom' child object.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Preview instance is null or inactive, cannot place prefab.");
+        }
+    }
+
 
     private Vector3 GetMouseWorldPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
         {
             return hit.point;
         }
 
-        Debug.LogWarning("Mouse position not hitting anything, returning zero vector.");
+        Debug.LogWarning("Mouse position not hitting Ground, returning zero vector.");
         return Vector3.zero;
+    }
+
+    private bool IsValidPlacementPosition(Vector3 position)
+    {
+        Ray groundRay = new Ray(position + Vector3.up * 10, Vector3.down);
+        if (Physics.Raycast(groundRay, out RaycastHit groundHit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        {
+            if (groundHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                Collider[] nearbyPathColliders = Physics.OverlapSphere(position, requiredDistanceFromPath, LayerMask.GetMask("Path"));
+                if (nearbyPathColliders.Length == 0)
+                {
+                    return true;
+                }
+            }
+        }
+
+        Debug.Log("Invalid placement position: too close to or directly on Path.");
+        return false;
     }
 
     private void HandlePlacementInput()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && previewInstance.activeSelf)
         {
             PlacePrefab();
         }
@@ -90,22 +178,6 @@ public class PrefabPlacementManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             CancelPlacement();
-        }
-    }
-
-    private void PlacePrefab()
-    {
-        if (previewInstance != null)
-        {
-            Instantiate(currentPrefab, placementPosition, previewInstance.transform.rotation);
-            Destroy(previewInstance);
-            previewInstance = null;
-            currentPrefab = null;
-            GameManager.instance.ResumePreviousState();
-        }
-        else
-        {
-            Debug.LogError("Preview instance is null, cannot place prefab.");
         }
     }
 

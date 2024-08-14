@@ -9,7 +9,7 @@ public interface IHealth
 
 public class Health : MonoBehaviour, IHealth
 {
-    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float maxHealth = 5f;
     private float currentHealth;
 
     private void Awake()
@@ -22,7 +22,7 @@ public class Health : MonoBehaviour, IHealth
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        //Debug.Log($"{gameObject.name} took {amount} damage. Current health: {currentHealth}");
+        Debug.Log($"{gameObject.name} took {amount} damage. Current health: {currentHealth}");
 
         if (currentHealth <= 0)
         {
@@ -43,11 +43,11 @@ public class Health : MonoBehaviour, IHealth
 
     private void Die()
     {
-        this.gameObject.SetActive(false);
         Debug.Log($"{gameObject.name} has died.");
         if (gameObject.CompareTag("TownHall"))
         {
             EventManager.instance.TriggerGameOverMode();
+            Destroy(gameObject);
         }
         if (gameObject.CompareTag("KnightMeleeEnemy"))
         {
