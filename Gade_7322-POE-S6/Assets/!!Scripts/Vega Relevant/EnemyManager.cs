@@ -64,6 +64,7 @@ public class EnemyManager : MonoBehaviour
 
     public void RemoveEnemy(GameObject enemy)
     {
+        GoldManager.instance.AddGold(15);
         enemies.Remove(enemy);
         Destroy(enemy);
     }
