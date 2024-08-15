@@ -29,12 +29,15 @@ public class GoldManager : MonoBehaviour
         if (HasEnoughGold(amount))
         {
             currentGold -= amount;
+
+            EventManager.instance.onGoldSpend.Invoke(amount);
         }
     }
-
     public void AddGold(int amount)
     {
         currentGold += amount;
+
+        EventManager.instance.onAddGold.Invoke(amount);
     }
 
 }

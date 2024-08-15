@@ -14,6 +14,8 @@ public class EventManager : MonoBehaviour
     public UnityEvent onPauseMode;
     public UnityEvent onGameOverMode;
     public UnityEvent onVictoryMode;
+    public UnityEvent<int> onAddGold;
+    public UnityEvent<int> onGoldSpend;
 
     public UnityEvent<GameObject> onEnemySpawned;
 
@@ -41,6 +43,8 @@ public class EventManager : MonoBehaviour
         if (onGameOverMode == null) onGameOverMode = new UnityEvent();
         if (onVictoryMode == null) onVictoryMode = new UnityEvent();
         if (onEnemySpawned == null) onEnemySpawned = new UnityEvent<GameObject>();
+        if (onAddGold == null) onAddGold = new UnityEvent<int>();
+        if (onGoldSpend == null) onGoldSpend = new UnityEvent<int>();
     }
 
     public void TriggerTutorialMode()
@@ -85,4 +89,15 @@ public class EventManager : MonoBehaviour
         GameManager.instance.SwitchState(GameManager.GameState.Victory);
         onVictoryMode.Invoke();
     }
+
+    public void TriggerAddGold(int amount)
+    {
+        onAddGold.Invoke(amount);
+    }
+
+    public void TriggerGoldSpend(int amount)
+    {
+        onGoldSpend.Invoke(amount);
+    }
+
 }
