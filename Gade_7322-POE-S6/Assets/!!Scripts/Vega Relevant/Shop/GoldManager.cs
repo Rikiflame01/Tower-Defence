@@ -36,4 +36,5 @@ public class GoldManager : MonoBehaviour
     {
         currentGold += amount;
     }
+
 }

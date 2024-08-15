@@ -8,18 +8,28 @@ public class MeleeEnemyAI : MonoBehaviour
     private Animator animator;
 
     [SerializeField] private float attackRange = 1.5f;
-    [SerializeField] private float damage = 10f;
     [SerializeField] private float attackCooldown = 1f;
+    private float damage;
     private float lastAttackTime;
 
-    private void Awake()
-    {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-    }
+    private RarityHandler rarityHandler;
+
 
     private void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        rarityHandler = GetComponent<RarityHandler>();
+
+        if (rarityHandler != null)
+        {
+            damage = rarityHandler.GetDamage();
+            navMeshAgent.speed = rarityHandler.GetSpeed();
+        }
+        else
+        {
+            Debug.LogError("RarityHandler not found on " + gameObject.name);
+        }
         FindTarget();
     }
 

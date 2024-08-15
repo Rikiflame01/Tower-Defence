@@ -9,6 +9,7 @@ TagManager:
   - Node
   - KnightMeleeEnemy
   - ShieldDefender
+  - Gold
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Water
   - UI
   - Path
-  - 
+  - Gold
   - 
   - 
   - 

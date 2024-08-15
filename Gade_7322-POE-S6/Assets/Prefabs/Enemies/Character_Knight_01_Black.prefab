@@ -717,6 +717,8 @@ GameObject:
   - component: {fileID: -2461095732167049076}
   - component: {fileID: -431714032153475831}
   - component: {fileID: 6181765540267352709}
+  - component: {fileID: -3840172523853678171}
+  - component: {fileID: 470722943139713744}
   m_Layer: 0
   m_Name: Character_Knight_01_Black
   m_TagString: KnightMeleeEnemy
@@ -828,7 +830,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 1.5
-  damage: 10
   attackCooldown: 1
 --- !u!114 &-431714032153475831
 MonoBehaviour:
@@ -864,6 +865,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.4649489, y: 2.06, z: 1.2554963}
   m_Center: {x: -0.04644856, y: 1.0799999, z: 0.12774795}
+--- !u!114 &-3840172523853678171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2178549857542120276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e124511f5823cc49a877e54e5ac6cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rarity: 0
+  baseHealth: 5
+  baseDamage: 10
+  baseSpeed: 2
+--- !u!114 &470722943139713744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2178549857542120276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff6c53412d0fc94788d36d40b79dab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldPrefab: {fileID: 496198014460494375, guid: cf5d95c1761f8d1419ee824c5a0fcc6a, type: 3}
 --- !u!1 &2404078357828703247
 GameObject:
   m_ObjectHideFlags: 0

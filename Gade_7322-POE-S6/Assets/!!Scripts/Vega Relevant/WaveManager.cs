@@ -51,7 +51,7 @@ public class WaveManager : MonoBehaviour
                     GameObject enemyInstance = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
                     EventManager.instance.TriggerEnemySpawned(enemyInstance);
-                    Debug.Log("Enemy spawned and event triggered: " + enemyInstance.name);
+                    //Debug.Log("Enemy spawned and event triggered: " + enemyInstance.name);
                     spawnCount++;
                 }
                 yield return new WaitForSeconds(1f);

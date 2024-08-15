@@ -22,7 +22,7 @@ public class Health : MonoBehaviour, IHealth
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        Debug.Log($"{gameObject.name} took {amount} damage. Current health: {currentHealth}");
+        //Debug.Log($"{gameObject.name} took {amount} damage. Current health: {currentHealth}");
 
         if (currentHealth <= 0)
         {
@@ -43,7 +43,6 @@ public class Health : MonoBehaviour, IHealth
 
     private void Die()
     {
-        Debug.Log($"{gameObject.name} has died.");
         if (gameObject.CompareTag("TownHall"))
         {
             EventManager.instance.TriggerGameOverMode();
@@ -51,6 +50,11 @@ public class Health : MonoBehaviour, IHealth
         }
         if (gameObject.CompareTag("KnightMeleeEnemy"))
         {
+            GoldDropper goldDropper = GetComponent<GoldDropper>();
+            if (goldDropper != null)
+            {
+                goldDropper.DropGold(3);
+            }
             EnemyManager.instance.RemoveEnemy(this.gameObject);
         }
     }
