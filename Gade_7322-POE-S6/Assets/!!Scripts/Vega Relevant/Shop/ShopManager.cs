@@ -1,15 +1,26 @@
-using UnityEditor;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using System.Collections.Generic;
 
 public class ShopManager : MonoBehaviour
 {
     public TownHallLevelSO townHallLevelData;
-
+    public TownHallProjectileSO townHallProjectileData;
     public static ShopManager instance;
 
     public int shieldDefenderCost = 100;
     public GameObject shieldDefenderPrefab;
+
+    private GameObject InitialChoicePanel;
+    private GameObject ShopOptionsPanel;
+    private GameObject TowerUpgradeOptionsPanel;
+
+    private int townHallLevel = 0;
+    private Dictionary<string, int> healingCosts = new Dictionary<string, int>
+    {
+        { "Ally", 50 },
+        { "TownHall", 500 },
+        { "ShieldDefender", 100 }
+    };
 
     private void Awake()
     {
@@ -34,17 +45,16 @@ public class ShopManager : MonoBehaviour
         EventManager.instance.onButtonClicked.RemoveListener(HandleButtonClicked);
     }
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            PurchaseShieldDefender();
-        }
+        InitialChoicePanel = GameObject.Find("InitialChoice");
+        ShopOptionsPanel = GameObject.Find("ShopOptions");
+        TowerUpgradeOptionsPanel = GameObject.Find("TowerUpgradeOptions");
     }
 
     public void PurchaseShieldDefender()
     {
-        if (GameManager.instance.GetCurrentState() == GameManager.GameState.Cooldown)
+        ConfirmationManager.instance.ShowConfirmation(shieldDefenderCost, () =>
         {
             if (GoldManager.instance.HasEnoughGold(shieldDefenderCost))
             {
@@ -55,23 +65,162 @@ public class ShopManager : MonoBehaviour
             {
                 Debug.Log("Not enough gold to purchase Shield Defender.");
             }
-        }
-        else
+        });
+    }
+
+    public void UpgradeTownHall()
+    {
+        int cost = GetUpgradeCost();
+        ConfirmationManager.instance.ShowConfirmation(cost, () =>
         {
-            Debug.Log("Cannot purchase items outside of Cooldown state.");
+            if (GoldManager.instance.HasEnoughGold(cost))
+            {
+                GoldManager.instance.SpendGold(cost);
+                townHallLevel++;
+                townHallLevelData.ConfigureLevel(townHallLevel);
+                Debug.Log($"Town Hall upgraded to level {townHallLevel}. New cost: {GetUpgradeCost()}");
+            }
+            else
+            {
+                Debug.Log("Not enough gold to upgrade Town Hall.");
+            }
+        });
+    }
+
+    public void UpgradeProjectile()
+    {
+        int cost = GetProjectileUpgradeCost();
+        ConfirmationManager.instance.ShowConfirmation(cost, () =>
+        {
+            if (GoldManager.instance.HasEnoughGold(cost))
+            {
+                GoldManager.instance.SpendGold(cost);
+                townHallProjectileData.level++;
+                Debug.Log($"Projectile upgraded to level {townHallProjectileData.level}. New cost: {GetProjectileUpgradeCost()}");
+            }
+            else
+            {
+                Debug.Log("Not enough gold to upgrade projectile.");
+            }
+        });
+    }
+
+    public void HealObjectsWithTags(List<string> tags)
+    {
+        int totalCost = 0;
+        foreach (string tag in tags)
+        {
+            if (healingCosts.TryGetValue(tag, out int cost))
+            {
+                totalCost += cost;
+            }
         }
+
+        ConfirmationManager.instance.ShowConfirmation(totalCost, () =>
+        {
+            foreach (string tag in tags)
+            {
+                if (healingCosts.TryGetValue(tag, out int cost))
+                {
+                    if (GoldManager.instance.HasEnoughGold(cost))
+                    {
+                        GoldManager.instance.SpendGold(cost);
+                        var objectsToHeal = GameObject.FindGameObjectsWithTag(tag);
+                        foreach (var obj in objectsToHeal)
+                        {
+                            var health = obj.GetComponent<IHealth>();
+                            if (health != null)
+                            {
+                                health.Heal();
+                            }
+                        }
+                        Debug.Log($"{tag} objects healed for {cost} gold.");
+                    }
+                    else
+                    {
+                        Debug.Log($"Not enough gold to heal {tag} objects.");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"No healing cost defined for tag: {tag}");
+                }
+            }
+        });
     }
 
     private void HandleButtonClicked(string buttonName)
     {
-        if (buttonName == "ShieldBuyBttn")
+        switch (buttonName)
         {
-            Debug.Log("Shield BuyItemButton was clicked!");
-            PurchaseShieldDefender();
-        }
-        else if (buttonName == "SellItemButton")
-        {
-            Debug.Log("SellItemButton was clicked!");
+            case "ShieldBuyBttn":
+                PurchaseShieldDefender();
+                break;
+            case "UpgradeTownHallBttn":
+                UpgradeTownHall();
+                break;
+            case "UpgradeProjectileBttn":
+                UpgradeProjectile();
+                break;
+            case "HealAllyBttn":
+                HealObjectsWithTags(new List<string> { "TownHall", "ShieldDefender", "Defender" });
+                break;
+            case "SellItemButton":
+                Debug.Log("SellItemButton was clicked!");
+                break;
+            case "ShopPanelBttn":
+                ClosePanel(InitialChoicePanel);
+                OpenPanel(ShopOptionsPanel);
+                break;
+            case "TUpgradesBttn":
+                ClosePanel(InitialChoicePanel);
+                OpenPanel(TowerUpgradeOptionsPanel);
+                break;
+            default:
+                Debug.LogWarning($"Unhandled button clicked: {buttonName}");
+                break;
         }
     }
+
+    private int GetUpgradeCost()
+    {
+        switch (townHallLevel)
+        {
+            case 0: return 100;
+            case 1: return 200;
+            case 2: return 400;
+            case 3: return 800;
+            default: return 1600;
+        }
+    }
+
+    private int GetProjectileUpgradeCost()
+    {
+        switch (townHallProjectileData.level)
+        {
+            case 0: return 150;
+            case 1: return 300;
+            case 2: return 600;
+            case 3: return 1200;
+            case 4: return 2400;
+            default: return 4800;
+        }
+    }
+
+    public void OpenPanel(GameObject panel)
+    {
+        if (!panel.activeSelf)
+        {
+            panel.SetActive(true);
+        }
+    }
+
+    public void ClosePanel(GameObject panel)
+    {
+        if (panel.activeSelf)
+        {
+            panel.SetActive(false);
+        }
+    }
+
 }

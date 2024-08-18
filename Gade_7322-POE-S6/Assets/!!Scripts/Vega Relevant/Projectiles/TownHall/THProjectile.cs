@@ -52,6 +52,7 @@ public class THProjectile : MonoBehaviour
             {
                 Debug.LogWarning("No IHealth component found on target.");
             }
+            Destroy(gameObject);
         }
 
     }

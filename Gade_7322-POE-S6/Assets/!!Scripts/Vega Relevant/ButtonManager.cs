@@ -5,11 +5,47 @@ using System.Collections.Generic;
 
 public class ButtonManager : MonoBehaviour
 {
+    public static ButtonManager instance;
+
     private GraphicRaycaster raycaster;
     private EventSystem eventSystem;
 
+    private GameObject shopCanvas;
+    private GameObject InitialChoicePanel;
+    private GameObject ShopOptionsPanel;
+    private GameObject TowerUpgradeOptionsPanel;
+
+    private List<GameObject> openPanels = new List<GameObject>();
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
+        shopCanvas = GameObject.Find("ShopCanvas");
+        InitialChoicePanel = GameObject.Find("InitialChoice");
+        ShopOptionsPanel = GameObject.Find("ShopOptions");
+        TowerUpgradeOptionsPanel = GameObject.Find("TowerUpgradeOptions");
+
+        Button[] allButtons = FindObjectsOfType<Button>();
+
+        foreach (Button button in allButtons)
+        {
+            button.onClick.AddListener(() => OnButtonClicked(button));
+        }
+        ShopOptionsPanel.SetActive(false);
+        TowerUpgradeOptionsPanel.SetActive(false);
+
         eventSystem = FindObjectOfType<EventSystem>();
 
         if (eventSystem == null)
@@ -26,17 +62,20 @@ public class ButtonManager : MonoBehaviour
             return;
         }
 
-        Button[] allButtons = FindObjectsOfType<Button>();
 
-        foreach (Button button in allButtons)
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            button.onClick.AddListener(() => OnButtonClicked(button));
+            ToggleSpecificCanvas();
         }
     }
 
     private void OnButtonClicked(Button button)
     {
-        if (GameManager.instance.GetCurrentState() == GameManager.GameState.Cooldown || 
+        if (GameManager.instance.GetCurrentState() == GameManager.GameState.Cooldown ||
             GameManager.instance.GetCurrentState() == GameManager.GameState.Tutorial)
         {
             if (IsPointerOnUIButton())
@@ -69,5 +108,48 @@ public class ButtonManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void OpenPanel(GameObject panel)
+    {
+        if (!panel.activeSelf)
+        {
+            panel.SetActive(true);
+            openPanels.Add(panel);
+        }
+    }
+
+    public void ClosePanel(GameObject panel)
+    {
+        if (panel.activeSelf)
+        {
+            panel.SetActive(false);
+            openPanels.Remove(panel);
+        }
+    }
+
+    public void CloseAllPanels()
+    {
+        foreach (GameObject panel in openPanels)
+        {
+            panel.SetActive(false);
+        }
+        openPanels.Clear();
+    }
+
+    private void ToggleSpecificCanvas()
+    {
+        if (shopCanvas != null)
+        {
+            bool isActive = shopCanvas.activeSelf;
+            shopCanvas.SetActive(!isActive);
+            InitialChoicePanel.SetActive(true);
+            ShopOptionsPanel.SetActive(false);
+            TowerUpgradeOptionsPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("ButtonManager: Specific canvas is not assigned.");
+        }
     }
 }

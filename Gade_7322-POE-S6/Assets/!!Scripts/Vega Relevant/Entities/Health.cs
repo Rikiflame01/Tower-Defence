@@ -5,6 +5,9 @@ public interface IHealth
     void TakeDamage(float amount);
     void Heal(float amount);
     float GetCurrentHealth();
+    float MaxHealth { get; }
+
+    void Heal();
 }
 
 public class Health : MonoBehaviour, IHealth
@@ -62,6 +65,14 @@ public class Health : MonoBehaviour, IHealth
         if (gameObject.CompareTag("ShieldDefender"))
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void Heal()
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth = maxHealth;
         }
     }
 }
