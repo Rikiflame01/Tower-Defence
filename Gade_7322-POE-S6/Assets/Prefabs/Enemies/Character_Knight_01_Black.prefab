@@ -834,6 +834,7 @@ MonoBehaviour:
   targetTags:
   - TownHall
   - ShieldDefender
+  navMeshSearchDistance: 2
 --- !u!114 &-431714032153475831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -866,8 +867,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4649489, y: 2.06, z: 1.2554963}
-  m_Center: {x: -0.04644856, y: 1.0799999, z: 0.12774795}
+  m_Size: {x: 0.609077, y: 2.06, z: 0.45207033}
+  m_Center: {x: 0.016900796, y: 1.0799999, z: 0.03352647}
 --- !u!114 &-3840172523853678171
 MonoBehaviour:
   m_ObjectHideFlags: 0

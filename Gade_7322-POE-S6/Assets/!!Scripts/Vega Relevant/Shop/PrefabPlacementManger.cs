@@ -1,3 +1,4 @@
+using Unity.AI.Navigation;
 using UnityEngine;
 
 /// <summary>
@@ -119,6 +120,7 @@ public class PrefabPlacementManager : MonoBehaviour
                 Destroy(previewInstance);
                 previewInstance = null;
                 currentPrefab = null;
+                RebakeNavMesh();
 
                 GameManager.instance.ResumePreviousState();
             }
@@ -132,7 +134,31 @@ public class PrefabPlacementManager : MonoBehaviour
             Debug.LogError("Preview instance is null or inactive, cannot place prefab.");
         }
     }
+    private void RebakeNavMesh()
+    {
+        NavMeshSurface[] navMeshSurfaces = FindObjectsOfType<NavMeshSurface>();
 
+        if (navMeshSurfaces.Length == 0)
+        {
+            Debug.LogWarning("No NavMeshSurface components found in the scene.");
+            return;
+        }
+
+        foreach (NavMeshSurface surface in navMeshSurfaces)
+        {
+
+            if (surface != null)
+            {
+                surface.BuildNavMesh();
+            }
+            else
+            {
+                Debug.LogError($"NavMeshSurface component is missing on the GameObject: {surface.gameObject.name}");
+            }
+        }
+
+        Debug.Log("All NavMeshes baked successfully at runtime.");
+    }
 
     private Vector3 GetMouseWorldPosition()
     {
