@@ -9,6 +9,7 @@ public class GoldTextCanvas : MonoBehaviour
 
     private void Awake()
     {
+        UpdateGoldText(100);
         EventManager.instance.onAddGold.AddListener(UpdateGoldText);
         EventManager.instance.onGoldSpend.AddListener(UpdateGoldText);
     }
