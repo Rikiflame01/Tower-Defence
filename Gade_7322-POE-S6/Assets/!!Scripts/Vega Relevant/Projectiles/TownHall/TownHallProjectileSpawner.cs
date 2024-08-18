@@ -15,7 +15,7 @@ public class TownHallProjectileSpawner : MonoBehaviour
     private void Start()
     {
         lastShotTime = Time.time;
-        townHallLevelData.ConfigureLevel(3);
+        townHallLevelData.ConfigureLevel(0);
 
         if (projectilePrefab == null)
         {
@@ -32,14 +32,6 @@ public class TownHallProjectileSpawner : MonoBehaviour
             {
                 Shoot(nearestEnemy.transform);
                 lastShotTime = Time.time;
-            }
-
-            if (townHallLevelData.hasBurstAbility && Time.time >= burstCooldownEndTime && !isBurstActive)
-            {
-                if (Input.GetKeyDown(KeyCode.B))
-                {
-                    StartCoroutine(ActivateBurst(nearestEnemy.transform));
-                }
             }
         }
     }
