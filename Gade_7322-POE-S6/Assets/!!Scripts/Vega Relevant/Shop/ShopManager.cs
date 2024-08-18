@@ -4,6 +4,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ShopManager : MonoBehaviour
 {
+    public TownHallLevelSO townHallLevelData;
+
     public static ShopManager instance;
 
     public int shieldDefenderCost = 100;
@@ -20,6 +22,16 @@ public class ShopManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        EventManager.instance.onButtonClicked.AddListener(HandleButtonClicked);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.instance.onButtonClicked.RemoveListener(HandleButtonClicked);
     }
 
     private void Update()
@@ -49,48 +61,17 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Cannot purchase items outside of Cooldown state.");
         }
     }
-}
 
-[CustomEditor(typeof(GoldManager))]
-public class GoldManagerEditor : Editor
-{
-    public override void OnInspectorGUI()
+    private void HandleButtonClicked(string buttonName)
     {
-        DrawDefaultInspector();
-
-        GoldManager goldManager = (GoldManager)target;
-
-        GUILayout.Space(10);
-        GUILayout.Label("Testing Tools", EditorStyles.boldLabel);
-
-        if (GUILayout.Button("Add 100 Gold"))
+        if (buttonName == "ShieldBuyBttn")
         {
-            goldManager.AddGold(100);
-            Debug.Log("Added 100 gold. Current gold: " + goldManager.currentGold);
+            Debug.Log("Shield BuyItemButton was clicked!");
+            PurchaseShieldDefender();
         }
-
-        if (GUILayout.Button("Add 1000 Gold"))
+        else if (buttonName == "SellItemButton")
         {
-            goldManager.AddGold(1000);
-            Debug.Log("Added 1000 gold. Current gold: " + goldManager.currentGold);
-        }
-    }
-}
-[CustomEditor(typeof(ShopManager))]
-public class ShopManagerEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        ShopManager shopManager = (ShopManager)target;
-
-        GUILayout.Space(10);
-        GUILayout.Label("Testing Tools", EditorStyles.boldLabel);
-
-        if (GUILayout.Button("Purchase Shield Defender"))
-        {
-            shopManager.PurchaseShieldDefender();
+            Debug.Log("SellItemButton was clicked!");
         }
     }
 }

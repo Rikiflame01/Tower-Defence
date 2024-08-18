@@ -15,7 +15,7 @@ public class TownHallProjectileSpawner : MonoBehaviour
     private void Start()
     {
         lastShotTime = Time.time;
-        townHallLevelData.ConfigureLevel(0);
+        townHallLevelData.ConfigureLevel(3);
 
         if (projectilePrefab == null)
         {

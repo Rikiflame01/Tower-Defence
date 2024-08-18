@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TownHallLevel
   m_EditorClassIdentifier: 
   interval: 1
-  canShootFromAllPoints: 0
-  hasBurstAbility: 0
+  canShootFromAllPoints: 1
+  hasBurstAbility: 1
   burstCount: 3
   burstCooldown: 30
   burstActivationTime: 10

@@ -59,5 +59,9 @@ public class Health : MonoBehaviour, IHealth
             }
             EnemyManager.instance.RemoveEnemy(this.gameObject);
         }
+        if (gameObject.CompareTag("ShieldDefender"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

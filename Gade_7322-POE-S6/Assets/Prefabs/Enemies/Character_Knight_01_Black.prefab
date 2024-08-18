@@ -831,6 +831,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 1.5
   attackCooldown: 1
+  targetTags:
+  - TownHall
+  - ShieldDefender
 --- !u!114 &-431714032153475831
 MonoBehaviour:
   m_ObjectHideFlags: 0

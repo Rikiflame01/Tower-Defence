@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 5702189377851947188}
   - component: {fileID: 4617570427326356575}
   - component: {fileID: 7540740580756572515}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DSBuyBttn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,7 +492,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &8831202658088935176
 MonoBehaviour:
@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 8809712389200417124}
   - component: {fileID: 734341826611864961}
   - component: {fileID: 5717245419796412884}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -987,7 +987,7 @@ GameObject:
   - component: {fileID: 1482436325518129007}
   - component: {fileID: 9122044400290314702}
   - component: {fileID: 2984059520374495199}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ShieldBuyBttn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1009,9 +1009,9 @@ RectTransform:
   - {fileID: 1027363607513032314}
   m_Father: {fileID: 797354650966783967}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -211}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1482436325518129007
@@ -1076,7 +1076,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.9882878, g: 1, b: 0, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.84122574, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1106,7 +1106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5459370192263362438}
   - component: {fileID: 6845142058722172452}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1276,8 +1276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 797354650966783967}
-  - component: {fileID: 4613942966281862693}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BttnLayoutGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1306,32 +1305,6 @@ RectTransform:
   m_AnchoredPosition: {x: 266, y: -540}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4613942966281862693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2245224175826098443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 322
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 370.57
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &2650251770189909100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,7 +1450,7 @@ GameObject:
   - component: {fileID: 7392205197259418857}
   - component: {fileID: 3194699643072164658}
   - component: {fileID: 8699380236795024673}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1987,7 +1960,7 @@ GameObject:
   - component: {fileID: 4286933507410430152}
   - component: {fileID: 8221511651443705169}
   - component: {fileID: 6289089931967380112}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2599,7 +2572,7 @@ GameObject:
   - component: {fileID: 4882976749427021451}
   - component: {fileID: 3920948439988842445}
   - component: {fileID: 6430417040148613400}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BarracksBuyBttn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2911,7 +2884,7 @@ GameObject:
   - component: {fileID: 1299622363315482654}
   - component: {fileID: 2289451667442686168}
   - component: {fileID: 285891041904292419}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3165,7 +3138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1954856776203745488}
   - component: {fileID: 2968307876404295779}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextLayoutGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3386,7 +3359,7 @@ GameObject:
   - component: {fileID: 1027363607513032314}
   - component: {fileID: 5168307918704921956}
   - component: {fileID: 5877220998642299042}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3520,7 +3493,7 @@ GameObject:
   - component: {fileID: 1454962478791083550}
   - component: {fileID: 1771895225293559535}
   - component: {fileID: 6232343477407447608}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3997,9 +3970,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2930338843955646936}
-  - component: {fileID: 782778199264232669}
-  - component: {fileID: 322732806878137601}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ShopOptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4027,44 +3998,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &782778199264232669
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9046569062239157855}
-  m_CullTransparentMesh: 1
---- !u!114 &322732806878137601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9046569062239157855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ebf9e47b2a26f544aa2fa9cb3a11190b, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1001 &956213460731983035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4153,7 +4086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 496198014460494375, guid: cf5d95c1761f8d1419ee824c5a0fcc6a, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 496198014460494375, guid: cf5d95c1761f8d1419ee824c5a0fcc6a, type: 3}
       propertyPath: m_IsActive
@@ -4411,7 +4344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 496198014460494375, guid: cf5d95c1761f8d1419ee824c5a0fcc6a, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 496198014460494375, guid: cf5d95c1761f8d1419ee824c5a0fcc6a, type: 3}
       propertyPath: m_TagString
@@ -4612,7 +4545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 496198014460494375, guid: cf5d95c1761f8d1419ee824c5a0fcc6a, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 496198014460494375, guid: cf5d95c1761f8d1419ee824c5a0fcc6a, type: 3}
       propertyPath: m_IsActive

@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MeleeEnemyAI : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
-    private GameObject target;
+    private List<GameObject> targets = new List<GameObject>();
     private Animator animator;
 
     [SerializeField] private float attackRange = 1.5f;
@@ -14,6 +15,7 @@ public class MeleeEnemyAI : MonoBehaviour
 
     private RarityHandler rarityHandler;
 
+    [SerializeField] private List<string> targetTags;
 
     private void Start()
     {
@@ -30,41 +32,78 @@ public class MeleeEnemyAI : MonoBehaviour
         {
             Debug.LogError("RarityHandler not found on " + gameObject.name);
         }
-        FindTarget();
+
+        FindTargets();
     }
 
     private void Update()
     {
-        if (target == null)
+        if (targets.Count == 0)
         {
-            FindTarget();
+            FindTargets();
             return;
         }
 
-        navMeshAgent.SetDestination(target.transform.position);
+        GameObject nearestTarget = GetNearestTarget();
+        if (nearestTarget != null)
+        {
+            navMeshAgent.SetDestination(nearestTarget.transform.position);
 
-        float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
-        if (distanceToTarget <= attackRange)
-        {
-            AttackTarget();
-        }
-        else
-        {
-            animator.SetBool("IsAttacking", false);
+            float distanceToTarget = Vector3.Distance(transform.position, nearestTarget.transform.position);
+            if (distanceToTarget <= attackRange)
+            {
+                AttackTarget(nearestTarget);
+            }
+            else
+            {
+                animator.SetBool("IsAttacking", false);
+            }
         }
     }
 
-    private void FindTarget()
+    private void FindTargets()
     {
-        target = GameObject.FindWithTag("TownHall");
+        targets.Clear();
 
-        if (target == null)
+        foreach (string tag in targetTags)
         {
-            Debug.LogWarning("No object with tag 'TownHall' found in the scene.");
+            GameObject[] foundTargets = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject target in foundTargets)
+            {
+                targets.Add(target);
+            }
+        }
+
+        if (targets.Count == 0)
+        {
+            Debug.LogWarning("No targets found with specified tags.");
         }
     }
 
-    private void AttackTarget()
+    private GameObject GetNearestTarget()
+    {
+        GameObject nearestTarget = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (GameObject target in targets)
+        {
+            if (target == null)
+            {
+                continue;
+            }
+
+            float distance = Vector3.Distance(transform.position, target.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                nearestTarget = target;
+            }
+        }
+
+        return nearestTarget;
+    }
+
+    private void AttackTarget(GameObject target)
     {
         if (Time.time >= lastAttackTime + attackCooldown)
         {

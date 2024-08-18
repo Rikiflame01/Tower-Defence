@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GoldCollectionTrigger : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class GoldCollectionTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !IsPointerOverUI())
         {
             CollectGoldInRadius();
         }
@@ -50,11 +51,15 @@ public class GoldCollectionTrigger : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, groundOrPathLayerMask))
         {
-            //Debug.Log($"Hit {hit.collider.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
             return hit.point;
         }
 
         Debug.LogWarning("Raycast did not hit the Ground or Path layers.");
         return Vector3.zero;
+    }
+
+    private bool IsPointerOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }

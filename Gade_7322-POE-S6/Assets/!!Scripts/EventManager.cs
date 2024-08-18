@@ -19,6 +19,8 @@ public class EventManager : MonoBehaviour
 
     public UnityEvent<GameObject> onEnemySpawned;
 
+    public UnityEvent<string> onButtonClicked;
+
     private void Awake()
     {
         if (instance == null)
@@ -45,6 +47,12 @@ public class EventManager : MonoBehaviour
         if (onEnemySpawned == null) onEnemySpawned = new UnityEvent<GameObject>();
         if (onAddGold == null) onAddGold = new UnityEvent<int>();
         if (onGoldSpend == null) onGoldSpend = new UnityEvent<int>();
+        if (onButtonClicked == null) onButtonClicked = new UnityEvent<string>();
+    }
+
+    public void TriggerButtonClicked(string buttonName)
+    {
+        onButtonClicked.Invoke(buttonName);
     }
 
     public void TriggerTutorialMode()
