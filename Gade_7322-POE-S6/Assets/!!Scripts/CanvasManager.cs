@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,9 +13,9 @@ public class CanvasManager : MonoBehaviour
     public GameObject placementCanvas;
     public GameObject upgradeCanvas;
     public GameObject waveCanvas;
-    public GameObject pauseCanvas;
-    public GameObject gameOverCanvas;
-    public GameObject victoryCanvas;
+    private GameObject pauseCanvas;
+    private GameObject gameOverCanvas;
+    private GameObject victoryCanvas;
 
     private bool isPaused;
 
@@ -42,67 +41,109 @@ public class CanvasManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
+
+        pauseCanvas = GameObject.Find("Canv_Pause");
+        gameOverCanvas = GameObject.Find("Canv_Lose");
+        victoryCanvas = GameObject.Find("Canv_Win");
+
+        if (pauseCanvas == null) Debug.LogWarning("Pause Canvas not found!");
+        if (gameOverCanvas == null) Debug.LogWarning("Game Over Canvas not found!");
+        if (victoryCanvas == null) Debug.LogWarning("Victory Canvas not found!");
     }
 
     private void OnEnable()
     {
-        EventManager.instance.onTutorialMode.AddListener(() => SetGameMode(GameMode.Tutorial));
-        EventManager.instance.onCooldownMode.AddListener(() => SetGameMode(GameMode.Cooldown));
-        EventManager.instance.onPlacementMode.AddListener(() => SetGameMode(GameMode.Placement));
-        EventManager.instance.onUpgradeMode.AddListener(() => SetGameMode(GameMode.Upgrade));
-        EventManager.instance.onWaveMode.AddListener(() => SetGameMode(GameMode.Wave));
-        EventManager.instance.onPauseMode.AddListener(() => SetGameMode(GameMode.Pause));
-        EventManager.instance.onGameOverMode.AddListener(() => SetGameMode(GameMode.GameOver));
-        EventManager.instance.onVictoryMode.AddListener(() => SetGameMode(GameMode.Victory));
+        if (EventManager.instance != null)
+        {
+            EventManager.instance.onTutorialMode?.AddListener(() => SetGameMode(GameMode.Tutorial));
+            EventManager.instance.onCooldownMode?.AddListener(() => SetGameMode(GameMode.Cooldown));
+            EventManager.instance.onPlacementMode?.AddListener(() => SetGameMode(GameMode.Placement));
+            EventManager.instance.onUpgradeMode?.AddListener(() => SetGameMode(GameMode.Upgrade));
+            EventManager.instance.onWaveMode?.AddListener(() => SetGameMode(GameMode.Wave));
+            EventManager.instance.onPauseMode?.AddListener(() => SetGameMode(GameMode.Pause));
+            EventManager.instance.onGameOverMode?.AddListener(() => SetGameMode(GameMode.GameOver));
+            EventManager.instance.onVictoryMode?.AddListener(() => SetGameMode(GameMode.Victory));
+        }
+        else
+        {
+            Debug.LogWarning("EventManager instance not found!");
+        }
     }
 
     private void OnDisable()
     {
-        EventManager.instance.onTutorialMode.RemoveListener(() => SetGameMode(GameMode.Tutorial));
-        EventManager.instance.onCooldownMode.RemoveListener(() => SetGameMode(GameMode.Cooldown));
-        EventManager.instance.onPlacementMode.RemoveListener(() => SetGameMode(GameMode.Placement));
-        EventManager.instance.onUpgradeMode.RemoveListener(() => SetGameMode(GameMode.Upgrade));
-        EventManager.instance.onWaveMode.RemoveListener(() => SetGameMode(GameMode.Wave));
-        EventManager.instance.onPauseMode.RemoveListener(() => SetGameMode(GameMode.Pause));
-        EventManager.instance.onGameOverMode.RemoveListener(() => SetGameMode(GameMode.GameOver));
-        EventManager.instance.onVictoryMode.RemoveListener(() => SetGameMode(GameMode.Victory));
+        if (EventManager.instance != null)
+        {
+            EventManager.instance.onTutorialMode?.RemoveListener(() => SetGameMode(GameMode.Tutorial));
+            EventManager.instance.onCooldownMode?.RemoveListener(() => SetGameMode(GameMode.Cooldown));
+            EventManager.instance.onPlacementMode?.RemoveListener(() => SetGameMode(GameMode.Placement));
+            EventManager.instance.onUpgradeMode?.RemoveListener(() => SetGameMode(GameMode.Upgrade));
+            EventManager.instance.onWaveMode?.RemoveListener(() => SetGameMode(GameMode.Wave));
+            EventManager.instance.onPauseMode?.RemoveListener(() => SetGameMode(GameMode.Pause));
+            EventManager.instance.onGameOverMode?.RemoveListener(() => SetGameMode(GameMode.GameOver));
+            EventManager.instance.onVictoryMode?.RemoveListener(() => SetGameMode(GameMode.Victory));
+        }
     }
 
     private void SetGameMode(GameMode mode)
     {
+        if (GameManager.instance == null)
+        {
+            Debug.LogWarning("GameManager instance not found!");
+            return;
+        }
+
         switch (mode)
         {
             case GameMode.Tutorial:
-                if (GameManager.instance.currentState == GameManager.GameState.Tutorial) { ShowCanvas(tutorialCanvas); }
-                else { Debug.Log("This should not be executing: " + mode); }
+                if (GameManager.instance.currentState == GameManager.GameState.Tutorial)
+                    ShowCanvas(tutorialCanvas);
+                else
+                    Debug.LogWarning("GameMode.Tutorial should not be executing in this state: " + mode);
                 break;
             case GameMode.Cooldown:
-                if (GameManager.instance.currentState == GameManager.GameState.Cooldown) { ShowCanvas(cooldownCanvas); }
-                else { Debug.Log("This should not be executing: " + mode); }
+                if (GameManager.instance.currentState == GameManager.GameState.Cooldown)
+                    ShowCanvas(cooldownCanvas);
+                else
+                    Debug.LogWarning("GameMode.Cooldown should not be executing in this state: " + mode);
                 break;
             case GameMode.Placement:
-                if (GameManager.instance.currentState == GameManager.GameState.Placement) { ShowCanvas(placementCanvas); }
-                else { Debug.Log("This should not be executing: " + mode); }
+                if (GameManager.instance.currentState == GameManager.GameState.Placement)
+                    ShowCanvas(placementCanvas);
+                else
+                    Debug.LogWarning("GameMode.Placement should not be executing in this state: " + mode);
                 break;
             case GameMode.Upgrade:
-                if (GameManager.instance.currentState == GameManager.GameState.Upgrade) { ShowCanvas(upgradeCanvas); }
-                else { Debug.Log("This should not be executing: " + mode); }
+                if (GameManager.instance.currentState == GameManager.GameState.Upgrade)
+                    ShowCanvas(upgradeCanvas);
+                else
+                    Debug.LogWarning("GameMode.Upgrade should not be executing in this state: " + mode);
                 break;
             case GameMode.Wave:
-                if (GameManager.instance.currentState == GameManager.GameState.Wave) { ShowCanvas(waveCanvas); }
-                else { Debug.Log("This should not be executing: " + mode); }
+                if (GameManager.instance.currentState == GameManager.GameState.Wave)
+                    ShowCanvas(waveCanvas);
+                else
+                    Debug.LogWarning("GameMode.Wave should not be executing in this state: " + mode);
                 break;
             case GameMode.Pause:
                 PauseToggle();
                 break;
             case GameMode.GameOver:
-                if (GameManager.instance.currentState == GameManager.GameState.GameOver) { ShowCanvas(gameOverCanvas); }
-                else { Debug.Log("This should not be executing: " + mode); }
+                if (GameManager.instance.currentState == GameManager.GameState.GameOver)
+                    ShowCanvas(gameOverCanvas);
+                else
+                    Debug.LogWarning("GameMode.GameOver should not be executing in this state: " + mode);
                 break;
             case GameMode.Victory:
-                if (GameManager.instance.currentState == GameManager.GameState.Victory) { ShowCanvas(victoryCanvas); }
-                else { Debug.Log("This should not be executing: " + mode); }
+                if (GameManager.instance.currentState == GameManager.GameState.Victory)
+                    ShowCanvas(victoryCanvas);
+                else
+                    Debug.LogWarning("GameMode.Victory should not be executing in this state: " + mode);
+                break;
+            default:
+                Debug.LogWarning("Unhandled game mode: " + mode);
                 break;
         }
     }
@@ -111,22 +152,29 @@ public class CanvasManager : MonoBehaviour
     {
         if (canvas == null)
         {
-            Debug.LogError("Canvas is not assigned." + canvas.ToString());
+            Debug.LogWarning("Attempted to show a null canvas.");
             return;
         }
+
         foreach (GameObject canvasObject in canvases)
         {
-            canvasObject.SetActive(false);
+            if (canvasObject != null)
+            {
+                canvasObject.SetActive(false);
+            }
         }
 
         canvas.SetActive(true);
     }
 
-    private void HideCanvases()
+    public void HideCanvases()
     {
         foreach (GameObject canvas in canvases)
         {
-            canvas.SetActive(false);
+            if (canvas != null)
+            {
+                canvas.SetActive(false);
+            }
         }
     }
 
@@ -144,7 +192,15 @@ public class CanvasManager : MonoBehaviour
 
     private IEnumerator PauseAfterDelay(float delay)
     {
-        ShowCanvas(pauseCanvas);
+        if (pauseCanvas != null)
+        {
+            ShowCanvas(pauseCanvas);
+        }
+        else
+        {
+            Debug.LogWarning("Pause canvas is null, cannot show pause screen.");
+        }
+
         yield return new WaitForSecondsRealtime(delay);
         Time.timeScale = 0;
         isPaused = true;
@@ -155,8 +211,17 @@ public class CanvasManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(delay);
         Time.timeScale = 1;
         HideCanvases();
-        GameManager.instance.ResumePreviousState();
-        Debug.Log("Resuming previous state: " + GameManager.instance.GetCurrentState().ToString());
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.ResumePreviousState();
+            Debug.Log("Resuming previous state: " + GameManager.instance.GetCurrentState().ToString());
+        }
+        else
+        {
+            Debug.LogWarning("GameManager instance is null, cannot resume previous state.");
+        }
+
         isPaused = false;
     }
 }

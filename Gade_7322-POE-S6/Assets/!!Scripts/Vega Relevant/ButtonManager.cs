@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class ButtonManager : MonoBehaviour
 
     private void Awake()
     {
+
         if (instance == null)
         {
             instance = this;
@@ -28,6 +30,7 @@ public class ButtonManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        CanvasManager.instance.HideCanvases();
     }
 
     private void Start()
@@ -152,5 +155,48 @@ public class ButtonManager : MonoBehaviour
         {
             Debug.LogError("ButtonManager: Specific canvas is not assigned.");
         }
+    }
+    public void ExitApplication()
+    {
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
+        Application.Quit();
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        if (sceneName == null)
+        {
+            Debug.LogError("ButtonManager: Scene name is not assigned.");
+            return;
+        }
+
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.scene.name == "DontDestroyOnLoad")
+            {
+                Destroy(obj);
+            }
+        }
+
+        if (CanvasManager.instance != null)
+        {
+            Destroy(CanvasManager.instance.gameObject);
+            CanvasManager.instance = null;
+        }
+
+        if (GameManager.instance != null)
+        {
+            Destroy(GameManager.instance.gameObject);
+            GameManager.instance = null;
+        }
+
+        SceneManager.LoadScene(sceneName);
+
     }
 }
