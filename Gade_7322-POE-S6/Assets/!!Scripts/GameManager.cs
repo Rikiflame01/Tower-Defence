@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        ShopManager.instance.townHallProjectileData.Reset();
         SetCustomCursor();
         SwitchState(GameState.Tutorial);
     }

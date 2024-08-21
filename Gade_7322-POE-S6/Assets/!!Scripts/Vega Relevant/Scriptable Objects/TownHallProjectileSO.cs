@@ -44,4 +44,13 @@ public class TownHallProjectileSO : ScriptableObject
 
         return damage;
     }
+    public void Reset()
+    {
+        level = 0;
+        baseDamage = 5f;
+        hasHoming = false;
+        hasRicochet = false;
+        ricochetCount = 0;
+        hasExplosion = false;
+    }
 }
