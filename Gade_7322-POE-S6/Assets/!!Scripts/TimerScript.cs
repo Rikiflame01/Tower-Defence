@@ -5,7 +5,7 @@ using TMPro;
 public class TimerScript : MonoBehaviour
 {
     public float countdownTime = 20f;
-    private float currentTime;
+    public float currentTime;
     public TextMeshProUGUI timerText;
 
     private void Start()
@@ -30,7 +30,7 @@ public class TimerScript : MonoBehaviour
         TimerEnded();
     }
 
-    private void UpdateTimerText()
+    public void UpdateTimerText()
     {
         timerText.text = currentTime.ToString("F2");
     }

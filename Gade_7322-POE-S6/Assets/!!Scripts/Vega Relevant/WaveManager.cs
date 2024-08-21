@@ -9,7 +9,7 @@ public class WaveManager : MonoBehaviour
     public GridGenerator gridGenerator;
     public PathGenerator pathGenerator;
     public float spawnRadius = 1.0f;
-    private int roundCounter = 0;
+    public int roundCounter = 0;
 
     private void Start()
     {

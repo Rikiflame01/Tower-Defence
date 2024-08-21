@@ -6,12 +6,43 @@ public class GoldCollectionTrigger : MonoBehaviour
     public float collectionRadius = 5f;
     public LayerMask groundOrPathLayerMask;
 
+    public LayerMask clickableLayerMask;
+
+    private void Start()
+    {
+        clickableLayerMask = LayerMask.GetMask("ClickableObject");
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !IsPointerOverUI())
         {
-            CollectGoldInRadius();
+            if (!IsClickOnSpinningObject())
+            {
+                CollectGoldInRadius();
+            }
+            else
+            {
+                Debug.Log("Click was on spinning object, skipping gold collection.");
+            }
         }
+    }
+
+    private bool IsClickOnSpinningObject()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f, clickableLayerMask))
+        {
+            StartGame spinObject = hit.transform.GetComponent<StartGame>();
+            if (spinObject != null)
+            {
+                Debug.Log("Raycast hit spinning object: " + spinObject.gameObject.name);
+                return true;
+            }
+        }
+        return false;
     }
 
     private void CollectGoldInRadius()
