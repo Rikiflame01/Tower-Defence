@@ -122,7 +122,7 @@ public class PrefabPlacementManager : MonoBehaviour
                 currentPrefab = null;
                 RebakeNavMesh();
 
-                GameManager.instance.ResumePreviousState();
+                EventManager.instance.TriggerUpgradeMode();
             }
             else
             {
@@ -228,6 +228,6 @@ public class PrefabPlacementManager : MonoBehaviour
         }
         currentPrefab = null;
         GoldManager.instance.AddGold(ShopManager.instance.shieldDefenderCost);
-        GameManager.instance.ResumePreviousState();
+        EventManager.instance.TriggerUpgradeMode();
     }
 }

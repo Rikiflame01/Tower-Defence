@@ -76,7 +76,8 @@ public class ButtonManager : MonoBehaviour
     private void OnButtonClicked(Button button)
     {
         if (GameManager.instance.GetCurrentState() == GameManager.GameState.Cooldown ||
-            GameManager.instance.GetCurrentState() == GameManager.GameState.Tutorial)
+            GameManager.instance.GetCurrentState() == GameManager.GameState.Tutorial ||
+            GameManager.instance.GetCurrentState() == GameManager.GameState.Upgrade)
         {
             if (IsPointerOnUIButton())
             {

@@ -11,9 +11,13 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePause()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (GameManager.instance.currentState != GameManager.GameState.Placement)
         {
-            EventManager.instance.TriggerPauseMode();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                EventManager.instance.TriggerPauseMode();
+            }
         }
+
     }
 }

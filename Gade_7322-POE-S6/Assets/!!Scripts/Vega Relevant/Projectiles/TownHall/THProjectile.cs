@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class THProjectile : MonoBehaviour
@@ -47,13 +48,21 @@ public class THProjectile : MonoBehaviour
             if (health != null)
             {
                 health.TakeDamage(projectileData.GetDamage());
+                Destroy(gameObject);
             }
             else
             {
                 Debug.LogWarning("No IHealth component found on target.");
             }
-            Destroy(gameObject);
+            
         }
+        StartCoroutine(StartDespawn());
 
+    }
+
+    private IEnumerator StartDespawn()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }
