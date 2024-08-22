@@ -6,14 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float lookSpeed = 2f;
-    [SerializeField] private Transform placementCameraTarget; // The target position and rotation for the camera during placement mode
-    [SerializeField] private float cameraTransitionSpeed = 2f; // Speed of the camera transition
+    [SerializeField] private Transform placementCameraTarget;
+    [SerializeField] private Transform defaultCameraTarget;  
+    [SerializeField] private float cameraTransitionSpeed = 2f;
 
     private bool isFreeLookActive = false;
     private Vector3 lastMousePosition;
     private bool isInPlacementMode = false;
-    private Vector3 originalCameraPosition;
-    private Quaternion originalCameraRotation;
 
     private void OnEnable()
     {
@@ -28,7 +27,16 @@ public class PlayerController : MonoBehaviour
     private void TransitionBack()
     {
         isInPlacementMode = false;
-        StartCoroutine(TransitionCamera(originalCameraPosition, originalCameraRotation));
+
+        if (defaultCameraTarget != null)
+        {
+            Quaternion targetRotation = Quaternion.Euler(defaultCameraTarget.rotation.eulerAngles.x, 90f, defaultCameraTarget.rotation.eulerAngles.z);
+            StartCoroutine(TransitionCamera(defaultCameraTarget.position, targetRotation));
+        }
+        else
+        {
+            Debug.LogWarning("Default camera target is not set.");
+        }
     }
 
     private void Update()
@@ -74,12 +82,12 @@ public class PlayerController : MonoBehaviour
 
     private void HandleFreeLook()
     {
-        if (Input.GetMouseButtonDown(1)) // Right mouse button down
+        if (Input.GetMouseButtonDown(1))
         {
             isFreeLookActive = true;
             lastMousePosition = Input.mousePosition;
         }
-        else if (Input.GetMouseButtonUp(1)) // Right mouse button up
+        else if (Input.GetMouseButtonUp(1))
         {
             isFreeLookActive = false;
         }
@@ -89,12 +97,11 @@ public class PlayerController : MonoBehaviour
             Vector3 mouseDelta = Input.mousePosition - lastMousePosition;
             lastMousePosition = Input.mousePosition;
 
-            // Rotate the camera based on mouse movement
             float yaw = mouseDelta.x * lookSpeed;
             float pitch = -mouseDelta.y * lookSpeed;
 
-            transform.Rotate(0, yaw, 0, Space.World); // Rotate around the Y axis
-            Camera.main.transform.Rotate(pitch, 0, 0, Space.Self); // Rotate the camera around its X axis
+            transform.Rotate(0, yaw, 0, Space.World); 
+            Camera.main.transform.Rotate(pitch, 0, 0, Space.Self);
         }
     }
 
@@ -103,8 +110,6 @@ public class PlayerController : MonoBehaviour
         if (!isInPlacementMode)
         {
             isInPlacementMode = true;
-            originalCameraPosition = Camera.main.transform.position;
-            originalCameraRotation = Camera.main.transform.rotation;
 
             if (placementCameraTarget != null)
             {
@@ -133,11 +138,9 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        // Ensure final position and rotation are exactly set
         Camera.main.transform.position = targetPosition;
         Camera.main.transform.rotation = targetRotation;
 
-        // Debugging rotation
         Debug.Log("Final Rotation: " + Camera.main.transform.rotation.eulerAngles);
     }
 }

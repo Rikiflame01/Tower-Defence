@@ -10,6 +10,7 @@ TagManager:
   - KnightMeleeEnemy
   - ShieldDefender
   - Gold
+  - Tree
   layers:
   - Default
   - TransparentFX
