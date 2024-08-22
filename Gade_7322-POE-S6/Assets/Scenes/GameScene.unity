@@ -1693,7 +1693,7 @@ MonoBehaviour:
   treePrefab: {fileID: 4437794887783884655, guid: 9677b743eb12ec441b588216f4622c6b, type: 3}
   perlinScale: 15
   foliageDensity: 0.1
-  minDistanceBetweenTrees: 2
+  minDistanceBetweenTrees: 4
   minDistanceFromPath: 1
   pathLayerMask:
     serializedVersion: 2
