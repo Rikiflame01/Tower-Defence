@@ -3953,6 +3953,7 @@ MonoBehaviour:
   previewRadiusMultiplier: 1
   placementRadius: 2
   requiredDistanceFromPath: 1
+  requiredMinimumDistanceFromPath: 1.5
   foliageLayerMask:
     serializedVersion: 2
     m_Bits: 1024
