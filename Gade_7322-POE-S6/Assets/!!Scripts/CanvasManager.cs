@@ -8,7 +8,7 @@ public class CanvasManager : MonoBehaviour
 
     public GameObject[] canvases;
 
-    public GameObject tutorialCanvas;
+    private GameObject tutorialCanvas;
     public GameObject cooldownCanvas;
     public GameObject placementCanvas;
     public GameObject upgradeCanvas;
@@ -47,10 +47,13 @@ public class CanvasManager : MonoBehaviour
         pauseCanvas = GameObject.Find("Canv_Pause");
         gameOverCanvas = GameObject.Find("Canv_Lose");
         victoryCanvas = GameObject.Find("Canv_Win");
+        tutorialCanvas = GameObject.Find("Canv_Tutorial");
+
 
         if (pauseCanvas == null) Debug.LogWarning("Pause Canvas not found!");
         if (gameOverCanvas == null) Debug.LogWarning("Game Over Canvas not found!");
         if (victoryCanvas == null) Debug.LogWarning("Victory Canvas not found!");
+        if (tutorialCanvas == null) Debug.LogWarning("Tutorial Canvas not found!");
     }
 
     private void OnEnable()
@@ -87,7 +90,7 @@ public class CanvasManager : MonoBehaviour
         }
     }
 
-    private void SetGameMode(GameMode mode)
+    public void SetGameMode(GameMode mode)
     {
         if (GameManager.instance == null)
         {
@@ -99,7 +102,7 @@ public class CanvasManager : MonoBehaviour
         {
             case GameMode.Tutorial:
                 if (GameManager.instance.currentState == GameManager.GameState.Tutorial)
-                    ShowCanvas(tutorialCanvas);
+                    StartCoroutine(ShowCanvasWithDelay(tutorialCanvas, 0.5f));
                 else
                     Debug.LogWarning("GameMode.Tutorial should not be executing in this state: " + mode);
                 break;
@@ -165,6 +168,14 @@ public class CanvasManager : MonoBehaviour
         }
 
         canvas.SetActive(true);
+    }
+
+    //ShowCanvasWithDelay
+    private IEnumerator ShowCanvasWithDelay(GameObject canvas, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        ShowCanvas(canvas);
+        Debug.Log("Showing canvas: " + canvas.name);
     }
 
     public void HideCanvases()

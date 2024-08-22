@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
             case GameState.Tutorial:
                 // Handle Tutorial mode
                 SaveCurrentState();
-                Debug.Log("GameState set to: " + state + " Actual case executed: " + GameState.Tutorial.ToString());
+                //CanvasManager.instance.SetGameMode(CanvasManager.GameMode.Tutorial);
                 break;
             case GameState.Cooldown:
                 SaveCurrentState();
