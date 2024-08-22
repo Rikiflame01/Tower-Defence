@@ -14,6 +14,7 @@ public class PrefabPlacementManager : MonoBehaviour
     [SerializeField] private float previewRadiusMultiplier = 2f;
     [SerializeField] private float placementRadius = 1f;
     [SerializeField] private float requiredDistanceFromPath = 1.0f;
+    [SerializeField] private float requiredMinimumDistanceFromPath = 1.0f;
     [SerializeField] private LayerMask foliageLayerMask;
 
     private GameObject currentPrefab;
@@ -230,7 +231,16 @@ public class PrefabPlacementManager : MonoBehaviour
                 Collider[] nearbyPathColliders = Physics.OverlapSphere(position, requiredDistanceFromPath, LayerMask.GetMask("Path"));
                 if (nearbyPathColliders.Length == 0)
                 {
-                    return true;
+                    Collider[] withinMinimumDistanceColliders = Physics.OverlapSphere(position, requiredMinimumDistanceFromPath, LayerMask.GetMask("Path"));
+                    if (withinMinimumDistanceColliders.Length > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        Debug.Log("Invalid placement position: too far away from the Path.");
+                        return false;
+                    }
                 }
             }
         }
@@ -238,7 +248,6 @@ public class PrefabPlacementManager : MonoBehaviour
         Debug.Log("Invalid placement position: too close to or directly on Path.");
         return false;
     }
-
     private void HandlePlacementInput()
     {
         if (Input.GetMouseButtonDown(0) && previewInstance.activeSelf)
