@@ -10,6 +10,7 @@ public class WaveManager : MonoBehaviour
     public PathGenerator pathGenerator;
     public float spawnRadius = 1.0f;
     public int roundCounter = 0;
+    public float baseSpawnDelay = 1f;
 
     private void Start()
     {
@@ -20,10 +21,27 @@ public class WaveManager : MonoBehaviour
     {
         roundCounter++;
         int enemyCount = roundCounter * 8;
-        StartCoroutine(SpawnEnemies(enemyCount));
+
+        float spawnDelay = Mathf.Max(0.1f, baseSpawnDelay - (roundCounter * 0.05f));
+
+        int spawnPointsToUse = 1;
+        if (roundCounter >= 20)
+        {
+            spawnPointsToUse = pathGenerator.startPositions.Count;
+        }
+        else if (roundCounter >= 10)
+        {
+            spawnPointsToUse = Mathf.Min(3, pathGenerator.startPositions.Count);
+        }
+        else if (roundCounter >= 5)
+        {
+            spawnPointsToUse = Mathf.Min(2, pathGenerator.startPositions.Count);
+        }
+
+        StartCoroutine(SpawnEnemiesSimultaneously(enemyCount, spawnDelay, spawnPointsToUse));
     }
 
-    private IEnumerator SpawnEnemies(int count)
+    private IEnumerator SpawnEnemiesSimultaneously(int count, float delay, int spawnPointsToUse)
     {
         yield return new WaitUntil(() => gridGenerator != null && gridGenerator.IsGridGenerated());
 
@@ -35,27 +53,21 @@ public class WaveManager : MonoBehaviour
             yield break;
         }
 
-        int spawnCount = 0;
-        int pathsCount = startPositions.Count;
-        int enemiesPerPath = count / pathsCount;
-        int remainder = count % pathsCount;
+        int enemiesPerPath = count / spawnPointsToUse;
+        int remainder = count % spawnPointsToUse;
 
-        for (int i = 0; i < pathsCount; i++)
+        for (int j = 0; j < enemiesPerPath + (remainder > 0 ? 1 : 0); j++)
         {
-            int enemiesToSpawn = enemiesPerPath + (i < remainder ? 1 : 0);
-            for (int j = 0; j < enemiesToSpawn; j++)
+            for (int i = 0; i < spawnPointsToUse; i++)
             {
                 Vector3 spawnPosition = GetValidSpawnPosition(startPositions[i]);
                 if (spawnPosition != Vector3.zero)
                 {
                     GameObject enemyInstance = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-
                     EventManager.instance.TriggerEnemySpawned(enemyInstance);
-                    //Debug.Log("Enemy spawned and event triggered: " + enemyInstance.name);
-                    spawnCount++;
                 }
-                yield return new WaitForSeconds(1f);
             }
+            yield return new WaitForSeconds(delay);
         }
     }
 
