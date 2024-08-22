@@ -16,6 +16,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent onVictoryMode;
     public UnityEvent<int> onAddGold;
     public UnityEvent<int> onGoldSpend;
+    public UnityEvent onDefenderPlaced;
 
     public UnityEvent<GameObject> onEnemySpawned;
 
@@ -48,6 +49,12 @@ public class EventManager : MonoBehaviour
         if (onAddGold == null) onAddGold = new UnityEvent<int>();
         if (onGoldSpend == null) onGoldSpend = new UnityEvent<int>();
         if (onButtonClicked == null) onButtonClicked = new UnityEvent<string>();
+        if (onDefenderPlaced == null) onDefenderPlaced = new UnityEvent();
+    }
+
+    public void TriggerDefenderPlaced()
+    {
+        onDefenderPlaced.Invoke();
     }
 
     public void TriggerButtonClicked(string buttonName)

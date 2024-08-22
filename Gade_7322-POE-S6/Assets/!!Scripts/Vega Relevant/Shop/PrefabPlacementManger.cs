@@ -153,6 +153,8 @@ public class PrefabPlacementManager : MonoBehaviour
                 currentPrefab = null;
                 RebakeNavMesh();
 
+                EventManager.instance.TriggerDefenderPlaced();
+
                 EventManager.instance.TriggerUpgradeMode();
             }
             else
