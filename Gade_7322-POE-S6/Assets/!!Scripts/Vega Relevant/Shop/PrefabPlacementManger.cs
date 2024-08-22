@@ -1,5 +1,6 @@
 using Unity.AI.Navigation;
 using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Manages the placement of building prefabs in the game. Ensures that buildings are placed on valid ground locations, 
@@ -12,10 +13,12 @@ public class PrefabPlacementManager : MonoBehaviour
 
     [SerializeField] private float placementRadius = 1f;
     [SerializeField] private float requiredDistanceFromPath = 1.0f;
+    [SerializeField] private LayerMask foliageLayerMask;
 
     private GameObject currentPrefab;
     private GameObject previewInstance;
     private Vector3 placementPosition;
+    private List<GameObject> foliageToRemove = new List<GameObject>();
 
     private void Awake()
     {
@@ -89,6 +92,8 @@ public class PrefabPlacementManager : MonoBehaviour
                     newPosition = hit.point + offset;
                     previewInstance.transform.position = newPosition;
                     previewInstance.SetActive(true);
+
+                    PreviewFoliageRemoval(newPosition, placementRadius);
                 }
                 else
                 {
@@ -106,6 +111,30 @@ public class PrefabPlacementManager : MonoBehaviour
         }
     }
 
+    private void PreviewFoliageRemoval(Vector3 position, float radius)
+    {
+        foreach (GameObject foliage in foliageToRemove)
+        {
+            if (foliage != null)
+            {
+                foliage.SetActive(true);
+            }
+        }
+        foliageToRemove.Clear();
+
+        Collider[] colliders = Physics.OverlapSphere(position, radius, foliageLayerMask);
+
+        foreach (Collider collider in colliders)
+        {
+            GameObject foliageObject = collider.gameObject;
+            if (foliageObject != null)
+            {
+                foliageObject.SetActive(false);
+                foliageToRemove.Add(foliageObject);
+            }
+        }
+    }
+
     private void PlacePrefab()
     {
         if (previewInstance != null && previewInstance.activeSelf)
@@ -114,6 +143,8 @@ public class PrefabPlacementManager : MonoBehaviour
             if (bottomTransform != null)
             {
                 Vector3 finalPosition = previewInstance.transform.position;
+
+                RemoveExistingFoliage(finalPosition, placementRadius);
 
                 Instantiate(currentPrefab, finalPosition, previewInstance.transform.rotation);
 
@@ -134,6 +165,22 @@ public class PrefabPlacementManager : MonoBehaviour
             Debug.LogError("Preview instance is null or inactive, cannot place prefab.");
         }
     }
+
+    private void RemoveExistingFoliage(Vector3 position, float radius)
+    {
+        Collider[] colliders = Physics.OverlapSphere(position, radius, foliageLayerMask);
+
+        foreach (Collider collider in colliders)
+        {
+            GameObject foliageObject = collider.gameObject;
+            if (foliageObject != null)
+            {
+                Debug.Log($"Removing existing foliage object: {foliageObject.name}");
+                Destroy(foliageObject);
+            }
+        }
+    }
+
     private void RebakeNavMesh()
     {
         NavMeshSurface[] navMeshSurfaces = FindObjectsOfType<NavMeshSurface>();
@@ -146,7 +193,6 @@ public class PrefabPlacementManager : MonoBehaviour
 
         foreach (NavMeshSurface surface in navMeshSurfaces)
         {
-
             if (surface != null)
             {
                 surface.BuildNavMesh();
@@ -221,6 +267,15 @@ public class PrefabPlacementManager : MonoBehaviour
 
     private void CancelPlacement()
     {
+        foreach (GameObject foliage in foliageToRemove)
+        {
+            if (foliage != null)
+            {
+                foliage.SetActive(true);
+            }
+        }
+        foliageToRemove.Clear();
+
         if (previewInstance != null)
         {
             Destroy(previewInstance);

@@ -62,4 +62,20 @@ public class GridGenerator : MonoBehaviour
         }
         return null;
     }
+
+    public List<Node> GetAllNodes()
+    {
+        List<Node> nodes = new List<Node>();
+
+        foreach (var cube in cubeGrid.Values)
+        {
+            Node node = cube.GetComponent<Node>();
+            if (node != null)
+            {
+                nodes.Add(node);
+            }
+        }
+
+        return nodes;
+    }
 }

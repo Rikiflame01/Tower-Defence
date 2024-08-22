@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1658,6 +1658,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247737355}
   m_CullTransparentMesh: 1
+--- !u!1 &255980705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 255980707}
+  - component: {fileID: 255980706}
+  m_Layer: 0
+  m_Name: FoliageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &255980706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255980705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a10cafe1b1df5524a84e8f95fe8a4452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassPrefab: {fileID: 7135005128002550574, guid: 06392c411129d2946945f26ec3bcaec9, type: 3}
+  flowerPrefab: {fileID: 4158706403153419378, guid: 19d2c5f48ff6a8e4bb3eb44168ed283f, type: 3}
+  rockPrefab: {fileID: 6346277799637881195, guid: 3d2e664ac1190cc4abde0bb886741345, type: 3}
+  treePrefab: {fileID: 4437794887783884655, guid: 9677b743eb12ec441b588216f4622c6b, type: 3}
+  perlinScale: 15
+  foliageDensity: 0.1
+  minDistanceBetweenTrees: 2
+  minDistanceFromPath: 1
+  pathLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!4 &255980707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255980705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.68913, y: -9.521008, z: 21.3009}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &281526939
 GameObject:
   m_ObjectHideFlags: 0
@@ -3788,6 +3843,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placementRadius: 2
   requiredDistanceFromPath: 1
+  foliageLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!4 &880486589
 Transform:
   m_ObjectHideFlags: 0
@@ -8764,6 +8822,7 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 1534714245}
   - {fileID: 861430613}
+  - {fileID: 255980707}
   - {fileID: 1190385477}
   - {fileID: 1894124790}
   - {fileID: 162351793}
