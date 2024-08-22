@@ -11,6 +11,7 @@ TagManager:
   - ShieldDefender
   - Gold
   - Tree
+  - Rock
   layers:
   - Default
   - TransparentFX

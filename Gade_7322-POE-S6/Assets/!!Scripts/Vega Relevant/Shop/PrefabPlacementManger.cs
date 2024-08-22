@@ -295,5 +295,6 @@ public class PrefabPlacementManager : MonoBehaviour
         currentPrefab = null;
         GoldManager.instance.AddGold(ShopManager.instance.shieldDefenderCost);
         EventManager.instance.TriggerUpgradeMode();
+        EventManager.instance.TriggerDefenderPlaced();
     }
 }

@@ -13,12 +13,24 @@ public class FoliageManager : MonoBehaviour
     public float foliageDensity = 0.5f;
     public float minDistanceBetweenTrees = 2f;
     public float minDistanceFromPath = 3f;
+    public float minDistanceFromTownHall = 10f;
     public LayerMask pathLayerMask;
 
     private Dictionary<Vector3, GameObject> occupiedNodes = new Dictionary<Vector3, GameObject>();
+    private Transform townHallTransform;
 
     void Start()
     {
+        GameObject townHall = GameObject.FindGameObjectWithTag("TownHall");
+        if (townHall != null)
+        {
+            townHallTransform = townHall.transform;
+        }
+        else
+        {
+            Debug.LogError("No object with the 'TownHall' tag found in the scene.");
+        }
+
         StartCoroutine(GenerateFoliage());
     }
 
@@ -39,26 +51,28 @@ public class FoliageManager : MonoBehaviour
         {
             Vector3 nodePosition = node.transform.position;
 
-            if (node.isOccupied)
-            {
-                occupiedNodes[nodePosition] = node.gameObject;
-                continue;
-            }
+            PlaceGrass(node, nodePosition);
 
-            if (IsPositionNearPath(nodePosition))
+            if (node.isOccupied || IsPositionNearPath(nodePosition))
                 continue;
 
             float noiseValue = Mathf.PerlinNoise(nodePosition.x / perlinScale, nodePosition.z / perlinScale);
-            Debug.Log($"Noise value at {nodePosition}: {noiseValue}");
 
             if (noiseValue > foliageDensity)
             {
                 if (TryPlaceFoliage(node, nodePosition, noiseValue))
                 {
-                    Debug.Log($"Foliage placed at {nodePosition}");
                     continue;
                 }
             }
+        }
+    }
+
+    private void PlaceGrass(Node node, Vector3 position)
+    {
+        if (!IsDirectlyOnPath(position) && grassPrefab != null)
+        {
+            Instantiate(grassPrefab, position, Quaternion.identity, transform);
         }
     }
 
@@ -70,7 +84,7 @@ public class FoliageManager : MonoBehaviour
         {
             if (treePrefab != null)
             {
-                foliageInstance = Instantiate(treePrefab, position, Quaternion.identity, transform);
+                foliageInstance = Instantiate(treePrefab, position, GetRandomYRotation(), transform);
             }
             else
             {
@@ -80,32 +94,21 @@ public class FoliageManager : MonoBehaviour
         }
         else if (noiseValue > 0.6f)
         {
-            if (rockPrefab != null)
+            if (rockPrefab != null && !IsPositionNearTownHall(position))
             {
-                foliageInstance = Instantiate(rockPrefab, position, Quaternion.identity, transform);
+                foliageInstance = Instantiate(rockPrefab, position, GetRandomYRotation(), transform);
             }
             else
             {
-                Debug.LogWarning("Rock prefab is not assigned.");
+                Debug.LogWarning("Rock prefab is not assigned or too close to TownHall.");
             }
             MarkNodesOccupied(position, 1);
-        }
-        else if (noiseValue > 0.4f)
-        {
-            if (grassPrefab != null)
-            {
-                foliageInstance = Instantiate(grassPrefab, position, Quaternion.identity, transform);
-            }
-            else
-            {
-                Debug.LogWarning("Grass prefab is not assigned.");
-            }
         }
         else if (noiseValue > 0.2f)
         {
             if (flowerPrefab != null)
             {
-                foliageInstance = Instantiate(flowerPrefab, position, Quaternion.identity, transform);
+                foliageInstance = Instantiate(flowerPrefab, position, GetRandomYRotation(), transform);
             }
             else
             {
@@ -123,13 +126,31 @@ public class FoliageManager : MonoBehaviour
         return false;
     }
 
+    private bool IsDirectlyOnPath(Vector3 position)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(position + Vector3.up * 0.1f, Vector3.down, out hit, 0.2f, pathLayerMask))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool IsPositionNearTownHall(Vector3 position)
+    {
+        if (townHallTransform != null)
+        {
+            float distanceToTownHall = Vector3.Distance(position, townHallTransform.position);
+            bool nearTownHall = distanceToTownHall < minDistanceFromTownHall;
+
+            return nearTownHall;
+        }
+        return false;
+    }
+
     private bool IsPositionNearPath(Vector3 position)
     {
         bool nearPath = Physics.CheckSphere(position, minDistanceFromPath, pathLayerMask);
-        if (nearPath)
-        {
-            Debug.Log($"Position {position} is near a path.");
-        }
         return nearPath;
     }
 
@@ -159,9 +180,13 @@ public class FoliageManager : MonoBehaviour
                 if (node != null)
                 {
                     node.SetOccupied(true);
-                    Debug.Log($"Marked node at {colliderPosition} as occupied.");
                 }
             }
         }
+    }
+
+    private Quaternion GetRandomYRotation()
+    {
+        return Quaternion.Euler(0, Random.Range(0f, 360f), 0);
     }
 }
