@@ -3841,6 +3841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced70bf4820afb84eb0820cf05a26722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  previewRadiusMultiplier: 1
   placementRadius: 2
   requiredDistanceFromPath: 1
   foliageLayerMask:

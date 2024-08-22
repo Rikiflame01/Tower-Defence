@@ -11,6 +11,7 @@ public class PrefabPlacementManager : MonoBehaviour
 {
     public static PrefabPlacementManager instance;
 
+    [SerializeField] private float previewRadiusMultiplier = 2f;
     [SerializeField] private float placementRadius = 1f;
     [SerializeField] private float requiredDistanceFromPath = 1.0f;
     [SerializeField] private LayerMask foliageLayerMask;
@@ -93,7 +94,7 @@ public class PrefabPlacementManager : MonoBehaviour
                     previewInstance.transform.position = newPosition;
                     previewInstance.SetActive(true);
 
-                    PreviewFoliageRemoval(newPosition, placementRadius);
+                    PreviewFoliageRemoval(newPosition, placementRadius * previewRadiusMultiplier);
                 }
                 else
                 {
@@ -134,7 +135,6 @@ public class PrefabPlacementManager : MonoBehaviour
             }
         }
     }
-
     private void PlacePrefab()
     {
         if (previewInstance != null && previewInstance.activeSelf)
