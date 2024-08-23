@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float lookSpeed = 2f;
     [SerializeField] private Transform placementCameraTarget;
-    [SerializeField] private Transform defaultCameraTarget;  
+    [SerializeField] private Transform defaultCameraTarget;
     [SerializeField] private float cameraTransitionSpeed = 2f;
 
     private bool isFreeLookActive = false;
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
         if (defaultCameraTarget != null)
         {
             Quaternion targetRotation = Quaternion.Euler(defaultCameraTarget.rotation.eulerAngles.x, 90f, defaultCameraTarget.rotation.eulerAngles.z);
-            StartCoroutine(TransitionCamera(defaultCameraTarget.position, targetRotation));
+            StartCoroutine(TransitionCamera(defaultCameraTarget.position, targetRotation, 60f));
         }
         else
         {
@@ -41,7 +42,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "GameScene" && GameManager.instance != null) {
+        if (SceneManager.GetActiveScene().name == "GameScene" && GameManager.instance != null)
+        {
             HandlePause();
             HandleMovement();
 
@@ -107,7 +109,7 @@ public class PlayerController : MonoBehaviour
             float yaw = mouseDelta.x * lookSpeed;
             float pitch = -mouseDelta.y * lookSpeed;
 
-            transform.Rotate(0, yaw, 0, Space.World); 
+            transform.Rotate(0, yaw, 0, Space.World);
             Camera.main.transform.Rotate(pitch, 0, 0, Space.Self);
         }
     }
@@ -120,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
             if (placementCameraTarget != null)
             {
-                StartCoroutine(TransitionCamera(placementCameraTarget.position, Quaternion.Euler(90f, 0f, 0f)));
+                StartCoroutine(TransitionCamera(placementCameraTarget.position, Quaternion.Euler(90f, 0f, 0f), 97f));
             }
             else
             {
@@ -129,11 +131,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator TransitionCamera(Vector3 targetPosition, Quaternion targetRotation)
+    private IEnumerator TransitionCamera(Vector3 targetPosition, Quaternion targetRotation, float targetFOV)
     {
         float t = 0;
         Vector3 startPosition = Camera.main.transform.position;
         Quaternion startRotation = Camera.main.transform.rotation;
+        float startFOV = Camera.main.fieldOfView;
 
         while (t < 1)
         {
@@ -141,12 +144,14 @@ public class PlayerController : MonoBehaviour
 
             Camera.main.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
             Camera.main.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
+            Camera.main.fieldOfView = Mathf.Lerp(startFOV, targetFOV, t);
 
             yield return null;
         }
 
         Camera.main.transform.position = targetPosition;
         Camera.main.transform.rotation = targetRotation;
+        Camera.main.fieldOfView = targetFOV;
 
         Debug.Log("Final Rotation: " + Camera.main.transform.rotation.eulerAngles);
     }
