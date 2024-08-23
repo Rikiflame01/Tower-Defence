@@ -165,9 +165,6 @@ public class ShopManager : MonoBehaviour
             case "HealAllyBttn":
                 HealObjectsWithTags(new List<string> { "TownHall", "ShieldDefender", "Defender" });
                 break;
-            case "SellItemButton":
-                Debug.Log("SellItemButton was clicked!");
-                break;
             case "ShopPanelBttn":
                 ClosePanel(InitialChoicePanel);
                 OpenPanel(ShopOptionsPanel);
