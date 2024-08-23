@@ -18,6 +18,9 @@ public class MeleeEnemyAI : MonoBehaviour
     [SerializeField] private List<string> targetTags;
     [SerializeField] private float navMeshSearchDistance = 2.0f;
 
+    [SerializeField] private GameObject damageTrigger;
+    private List<GameObject> enemiesInRange = new List<GameObject>();
+
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -37,6 +40,19 @@ public class MeleeEnemyAI : MonoBehaviour
         navMeshAgent.stoppingDistance = attackRange - 0.1f;
 
         FindTargets();
+
+        if (damageTrigger != null)
+        {
+            Collider triggerCollider = damageTrigger.GetComponent<Collider>();
+            if (triggerCollider != null && !triggerCollider.isTrigger)
+            {
+                triggerCollider.isTrigger = true;
+            }
+            else
+            {
+                Debug.LogError("No trigger collider found on damageTrigger object.");
+            }
+        }
     }
 
     private void Update()
@@ -82,6 +98,18 @@ public class MeleeEnemyAI : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
             animator.SetBool("IsAttacking", false);
+        }
+
+        if (enemiesInRange.Count > 0 && Time.time >= lastAttackTime + attackCooldown)
+        {
+            foreach (GameObject enemy in enemiesInRange)
+            {
+                if (enemy != null && enemy.activeInHierarchy)
+                {
+                    AttackTarget(enemy);
+                    break;
+                }
+            }
         }
     }
 
@@ -154,6 +182,31 @@ public class MeleeEnemyAI : MonoBehaviour
             else
             {
                 Debug.LogWarning("Target does not have an IHealth component.");
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (damageTrigger != null && other.gameObject != this.gameObject)
+        {
+            if (targets.Contains(other.gameObject))
+            {
+                if (!enemiesInRange.Contains(other.gameObject))
+                {
+                    enemiesInRange.Add(other.gameObject);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (damageTrigger != null && other.gameObject != this.gameObject)
+        {
+            if (enemiesInRange.Contains(other.gameObject))
+            {
+                enemiesInRange.Remove(other.gameObject);
             }
         }
     }
