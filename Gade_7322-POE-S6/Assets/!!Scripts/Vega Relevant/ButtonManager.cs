@@ -30,7 +30,11 @@ public class ButtonManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        CanvasManager.instance.HideCanvases();
+        if (CanvasManager.instance != null)
+        {
+            CanvasManager.instance.HideCanvases();
+        }
+
     }
 
     private void Start()
@@ -46,6 +50,7 @@ public class ButtonManager : MonoBehaviour
         {
             button.onClick.AddListener(() => OnButtonClicked(button));
         }
+        
         ShopOptionsPanel.SetActive(false);
         TowerUpgradeOptionsPanel.SetActive(false);
 
@@ -168,6 +173,9 @@ public class ButtonManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
+        GameObject camera = GameObject.Find("Camera");
+        Destroy(camera);
+
         if (sceneName == null)
         {
             Debug.LogError("ButtonManager: Scene name is not assigned.");

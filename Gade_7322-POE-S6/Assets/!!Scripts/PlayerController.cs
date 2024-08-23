@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
@@ -41,29 +41,36 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        HandlePause();
-        HandleMovement();
+        if (SceneManager.GetActiveScene().name == "GameScene" && GameManager.instance != null) {
+            HandlePause();
+            HandleMovement();
 
-        if (GameManager.instance.currentState == GameManager.GameState.Placement)
-        {
-            HandlePlacementCamera();
-            return;
+            if (GameManager.instance.currentState == GameManager.GameState.Placement)
+            {
+                HandlePlacementCamera();
+                return;
+            }
+            else
+            {
+                HandleFreeLook();
+            }
         }
-        else
-        {
-            HandleFreeLook();
-        }
+
     }
 
     private void HandlePause()
     {
-        if (GameManager.instance.currentState != GameManager.GameState.Placement)
+        if (GameManager.instance != null)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (GameManager.instance.currentState != GameManager.GameState.Placement)
             {
-                EventManager.instance.TriggerPauseMode();
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    EventManager.instance.TriggerPauseMode();
+                }
             }
         }
+
     }
 
     private void HandleMovement()
