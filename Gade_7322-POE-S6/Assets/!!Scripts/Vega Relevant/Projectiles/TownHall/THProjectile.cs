@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class THProjectile : MonoBehaviour
@@ -9,19 +10,12 @@ public class THProjectile : MonoBehaviour
 
     private void Start()
     {
-        target = EnemyManager.instance.GetNearestEnemy(transform.position);
+        AcquireTarget();
 
         if (target == null)
         {
             Destroy(gameObject);
             return;
-        }
-
-        float damage = projectileData.GetDamage();
-
-        if (projectileData.hasHoming)
-        {
-            Homing(target.transform);
         }
     }
 
@@ -31,18 +25,32 @@ public class THProjectile : MonoBehaviour
         {
             Homing(target.transform);
         }
+        else if (target == null && projectileData.hasHoming)
+        {
+            AcquireTarget();
+        }
     }
 
-    private void Homing(Transform target)
+    private void AcquireTarget()
     {
-        Vector3 direction = (target.position - transform.position).normalized;
+        target = EnemyManager.instance.GetNearestEnemy(transform.position);
+
+        if (target == null)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Homing(Transform targetTransform)
+    {
+        Vector3 direction = (targetTransform.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
-        transform.LookAt(target);
+        transform.LookAt(targetTransform);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "KnightMeleeEnemy")
+        if (collision.gameObject == target)
         {
             IHealth health = collision.gameObject.GetComponent<IHealth>();
             if (health != null)
@@ -54,10 +62,11 @@ public class THProjectile : MonoBehaviour
             {
                 Debug.LogWarning("No IHealth component found on target.");
             }
-            
         }
-        StartCoroutine(StartDespawn());
 
+        if (projectileData.hasHoming == false) { 
+            StartCoroutine(StartDespawn());
+        }
     }
 
     private IEnumerator StartDespawn()
