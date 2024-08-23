@@ -48,7 +48,8 @@ public class GoldCollectionTrigger : MonoBehaviour
     private void CollectGoldInRadius()
     {
         if (GameManager.instance.GetCurrentState() == GameManager.GameState.Cooldown ||
-            GameManager.instance.GetCurrentState() == GameManager.GameState.Wave)
+            GameManager.instance.GetCurrentState() == GameManager.GameState.Wave ||
+            GameManager.instance.GetCurrentState() == GameManager.GameState.Upgrade)
         {
             Vector3 clickPosition = GetMouseWorldPosition();
 

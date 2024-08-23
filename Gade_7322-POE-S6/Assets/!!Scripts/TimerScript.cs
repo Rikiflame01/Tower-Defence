@@ -37,6 +37,11 @@ public class TimerScript : MonoBehaviour
 
     private void TimerEnded()
     {
+        if (GameManager.instance.currentState == GameManager.GameState.Placement)
+        {
+            EventManager.instance.TriggerDefenderPlaced();
+        }
+
         EventManager.instance.TriggerWaveMode();
     }
 }
