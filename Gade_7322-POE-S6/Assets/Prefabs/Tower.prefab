@@ -962,6 +962,9 @@ MonoBehaviour:
   - {fileID: 2047488674050148063}
   projectilePrefab: {fileID: 5190568487516353992, guid: 30a416d902c211e4b99ab31f43111788, type: 3}
   projectileForce: 2000
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!1 &1339599271033955442
 GameObject:
   m_ObjectHideFlags: 0

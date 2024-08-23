@@ -7,6 +7,7 @@ public class TownHallProjectileSpawner : MonoBehaviour
     public Transform[] shootPoints;
     public GameObject projectilePrefab;
     public float projectileForce = 500f;
+    public LayerMask obstacleLayerMask;
 
     private float lastShotTime;
     private bool isBurstActive = false;
@@ -44,18 +45,37 @@ public class TownHallProjectileSpawner : MonoBehaviour
             return;
         }
 
-        if (townHallLevelData.canShootFromAllPoints)
+        bool hasFired = false;
+
+        foreach (Transform shootPoint in shootPoints)
         {
-            foreach (Transform shootPoint in shootPoints)
+            if (HasLineOfSight(shootPoint, target))
             {
                 FireProjectile(shootPoint, target);
+                hasFired = true;
             }
         }
-        else
+
+        if (!hasFired)
         {
-            int randomIndex = Random.Range(0, shootPoints.Length);
-            FireProjectile(shootPoints[randomIndex], target);
+            Debug.Log("No shoot points with line of sight to the target.");
         }
+    }
+
+    private bool HasLineOfSight(Transform shootPoint, Transform target)
+    {
+        Vector3 direction = (target.position - shootPoint.position).normalized;
+        RaycastHit hit;
+
+        if (Physics.Raycast(shootPoint.position, direction, out hit, Mathf.Infinity, obstacleLayerMask))
+        {
+            if (hit.transform == target)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void FireProjectile(Transform shootPoint, Transform target)
