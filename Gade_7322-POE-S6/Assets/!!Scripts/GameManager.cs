@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
             case GameState.Tutorial:
                 // Handle Tutorial mode
                 SaveCurrentState();
-                //CanvasManager.instance.SetGameMode(CanvasManager.GameMode.Tutorial);
+                CanvasManager.instance.SetGameMode(CanvasManager.GameMode.Tutorial);
                 break;
             case GameState.Cooldown:
                 SaveCurrentState();
