@@ -1,3 +1,12 @@
+/*
+    The TutorialCanvasManager class manages the tutorial steps in the UI.
+    - Handles navigation between tutorial steps using Next and Previous buttons.
+    - Shows or hides tutorial steps based on the current step index.
+    - Provides methods for navigating steps and ending the tutorial.
+    - Disables the GameObject if no tutorial steps are assigned.
+    - Updates button visibility based on the current step position.
+*/
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

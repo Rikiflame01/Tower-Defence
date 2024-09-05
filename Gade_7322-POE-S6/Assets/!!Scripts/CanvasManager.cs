@@ -1,3 +1,13 @@
+/*
+    The CanvasManager class controls game canvases based on different game modes.
+    - Manages canvases for Tutorial, Cooldown, Placement, Upgrade, Wave, Pause, GameOver, and Victory.
+    - Uses a singleton pattern for instance management.
+    - Sets active canvas according to the current game state.
+    - Shows or hides canvases with optional delays.
+    - Toggles game pause state with delay, affecting time scale and resuming previous state.
+    - Listens to events from EventManager to update canvases.
+*/
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -170,7 +180,6 @@ public class CanvasManager : MonoBehaviour
         canvas.SetActive(true);
     }
 
-    //ShowCanvasWithDelay
     private IEnumerator ShowCanvasWithDelay(GameObject canvas, float delay)
     {
         yield return new WaitForSecondsRealtime(delay);

@@ -1,3 +1,29 @@
+/*
+    The ShopManager class manages in-game shop functionalities, including purchasing items, upgrading buildings and projectiles, and healing objects.
+
+    - Fields:
+      - townHallLevelData: Data for town hall levels.
+      - townHallProjectileData: Data for projectile upgrades.
+      - shieldDefenderCost: Cost of the shield defender.
+      - shieldDefenderPrefab: Prefab for the shield defender.
+      - InitialChoicePanel, ShopOptionsPanel, TowerUpgradeOptionsPanel: Panels for different shop views.
+      - townHallLevel: Current level of the town hall.
+      - healingCosts: Dictionary containing healing costs for different object types.
+
+    - Methods:
+      - Awake(): Ensures there is only one instance of ShopManager.
+      - OnEnable()/OnDisable(): Subscribes and unsubscribes to button click events.
+      - Start(): Finds and assigns panel GameObjects.
+      - PurchaseShieldDefender(): Initiates the purchase process for the shield defender.
+      - UpgradeTownHall(): Upgrades the town hall and updates its level.
+      - UpgradeProjectile(): Upgrades the projectile and updates its level.
+      - HealObjectsWithTags(): Heals objects with specific tags if enough gold is available.
+      - HandleButtonClicked(): Handles button click events and triggers corresponding actions.
+      - GetUpgradeCost()/GetProjectileUpgradeCost(): Calculates the cost for upgrading the town hall and projectile.
+      - OpenPanel()/ClosePanel(): Manages the visibility of shop panels.
+*/
+
+
 using UnityEngine;
 using System.Collections.Generic;
 

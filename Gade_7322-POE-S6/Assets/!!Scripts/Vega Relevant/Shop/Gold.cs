@@ -1,3 +1,26 @@
+/*
+    The Gold class manages the behavior of collectible gold items in the game. It handles the gold's movement towards the town hall, applies explosion effects upon collection, and updates the player's gold count.
+
+    - Fields:
+      - amount: The amount of gold the object represents.
+      - flySpeed: The speed at which the gold flies towards the town hall.
+      - explosionForce: The force applied to the gold when it explodes.
+      - explosionRadius: The radius of the explosion effect.
+      - townHallTransform: The transform of the town hall to move towards.
+      - rb: The Rigidbody component of the gold.
+      - isCollected: A flag indicating if the gold has been collected.
+
+    - Methods:
+      - Initialize(int goldAmount): Sets the gold amount, initializes the Rigidbody, and finds the town hall's transform.
+      - TriggerCollection(): Starts the collection process if not already collected, applying an explosion force and initiating the collection sequence.
+      - ApplyExplosionForce(): Applies an explosion force to the gold using Rigidbody.
+      - StartCollecting(): Sets the Rigidbody to kinematic mode to stop physics interactions.
+      - Update(): Moves the gold towards the town hall if it is collected and kinematic.
+      - FlyTowardsTownHall(): Moves the gold towards the town hall and calls CollectGold() when close.
+      - CollectGold(): Adds the gold amount to the player's total and destroys the gold object.
+*/
+
+
 using UnityEngine;
 
 public class Gold : MonoBehaviour

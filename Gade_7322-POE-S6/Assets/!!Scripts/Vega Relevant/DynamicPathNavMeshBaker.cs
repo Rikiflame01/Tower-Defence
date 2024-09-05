@@ -1,3 +1,12 @@
+/*
+    The DynamicPathNavMeshBaker class manages the runtime baking of NavMesh surfaces.
+    - Waits for a specified delay before initiating the baking process.
+    - Finds all NavMeshSurface components in the scene.
+    - Iterates through each NavMeshSurface to build the NavMesh, logging warnings if none are found or errors if a component is missing.
+    - Logs a success message after all NavMeshes are baked.
+*/
+
+
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;

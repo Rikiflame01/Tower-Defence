@@ -1,3 +1,15 @@
+/*
+    The FoliageManager class is responsible for generating and placing various types of foliage 
+    (grass, flowers, rocks, trees) in a scene based on Perlin noise and certain constraints.
+    - Uses Perlin noise to determine where to place foliage.
+    - Ensures foliage is not placed too close to paths, the TownHall, or existing trees.
+    - Prevents overlapping foliage and manages occupied nodes.
+    - Handles the instantiation and placement of foliage prefabs.
+    - Provides methods for checking conditions around paths, the TownHall, and existing foliage.
+    - Uses raycasting and sphere checks to determine if positions meet specific criteria.
+*/
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

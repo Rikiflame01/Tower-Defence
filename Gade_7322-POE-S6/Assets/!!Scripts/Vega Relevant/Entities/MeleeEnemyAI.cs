@@ -1,3 +1,31 @@
+/*
+    The MeleeEnemyAI class manages the behavior of melee enemies, including movement, targeting, and attacking.
+    
+    - Fields:
+      - navMeshAgent: For pathfinding.
+      - targets: List of potential targets.
+      - animator: Controls animations.
+      - attackRange: Distance within which the enemy can attack.
+      - attackCooldown: Time between attacks.
+      - damage: Damage dealt by the enemy.
+      - rarityHandler: Manages enemy rarity and properties.
+      - targetTags: Tags to identify targets.
+      - navMeshSearchDistance: Distance for valid NavMesh positions.
+      - damageTrigger: Detects collisions with enemies.
+      - enemiesInRange: Enemies within attack range.
+    
+    - Methods:
+      - Start(): Initializes components and finds targets.
+      - Update(): Manages movement, targeting, and attacks.
+      - FindTargets(): Finds targets based on tags.
+      - GetNearestTarget(): Gets the nearest target.
+      - GetClosestPointOnTarget(GameObject target): Finds the closest point on a target's collider.
+      - AttackTarget(GameObject target): Handles attacking and cooldown.
+      - OnTriggerEnter(Collider other): Adds enemies to range.
+      - OnTriggerExit(Collider other): Removes enemies from range.
+*/
+
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;

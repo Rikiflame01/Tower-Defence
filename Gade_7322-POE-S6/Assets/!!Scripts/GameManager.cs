@@ -1,3 +1,12 @@
+/*
+    The GameManager class manages the current game state and cursor settings.
+    - Implements a singleton pattern for global access.
+    - Defines game states: Tutorial, Cooldown, Placement, Upgrade, Wave, Pause, GameOver, and Victory.
+    - Provides methods to switch states, save and resume previous states, and handle state changes.
+    - Initializes custom cursor settings in Start method.
+    - Uses HandleStateChange to manage actions for each game state and logs state changes.
+*/
+
 using System;
 using UnityEngine;
 

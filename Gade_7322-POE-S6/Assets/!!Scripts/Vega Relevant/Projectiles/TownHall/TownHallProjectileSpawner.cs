@@ -1,3 +1,29 @@
+/*
+    The TownHallProjectileSpawner class manages projectile spawning from multiple shoot points, handling targeting, shooting, and burst firing.
+
+    - Fields:
+      - townHallLevelData: Configuration data for the town hall level.
+      - shootPoints: Points from which projectiles are fired.
+      - projectilePrefab: Prefab for the projectile.
+      - projectileForce: Force applied to the projectile.
+      - obstacleLayerMask: Layer mask to detect obstacles.
+
+    - Private Fields:
+      - lastShotTime: Time of the last shot.
+      - isBurstActive: Flag for burst firing state.
+      - burstCooldownEndTime: End time for burst cooldown.
+
+    - Methods:
+      - Start(): Initializes and configures the level; logs error if prefab is missing.
+      - Update(): Checks for enemies and shoots if the time interval has passed.
+      - Shoot(Transform target): Fires projectiles at the target if line of sight is clear.
+      - HasLineOfSight(Transform shootPoint, Transform target): Checks if there is a clear line of sight to the target.
+      - FireProjectile(Transform shootPoint, Transform target): Instantiates and fires the projectile.
+      - ActivateBurst(Transform target): Coroutine for burst firing.
+      - UpgradeTownHall(int level): Updates the town hall level and its configuration.
+*/
+
+
 using System.Collections;
 using UnityEngine;
 

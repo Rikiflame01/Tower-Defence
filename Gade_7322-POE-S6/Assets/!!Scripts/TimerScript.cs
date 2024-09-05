@@ -1,3 +1,11 @@
+/*
+    The TimerScript class manages a countdown timer in Unity using TextMeshProUGUI for display.
+    - Starts a countdown timer when the cooldown mode event is triggered.
+    - Uses a coroutine to update the timer every frame until it reaches zero.
+    - Updates the timer display text to show the remaining time.
+    - Triggers a defender placed event and switches to wave mode when the timer ends, if in Placement mode.
+*/
+
 using System.Collections;
 using UnityEngine;
 using TMPro;

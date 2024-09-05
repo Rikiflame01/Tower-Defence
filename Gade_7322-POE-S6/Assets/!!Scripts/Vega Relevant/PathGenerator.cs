@@ -1,3 +1,22 @@
+/*
+    The PathGenerator class generates paths within a grid and handles pathfinding.
+    - Uses the GridGenerator to ensure paths are generated on a valid grid.
+    - Creates a specified number of paths with a given spacing and ensures they do not overlap.
+    - Generates paths by finding a route from a random perimeter position to the grid center.
+    - Uses A* pathfinding algorithm to find paths and creates visual representations of the paths.
+    - Ensures only one path has a NavMeshSurface component by assigning and destroying NavMeshSurface components.
+    
+    Key methods:
+    - GeneratePaths: Generates paths and visualizes them using pathPrefab.
+    - GetRandomPerimeterPosition: Retrieves a random position on the grid perimeter.
+    - IsPositionFarEnough: Checks if a position is sufficiently far from existing start positions.
+    - GetCenterPosition: Calculates the center position of the grid.
+    - FindPath: Implements A* pathfinding to find a path between start and goal.
+    - ReconstructPath: Reconstructs the path from the A* algorithm result.
+    - AssignSingleNavMeshSurface: Ensures only one path has a NavMeshSurface component for navigation.
+*/
+
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;

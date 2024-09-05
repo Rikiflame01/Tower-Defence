@@ -1,3 +1,15 @@
+/*
+    The TowerSpawnScript handles the spawning of a tower prefab at the center of a grid.
+    - On startup, it checks if the grid is generated using GridGenerator.
+    - If the grid is valid, it calculates the center position of the grid, adjusts 
+      the y-coordinate by a specified offset, and instantiates the tower prefab at this position.
+    - If the grid is not generated or GridGenerator is not assigned, an error message is logged.
+
+    Key methods:
+    - SpawnTowerAtCenter: Instantiates the tower prefab at the calculated center position with an optional y-offset.
+    - GetCenterPosition: Computes the center position of the grid based on grid dimensions and spacing.
+*/
+
 using UnityEngine;
 
 public class TowerSpawnScript : MonoBehaviour

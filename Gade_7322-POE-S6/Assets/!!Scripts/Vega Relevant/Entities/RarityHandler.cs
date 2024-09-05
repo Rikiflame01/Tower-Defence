@@ -1,3 +1,23 @@
+/*
+    The RarityHandler class adjusts enemy attributes based on rarity.
+
+    - Enums:
+      - RarityType: Defines rarity levels (Normal, Empowered, Mythic, Legendary, Godlike).
+
+    - Fields:
+      - rarity: Current rarity type.
+      - baseHealth, baseDamage, baseSpeed: Base stats for health, damage, and speed.
+      - health, damage, speed: Adjusted stats based on rarity.
+
+    - Methods:
+      - Awake(): Applies rarity stats.
+      - ApplyRarity(): Adjusts health, damage, and speed based on rarity, and updates health component.
+      - GetDamage(): Returns the current damage value.
+      - GetSpeed(): Returns the current speed value.
+      - GetRarity(): Returns the current rarity type.
+*/
+
+
 using UnityEngine;
 
 public class RarityHandler : MonoBehaviour

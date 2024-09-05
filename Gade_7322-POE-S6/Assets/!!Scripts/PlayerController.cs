@@ -1,3 +1,14 @@
+/*
+    The PlayerController class manages player movement and camera behavior.
+    - Handles player movement based on input.
+    - Manages camera transitions for placement mode and free look mode.
+    - Listens to defender placement events to transition back to the default camera view.
+    - Handles pausing the game when the Escape key is pressed (if not in Placement mode).
+    - Uses coroutines for smooth camera transitions.
+    - Adjusts the camera's field of view and position during transitions.
+    - Switches between placement and free look camera modes based on game state and input.
+*/
+
 using System;
 using System.Collections;
 using UnityEngine;

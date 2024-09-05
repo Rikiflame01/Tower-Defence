@@ -1,3 +1,12 @@
+/*
+    The GridGenerator class creates and manages a 3D grid of cubes in Unity.
+    - Instantiates cubes in a grid based on specified width, height, depth, and spacing.
+    - Stores each cube in a dictionary with its position as the key.
+    - Provides methods to get a cube at a specific position, check if the grid is generated, 
+      and retrieve the top node of a cube.
+    - Retrieves all nodes from the grid by accessing the Node component of each cube.
+*/
+
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -1,3 +1,22 @@
+/*
+    The GoldCollectionTrigger class handles the collection of gold objects within a certain radius when the user clicks on the screen, 
+    excluding clicks on UI elements and specific spinning objects.
+
+    - Fields:
+      - collectionRadius: The radius within which gold can be collected.
+      - groundOrPathLayerMask: Layer mask for detecting ground or path layers.
+      - clickableLayerMask: Layer mask for detecting clickable objects.
+
+    - Methods:
+      - Start(): Initializes the clickableLayerMask with the "ClickableObject" layer.
+      - Update(): Checks for mouse clicks and determines if the click should trigger gold collection or skip based on whether it hits a spinning object.
+      - IsClickOnSpinningObject(): Performs a raycast to check if the click hits a spinning object and returns true if it does.
+      - CollectGoldInRadius(): Collects gold within the specified radius if the current game state allows it. Uses raycasting to get the click position 
+        and overlap sphere to detect gold objects.
+      - GetMouseWorldPosition(): Performs a raycast to get the world position of the mouse click, based on ground or path layers.
+      - IsPointerOverUI(): Checks if the mouse pointer is over a UI element to prevent interaction with the UI.
+*/
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 

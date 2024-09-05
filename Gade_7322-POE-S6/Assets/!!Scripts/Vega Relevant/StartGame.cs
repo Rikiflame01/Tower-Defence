@@ -1,3 +1,16 @@
+/*
+    The StartGame class handles user interaction and spinning behavior for a game object.
+    - The object spins when clicked, with spin speed easing in and out over a specified duration.
+    - The object’s position is locked to a specified Transform position.
+    - The spinning effect is achieved by rotating the object with an eased speed.
+    - When clicked, the object starts spinning and triggers cooldown behavior if applicable.
+    
+    Key methods:
+    - StartSpinning: Starts the spinning effect and resets the elapsed time.
+    - SkipCooldown: Adjusts game state or timer based on the wave counter and game state.
+    - EaseInOutCubic: Applies cubic easing to control the spin speed.
+*/
+
 using UnityEngine;
 
 public class StartGame : MonoBehaviour

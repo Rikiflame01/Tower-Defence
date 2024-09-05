@@ -1,3 +1,20 @@
+/*
+    The IHealth interface defines methods for managing health.
+    - TakeDamage(float amount): Reduces health by the specified amount.
+    - Heal(float amount): Increases health by the specified amount.
+    - GetCurrentHealth(): Returns the current health value.
+    - MaxHealth: Property that gets the maximum health value.
+    - Heal(): Resets health to the maximum value if below it.
+
+    The Health class implements the IHealth interface and manages the health of a game object.
+    - maxHealth: The maximum health value, set to 5 by default.
+    - currentHealth: The current health value, initialized to maxHealth on start.
+    - TakeDamage(float amount): Reduces health, clamps it to 0, and triggers Die() if health drops to 0.
+    - Heal(float amount): Increases health, clamps it to the maximum value.
+    - GetCurrentHealth(): Returns the current health value.
+    - Die(): Handles different behaviors based on the object's tag (e.g., triggers game over, drops gold, or destroys the object).
+    - Heal(): Sets health to maximum if below it.
+*/
 using UnityEngine;
 
 public interface IHealth

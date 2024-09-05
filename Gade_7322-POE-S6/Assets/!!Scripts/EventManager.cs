@@ -1,3 +1,12 @@
+/*
+    The EventManager class manages various UnityEvents for game state changes and interactions.
+    - Implements a singleton pattern for global access.
+    - Defines events for game modes: Tutorial, Cooldown, Placement, Upgrade, Wave, Pause, GameOver, and Victory.
+    - Includes events for gold transactions, enemy spawning, defender placement, and button clicks.
+    - Initializes UnityEvents in the Start method if they are null.
+    - Provides methods to trigger these events and switch game states using GameManager.
+*/
+
 using System;
 using UnityEngine;
 using UnityEngine.Events;

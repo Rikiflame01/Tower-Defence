@@ -1,3 +1,12 @@
+/*
+    The MainMenuManager class handles scene loading and application quitting from the main menu.
+
+    - Methods:
+      - LoadScene(string sceneName): Loads the specified scene. Clears all objects in the "DontDestroyOnLoad" scene and destroys instances of CanvasManager and GameManager.
+      - ExitApplication(): Exits the application. In the editor, stops play mode.
+*/
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

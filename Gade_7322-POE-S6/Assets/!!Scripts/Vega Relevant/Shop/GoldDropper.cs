@@ -1,3 +1,18 @@
+/*
+    The GoldDropper class handles the creation and initialization of gold objects based on the rarity of the associated object.
+
+    - Fields:
+      - goldPrefab: Prefab of the gold object to be instantiated.
+      - rarityHandler: Component that determines the rarity of the object.
+
+    - Methods:
+      - Awake(): Initializes the rarityHandler and checks if it's attached to the same game object. Logs an error if it's missing.
+      - DropGold(int dropCount): Instantiates the goldPrefab and initializes each gold object with a calculated amount based on the rarity. 
+        Logs errors if the prefab or rarityHandler is missing.
+      - CalculateGoldAmount(): Returns the amount of gold based on the rarity of the object. Multiplies a base amount by a factor depending on the rarity type.
+*/
+
+
 using UnityEngine;
 
 public class GoldDropper : MonoBehaviour

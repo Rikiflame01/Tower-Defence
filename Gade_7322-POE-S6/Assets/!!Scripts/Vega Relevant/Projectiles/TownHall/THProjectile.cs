@@ -1,3 +1,21 @@
+/*
+    The THProjectile class controls a projectile's behavior, including homing and damage application.
+
+    - Fields:
+      - projectileData: Data related to the projectile's properties.
+      - speed: Movement speed of the projectile.
+      - target: Current target for the projectile.
+
+    - Methods:
+      - Start(): Acquires the initial target. Destroys the projectile if no target is found.
+      - Update(): Handles homing towards the target if applicable; reacquires target if lost.
+      - AcquireTarget(): Finds the nearest enemy as the target; destroys the projectile if no target is found.
+      - Homing(Transform targetTransform): Moves the projectile towards and looks at the target.
+      - OnCollisionEnter(Collision collision): Applies damage to the target on collision and handles projectile destruction.
+      - StartDespawn(): Coroutine to delay projectile destruction if not homing.
+*/
+
+
 using System.Collections;
 using System.Linq.Expressions;
 using UnityEngine;

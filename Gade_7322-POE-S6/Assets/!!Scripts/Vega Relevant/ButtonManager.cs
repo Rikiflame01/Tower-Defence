@@ -1,3 +1,12 @@
+/*
+    The ButtonManager class handles UI button interactions and panel management.
+    - Manages singleton instance and ensures necessary components are present.
+    - Adds click listeners to all buttons and handles their interactions based on game state.
+    - Provides methods to open, close, and manage UI panels.
+    - Toggles specific canvases and handles scene transitions, including cleaning up previous instances and unloading resources.
+    - Includes functionality to exit the application and load new scenes while managing object destruction.
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;

@@ -1,12 +1,35 @@
+/*
+    The PrefabPlacementManager class handles the placement of prefabs in the game world, including previewing, rotating, and validating placement.
+
+    - Fields:
+      - instance: Singleton instance of the PrefabPlacementManager.
+      - previewRadiusMultiplier: Multiplier for the preview radius.
+      - placementRadius: Radius for placement validation.
+      - requiredDistanceFromPath: Minimum distance from paths required for placement.
+      - requiredMinimumDistanceFromPath: Minimum distance from paths required to avoid invalid placement.
+      - foliageLayerMask: Layer mask to identify foliage objects.
+
+    - Methods:
+      - Awake(): Initializes the singleton instance of PrefabPlacementManager. Ensures only one instance persists across scenes.
+      - Update(): Handles input for placement and preview updating, and manages state changes.
+      - BeginPlacement(GameObject prefab): Initiates the placement process by creating a preview instance of the given prefab.
+      - UpdatePreview(): Updates the position of the preview instance based on mouse position and checks for valid placement.
+      - PreviewFoliageRemoval(Vector3 position, float radius): Temporarily removes foliage objects in the preview area.
+      - PlacePrefab(): Finalizes the placement of the prefab, removes existing foliage, and rebakes the NavMesh.
+      - RemoveExistingFoliage(Vector3 position, float radius): Permanently removes foliage objects in the placement area.
+      - RebakeNavMesh(): Rebuilds the NavMesh surfaces in the scene to reflect changes.
+      - GetMouseWorldPosition(): Retrieves the world position of the mouse click.
+      - IsValidPlacementPosition(Vector3 position): Checks if the placement position is valid based on distance from paths.
+      - HandlePlacementInput(): Handles input for placing, rotating, or canceling placement.
+      - RotatePrefab(): Rotates the preview instance by 90 degrees.
+      - CancelPlacement(): Cancels the placement process, restores foliage, and refunds gold.
+*/
+
+
 using Unity.AI.Navigation;
 using UnityEngine;
 using System.Collections.Generic;
 
-/// <summary>
-/// Manages the placement of building prefabs in the game. Ensures that buildings are placed on valid ground locations, 
-/// sufficiently far from the path, and that placement is properly handled with preview and rotation functionalities.
-/// Automatically refunds gold if the game state changes before placement is confirmed.
-/// </summary>
 public class PrefabPlacementManager : MonoBehaviour
 {
     public static PrefabPlacementManager instance;

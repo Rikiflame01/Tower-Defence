@@ -1,3 +1,17 @@
+/*
+    The GoldManager class manages the player's gold, including tracking the current amount and handling transactions.
+
+    - Fields:
+      - instance: Singleton instance of the GoldManager.
+      - currentGold: The amount of gold currently held by the player.
+
+    - Methods:
+      - Awake(): Initializes the singleton instance of GoldManager. Ensures only one instance persists across scenes.
+      - HasEnoughGold(int amount): Checks if the player has enough gold for a given amount. Returns true if the currentGold is greater than or equal to the specified amount.
+      - SpendGold(int amount): Deducts a specified amount of gold if the player has enough. Triggers the `onGoldSpend` event if successful.
+      - AddGold(int amount): Increases the currentGold by a specified amount. Triggers the `onAddGold` event.
+*/
+
 using UnityEngine;
 
 public class GoldManager : MonoBehaviour
