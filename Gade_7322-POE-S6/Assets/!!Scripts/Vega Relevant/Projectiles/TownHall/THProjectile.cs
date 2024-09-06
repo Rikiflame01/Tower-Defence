@@ -68,7 +68,7 @@ public class THProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == target)
+        if (collision.gameObject.tag != "ShieldDefender" && collision.gameObject.tag != "TownHall")
         {
             IHealth health = collision.gameObject.GetComponent<IHealth>();
             if (health != null)
