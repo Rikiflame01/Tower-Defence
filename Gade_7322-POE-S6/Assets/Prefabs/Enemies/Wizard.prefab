@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 4429494891015310194}
   - component: {fileID: 1655794406670030439}
   - component: {fileID: 1077586519931677196}
-  - component: {fileID: -4302308973500293466}
+  - component: {fileID: 2989928010434169251}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: KnightMeleeEnemy
@@ -603,7 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldPrefab: {fileID: 496198014460494375, guid: cf5d95c1761f8d1419ee824c5a0fcc6a, type: 3}
---- !u!114 &-4302308973500293466
+--- !u!114 &2989928010434169251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -612,16 +612,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1329930810665971739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5eb34fec4a3dd409cc66d8262a72d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d5c816d960e6e845a5a2fca74d98f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1
-  attackCooldown: 2
+  attackRange: 5
+  attackCooldown: 3
+  projectilePrefab: {fileID: 5547149740324898604, guid: dd4bdf211e3a10e4687e925986c5d6ea, type: 3}
+  projectileForce: 500
   targetTags:
   - TownHall
   - ShieldDefender
   navMeshSearchDistance: 2
-  damageTrigger: {fileID: 3991231817392261108, guid: 16c055ae227870843a63ce16b73e69ae, type: 3}
 --- !u!1 &1385363952879964799
 GameObject:
   m_ObjectHideFlags: 0

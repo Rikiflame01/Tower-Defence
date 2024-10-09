@@ -97,18 +97,12 @@ public class PrefabPlacementManager : MonoBehaviour
 
     private void UpdatePreview()
     {
-        if (previewInstance == null)
-        {
-            Debug.LogError("Preview instance is null, cannot update preview.");
-            return;
-        }
-
         Vector3 newPosition = GetMouseWorldPosition();
 
-        if (IsValidPlacementPosition(newPosition))
+        if (IsValidPlacementPosition(newPosition) )
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Ground")) && previewInstance != null)
             {
                 Transform bottomTransform = previewInstance.transform.Find("Bottom");
                 if (bottomTransform != null)
@@ -132,7 +126,10 @@ public class PrefabPlacementManager : MonoBehaviour
         }
         else
         {
-            previewInstance.SetActive(false);
+            if (previewInstance != null)
+            {
+                previewInstance.SetActive(false);
+            }
         }
     }
 

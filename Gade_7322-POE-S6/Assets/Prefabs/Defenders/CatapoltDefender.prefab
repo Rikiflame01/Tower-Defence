@@ -2305,7 +2305,7 @@ GameObject:
   - component: {fileID: 7992363762560744187}
   m_Layer: 0
   m_Name: CatapoltDefender
-  m_TagString: ShieldDefender
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
