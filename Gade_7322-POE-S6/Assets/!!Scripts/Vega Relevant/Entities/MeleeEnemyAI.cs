@@ -46,7 +46,7 @@ public class MeleeEnemyAI : MonoBehaviour
     [SerializeField] private List<string> targetTags;
     [SerializeField] private float navMeshSearchDistance = 2.0f;
 
-    [SerializeField] private GameObject damageTrigger;
+    [SerializeField] private BoxCollider damageTrigger;
     private List<GameObject> enemiesInRange = new List<GameObject>();
 
     private void Start()
@@ -71,8 +71,8 @@ public class MeleeEnemyAI : MonoBehaviour
 
         if (damageTrigger != null)
         {
-            Collider triggerCollider = damageTrigger.GetComponent<Collider>();
-            if (triggerCollider != null && !triggerCollider.isTrigger)
+            BoxCollider triggerCollider = damageTrigger.GetComponent<BoxCollider>();
+            if (triggerCollider != null && triggerCollider.isTrigger)
             {
                 triggerCollider.isTrigger = true;
             }
