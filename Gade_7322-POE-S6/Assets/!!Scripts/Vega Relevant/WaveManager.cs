@@ -1,14 +1,3 @@
-/*
-    The WaveManager class handles enemy spawning in waves.
-    - Responds to the `onWaveMode` event to start a new wave.
-    - Increments the round counter and calculates the number of enemies and spawn delay based on the round.
-    - Determines the number of spawn points to use based on the round.
-    - Spawns enemies simultaneously across spawn points, with delays between spawns.
-    - Ensures the grid is generated before starting to spawn enemies.
-    - Validates spawn positions using NavMesh.
-    - Instantiates enemy prefabs at valid positions and triggers an enemy spawn event.
-*/
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,12 +5,18 @@ using UnityEngine.AI;
 
 public class WaveManager : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject standardWarriorPrefab;
+    public GameObject wizardPrefab;
+    public GameObject tankyKnightPrefab;
     public GridGenerator gridGenerator;
     public PathGenerator pathGenerator;
     public float spawnRadius = 1.0f;
     public int roundCounter = 0;
     public float baseSpawnDelay = 1f;
+
+    [Range(0, 1)] public float standardWarriorRatio = 0.5f;
+    [Range(0, 1)] public float wizardRatio = 0.3f;
+    [Range(0, 1)] public float tankyKnightRatio = 0.2f;
 
     private void Start()
     {
@@ -74,6 +69,7 @@ public class WaveManager : MonoBehaviour
                 Vector3 spawnPosition = GetValidSpawnPosition(startPositions[i]);
                 if (spawnPosition != Vector3.zero)
                 {
+                    GameObject enemyPrefab = SelectEnemyPrefab();
                     GameObject enemyInstance = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
                     EventManager.instance.TriggerEnemySpawned(enemyInstance);
                 }
@@ -93,5 +89,23 @@ public class WaveManager : MonoBehaviour
         }
 
         return Vector3.zero;
+    }
+
+    private GameObject SelectEnemyPrefab()
+    {
+        float randomValue = Random.value;
+
+        if (randomValue < standardWarriorRatio)
+        {
+            return standardWarriorPrefab;
+        }
+        else if (randomValue < standardWarriorRatio + wizardRatio)
+        {
+            return wizardPrefab;
+        }
+        else
+        {
+            return tankyKnightPrefab;
+        }
     }
 }

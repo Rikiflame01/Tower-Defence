@@ -836,7 +836,7 @@ MonoBehaviour:
   - TownHall
   - ShieldDefender
   navMeshSearchDistance: 2
-  damageTrigger: {fileID: 7150790631044172337}
+  damageTrigger: {fileID: 1065372150815425015}
 --- !u!114 &-431714032153475831
 MonoBehaviour:
   m_ObjectHideFlags: 0
