@@ -60,7 +60,7 @@ public class MeleeEnemyAI : MonoBehaviour
             damage = rarityHandler.GetDamage();
             navMeshAgent.speed = rarityHandler.GetSpeed();
         }
-        else
+        else if (Debug.isDebugBuild)
         {
             Debug.LogError("RarityHandler not found on " + gameObject.name);
         }
@@ -76,7 +76,7 @@ public class MeleeEnemyAI : MonoBehaviour
             {
                 triggerCollider.isTrigger = true;
             }
-            else
+            else if (Debug.isDebugBuild)
             {
                 Debug.LogError("No trigger collider found on damageTrigger object.");
             }
@@ -117,7 +117,7 @@ public class MeleeEnemyAI : MonoBehaviour
                     }
                 }
             }
-            else
+            else if (Debug.isDebugBuild)
             {
                 Debug.LogWarning("No valid NavMesh position found near target.");
             }
@@ -154,9 +154,12 @@ public class MeleeEnemyAI : MonoBehaviour
             }
         }
 
-        if (targets.Count == 0)
+        if (Debug.isDebugBuild)
         {
-            Debug.LogWarning("No targets found with specified tags.");
+            if (targets.Count == 0)
+            {
+                Debug.LogWarning("No targets found with specified tags.");
+            } 
         }
     }
 
@@ -207,7 +210,7 @@ public class MeleeEnemyAI : MonoBehaviour
                 lastAttackTime = Time.time;
                 animator.SetBool("IsAttacking", true);
             }
-            else
+            else if (Debug.isDebugBuild)
             {
                 Debug.LogWarning("Target does not have an IHealth component.");
             }

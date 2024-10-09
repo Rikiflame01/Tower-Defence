@@ -79,7 +79,7 @@ public class CanvasManager : MonoBehaviour
             EventManager.instance.onGameOverMode?.AddListener(() => SetGameMode(GameMode.GameOver));
             EventManager.instance.onVictoryMode?.AddListener(() => SetGameMode(GameMode.Victory));
         }
-        else
+        else if (Debug.isDebugBuild)
         {
             Debug.LogWarning("EventManager instance not found!");
         }
@@ -104,7 +104,10 @@ public class CanvasManager : MonoBehaviour
     {
         if (GameManager.instance == null)
         {
-            Debug.LogWarning("GameManager instance not found!");
+            if (Debug.isDebugBuild)
+            {
+                Debug.LogWarning("GameManager instance not found!"); 
+            }
             return;
         }
 

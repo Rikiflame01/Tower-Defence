@@ -12,6 +12,8 @@ TagManager:
   - Gold
   - Tree
   - Rock
+  - HKnightMeleeEnemy
+  - WizardRangedEnemy
   layers:
   - Default
   - TransparentFX

@@ -30,21 +30,27 @@ public class HealthCanvas : MonoBehaviour
     private void Awake()
     {
         healthComponent = GetComponentInParent<IHealth>();
-        if (healthComponent == null)
+        if (Debug.isDebugBuild)
         {
-            Debug.LogError("HealthCanvas: No IHealth component found on the parent GameObject.");
-            return;
+            if (healthComponent == null)
+            {
+                Debug.LogError("HealthCanvas: No IHealth component found on the parent GameObject.");
+                return;
+            } 
         }
 
         targetTransform = GetComponentInParent<Transform>();
 
-        if (healthSlider == null)
+        if (Debug.isDebugBuild)
         {
-            healthSlider = GetComponentInChildren<Slider>();
             if (healthSlider == null)
             {
-                Debug.LogError("HealthCanvas: No Slider component found in children.");
-            }
+                healthSlider = GetComponentInChildren<Slider>();
+                if (healthSlider == null)
+                {
+                    Debug.LogError("HealthCanvas: No Slider component found in children.");
+                }
+            } 
         }
     }
 

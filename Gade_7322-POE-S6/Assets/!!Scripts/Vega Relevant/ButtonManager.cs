@@ -67,7 +67,10 @@ public class ButtonManager : MonoBehaviour
 
         if (eventSystem == null)
         {
-            Debug.LogError("ButtonManager: No EventSystem found in the scene.");
+            if (Debug.isDebugBuild)
+            {
+                Debug.LogError("ButtonManager: No EventSystem found in the scene."); 
+            }
             return;
         }
 
@@ -75,7 +78,10 @@ public class ButtonManager : MonoBehaviour
 
         if (raycaster == null)
         {
-            Debug.LogError("ButtonManager: No GraphicRaycaster found in the scene.");
+            if (Debug.isDebugBuild)
+            {
+                Debug.LogError("ButtonManager: No GraphicRaycaster found in the scene."); 
+            }
             return;
         }
 
@@ -101,7 +107,7 @@ public class ButtonManager : MonoBehaviour
                 EventManager.instance.TriggerButtonClicked(button.name);
             }
         }
-        else
+        else if (Debug.isDebugBuild)
         {
             Debug.Log("Button clicks are disabled unless in Cooldown state.");
         }
@@ -165,7 +171,7 @@ public class ButtonManager : MonoBehaviour
             ShopOptionsPanel.SetActive(false);
             TowerUpgradeOptionsPanel.SetActive(false);
         }
-        else
+        else if (Debug.isDebugBuild)
         {
             Debug.LogError("ButtonManager: Specific canvas is not assigned.");
         }
@@ -187,7 +193,10 @@ public class ButtonManager : MonoBehaviour
 
         if (sceneName == null)
         {
-            Debug.LogError("ButtonManager: Scene name is not assigned.");
+            if (Debug.isDebugBuild)
+            {
+                Debug.LogError("ButtonManager: Scene name is not assigned."); 
+            }
             return;
         }
 

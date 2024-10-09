@@ -44,9 +44,12 @@ public class TownHallProjectileSpawner : MonoBehaviour
         lastShotTime = Time.time;
         townHallLevelData.ConfigureLevel(0);
 
-        if (projectilePrefab == null)
+        if (Debug.isDebugBuild)
         {
-            Debug.LogError("Projectile prefab is not assigned in the TownHall script.");
+            if (projectilePrefab == null)
+            {
+                Debug.LogError("Projectile prefab is not assigned in the TownHall script.");
+            } 
         }
     }
 
@@ -65,10 +68,13 @@ public class TownHallProjectileSpawner : MonoBehaviour
 
     private void Shoot(Transform target)
     {
-        if (projectilePrefab == null)
+        if (Debug.isDebugBuild)
         {
-            Debug.LogError("Projectile prefab is not assigned. Cannot shoot.");
-            return;
+            if (projectilePrefab == null)
+            {
+                Debug.LogError("Projectile prefab is not assigned. Cannot shoot.");
+                return;
+            } 
         }
 
         bool hasFired = false;
@@ -82,9 +88,12 @@ public class TownHallProjectileSpawner : MonoBehaviour
             }
         }
 
-        if (!hasFired)
+        if (Debug.isDebugBuild)
         {
-            Debug.Log("No shoot points with line of sight to the target.");
+            if (!hasFired)
+            {
+                Debug.Log("No shoot points with line of sight to the target.");
+            } 
         }
     }
 

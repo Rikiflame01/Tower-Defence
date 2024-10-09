@@ -3076,7 +3076,7 @@ GameObject:
   - component: {fileID: 9220182964944381313}
   m_Layer: 0
   m_Name: Character_Knight_01_Black 1
-  m_TagString: KnightMeleeEnemy
+  m_TagString: HKnightMeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
