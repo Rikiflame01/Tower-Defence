@@ -11,7 +11,7 @@ public class RangedEnemyAI : MonoBehaviour
     [SerializeField] private float attackRange = 10f;
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float projectileForce = 500f;
+    [SerializeField] private float projectileForce = 1000f;
     private float lastAttackTime;
 
     private RarityHandler rarityHandler;
@@ -29,7 +29,7 @@ public class RangedEnemyAI : MonoBehaviour
         {
             navMeshAgent.speed = rarityHandler.GetSpeed();
         }
-        else
+        else if (Debug.isDebugBuild)
         {
             Debug.LogError("RarityHandler not found on " + gameObject.name);
         }
@@ -76,7 +76,7 @@ public class RangedEnemyAI : MonoBehaviour
                     animator.SetBool("IsAttacking", false);
                 }
             }
-            else
+            else if (Debug.isDebugBuild)
             {
                 Debug.LogWarning("No valid NavMesh position found near target.");
             }
@@ -96,9 +96,12 @@ public class RangedEnemyAI : MonoBehaviour
             }
         }
 
-        if (targets.Count == 0)
+        if (Debug.isDebugBuild)
         {
-            Debug.LogWarning("No targets found with specified tags.");
+            if (targets.Count == 0)
+            {
+                Debug.LogWarning("No targets found with specified tags.");
+            } 
         }
     }
 
@@ -147,7 +150,7 @@ public class RangedEnemyAI : MonoBehaviour
             Invoke(nameof(SpawnProjectile), 2.5f);
             lastAttackTime = Time.time;
         }
-        else
+        else if (Debug.isDebugBuild)
         {
             Debug.LogError("Projectile prefab is not assigned.");
         }

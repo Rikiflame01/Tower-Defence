@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 2989928010434169251}
   m_Layer: 0
   m_Name: Wizard
-  m_TagString: KnightMeleeEnemy
+  m_TagString: WizardRangedEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
