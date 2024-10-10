@@ -695,9 +695,12 @@ MonoBehaviour:
   attackCooldown: 3
   projectilePrefab: {fileID: 5547149740324898604, guid: dd4bdf211e3a10e4687e925986c5d6ea, type: 3}
   projectileForce: 1000
+  homingStrength: 5
   targetTags:
   - TownHall
   - ShieldDefender
+  - CatapultDefender
+  - BurstDefender
   navMeshSearchDistance: 2
 --- !u!1 &1385363952879964799
 GameObject:

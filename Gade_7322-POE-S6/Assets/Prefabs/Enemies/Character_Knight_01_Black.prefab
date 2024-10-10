@@ -911,6 +911,8 @@ MonoBehaviour:
   targetTags:
   - TownHall
   - ShieldDefender
+  - CatapultDefender
+  - BurstDefender
   navMeshSearchDistance: 2
   damageTrigger: {fileID: 1065372150815425015}
 --- !u!114 &-431714032153475831

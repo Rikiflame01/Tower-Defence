@@ -101,6 +101,14 @@ public class Health : MonoBehaviour, IHealth
         {
             Destroy(gameObject);
         }
+        if (gameObject.CompareTag("BurstDefender"))
+        {
+            Destroy(gameObject);
+        }
+        if (gameObject.CompareTag("CatapultDefender"))
+        {
+            Destroy(gameObject);
+        }
         else if (Debug.isDebugBuild)
         {
             Debug.LogWarning("No behavior defined for death of " + gameObject.name);
