@@ -97,7 +97,7 @@ public class MeleeEnemyAI : MonoBehaviour
             Vector3 targetPosition = GetClosestPointOnTarget(nearestTarget);
 
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(targetPosition, out hit, navMeshSearchDistance, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(targetPosition, out hit, navMeshSearchDistance, NavMesh.AllAreas) && navMeshAgent != null && navMeshAgent.enabled)
             {
                 navMeshAgent.SetDestination(hit.position);
 

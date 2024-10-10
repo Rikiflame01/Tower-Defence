@@ -55,7 +55,7 @@ public class RangedEnemyAI : MonoBehaviour
             Vector3 targetPosition = GetClosestPointOnTarget(nearestTarget);
 
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(targetPosition, out hit, navMeshSearchDistance, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(targetPosition, out hit, navMeshSearchDistance, NavMesh.AllAreas) && navMeshAgent != null && navMeshAgent.enabled)
             {
                 navMeshAgent.SetDestination(hit.position);
                 float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
@@ -176,7 +176,6 @@ public class RangedEnemyAI : MonoBehaviour
                 Vector3 direction = (target.transform.position - transform.position).normalized;
                 rb.AddForce(direction * projectileForce);
 
-                // Add homing behavior to the projectile
                 ProjectileHoming homing = projectileInstance.AddComponent<ProjectileHoming>();
                 homing.target = target;
                 homing.homingStrength = homingStrength;

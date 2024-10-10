@@ -2219,7 +2219,8 @@ GameObject:
   - component: {fileID: 8865787721556910846}
   - component: {fileID: 7579106056160731958}
   - component: {fileID: 6309828945483392864}
-  m_Layer: 11
+  - component: {fileID: 5866373983098085237}
+  m_Layer: 12
   m_Name: SM_Bld_Castle_Iron_Gate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2291,6 +2292,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5866373983098085237
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8184643160269626779}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5156019, y: 2.9064837, z: 0.49090078}
+  m_Center: {x: -0.000000472242, y: 1.4532422, z: 0.21417397}
 --- !u!1 &8209312501917797148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,6 +2325,7 @@ GameObject:
   - component: {fileID: 1053959520685650810}
   - component: {fileID: 5442827679387868726}
   - component: {fileID: 7992363762560744187}
+  - component: {fileID: -3043026737325282275}
   m_Layer: 11
   m_Name: CatapoltDefender
   m_TagString: CatapultDefender
@@ -2405,6 +2428,29 @@ CapsuleCollider:
   m_Height: 3.562981
   m_Direction: 1
   m_Center: {x: -0.21, y: -0.55, z: 1.16}
+--- !u!114 &-3043026737325282275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8209312501917797148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c21b15cbedb64d44082926129956737b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionZone: {fileID: 5866373983098085237}
+  attackCooldown: 2
+  launchDelay: 0.6
+  launchInterval: 0.5
+  level: 1
+  targetsPerLevel: 0400000006000000080000000a000000
+  damagePerLaunch: 1000
+  upgradeCosts: d0070000b80b0000a00f0000
+  ignoredLayers:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!1 &8418620878160992474
 GameObject:
   m_ObjectHideFlags: 0
