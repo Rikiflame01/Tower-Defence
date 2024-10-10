@@ -1,18 +1,6 @@
-/*
-    The EnemyManager class handles the management of enemies in the game.
-    - Manages a list of active enemies.
-    - Ensures the instance persists across scene loads.
-    - Listens for events related to enemy spawning and wave mode.
-    - Adds enemies to the list when spawned and stops spawning checks.
-    - Starts a coroutine to check if all enemies are defeated at the end of a wave.
-    - Provides methods to get the nearest enemy to a specified position and remove an enemy from the list.
-    - Triggers cooldown mode when all enemies are defeated.
-*/
-
-
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -99,6 +87,11 @@ public class EnemyManager : MonoBehaviour
         }
 
         return nearestEnemy;
+    }
+
+    public List<GameObject> GetAllEnemies()
+    {
+        return new List<GameObject>(enemies);
     }
 
     public void RemoveEnemy(GameObject enemy)

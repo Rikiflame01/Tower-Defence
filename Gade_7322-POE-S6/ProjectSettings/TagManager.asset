@@ -14,6 +14,8 @@ TagManager:
   - Rock
   - HKnightMeleeEnemy
   - WizardRangedEnemy
+  - CatapultDefender
+  - BurstDefender
   layers:
   - Default
   - TransparentFX
