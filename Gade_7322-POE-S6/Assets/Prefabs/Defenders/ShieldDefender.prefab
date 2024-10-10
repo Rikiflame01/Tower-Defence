@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2214382953151205312}
   - component: {fileID: 4694544377616541332}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1499062950703936049}
   - component: {fileID: 5025791494521026063}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 706668796560212960}
   - component: {fileID: 8624697201157090847}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 839951091589597987}
   - component: {fileID: 5111244527437789211}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 4653078020862436600}
   - component: {fileID: 7835614127288448179}
   - component: {fileID: 8432869214473931978}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7613192456903882872}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 4186809177954865188}
   - component: {fileID: 6866213867513475229}
   - component: {fileID: 5995060136512264284}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6243471926090357074}
   - component: {fileID: 7570635960847824593}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 8239701085456391549}
   - component: {fileID: 6807173506605174070}
   - component: {fileID: 5174020703315457359}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4252759464546581093}
   - component: {fileID: 364651836199403685}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,7 +601,7 @@ GameObject:
   - component: {fileID: 8088395578648696254}
   - component: {fileID: 6634220798021436917}
   - component: {fileID: 5020208452062363020}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5716221704312277458}
   - component: {fileID: 4368145936561503569}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 7290424469419872605}
   - component: {fileID: 5260897244029632790}
   - component: {fileID: 5816494009965836655}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -857,7 +857,7 @@ GameObject:
   - component: {fileID: 529754665545421196}
   - component: {fileID: 9151448703493382502}
   - component: {fileID: 2912428172225076685}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -932,7 +932,7 @@ GameObject:
   - component: {fileID: 8023838052365135020}
   - component: {fileID: 4860750091501042919}
   - component: {fileID: 6543442340367385758}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1017,7 +1017,7 @@ GameObject:
   - component: {fileID: 6316865828722287621}
   - component: {fileID: 6734067956697453595}
   - component: {fileID: 4883945534407523687}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1130,7 +1130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4119750038665469012}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1167,7 +1167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6655118871178874354}
   - component: {fileID: 7021594164494595442}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,7 +1220,7 @@ GameObject:
   - component: {fileID: 1465689965501897579}
   - component: {fileID: 4069443185464167200}
   - component: {fileID: 2432983196153770841}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1304,7 +1304,7 @@ GameObject:
   - component: {fileID: 2210182587300284401}
   - component: {fileID: -3271640105593926463}
   - component: {fileID: 8245748735297890005}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShieldDefender
   m_TagString: ShieldDefender
   m_Icon: {fileID: 0}
@@ -1420,7 +1420,7 @@ GameObject:
   - component: {fileID: 2212197324268219537}
   - component: {fileID: 3647337324346490074}
   - component: {fileID: 3109684619314103459}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1502,7 +1502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6325324251771521221}
   - component: {fileID: 5583329279335600387}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1555,7 +1555,7 @@ GameObject:
   - component: {fileID: 251570166917598584}
   - component: {fileID: 3410207872130489651}
   - component: {fileID: 3956796734437369162}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1638,7 +1638,7 @@ GameObject:
   - component: {fileID: 469964777575960048}
   - component: {fileID: 3074580031045754299}
   - component: {fileID: 3679786589828507074}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1720,7 +1720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4620505340007376449}
   - component: {fileID: 201880973965974351}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1772,7 +1772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8712805317553017829}
   - component: {fileID: 7405864240295661802}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1824,7 +1824,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9012403811662697325}
   - component: {fileID: 8339862135891131664}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1877,7 +1877,7 @@ GameObject:
   - component: {fileID: 4289835727849208028}
   - component: {fileID: 1704105152733685911}
   - component: {fileID: 1016708284077183214}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1960,7 +1960,7 @@ GameObject:
   - component: {fileID: 2867773335793161071}
   - component: {fileID: 856489740762366756}
   - component: {fileID: 1322084350319983453}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2042,7 +2042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8052707437935592950}
   - component: {fileID: 9011716687264188422}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2095,7 +2095,7 @@ GameObject:
   - component: {fileID: 2548647423785206527}
   - component: {fileID: 2312035297660129006}
   - component: {fileID: 6256018446081642238}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2169,7 +2169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7288115311915037196}
   - component: {fileID: 4918011380080791849}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2222,7 +2222,7 @@ GameObject:
   - component: {fileID: 3197497569275352664}
   - component: {fileID: 31937922768078355}
   - component: {fileID: 1858674966270066282}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2306,6 +2306,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Wep_Shield_03 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 106904, guid: 72e068cb4d9875a4d912ca446ea74cd8, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 443980, guid: 72e068cb4d9875a4d912ca446ea74cd8, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.067101
@@ -2381,6 +2385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Castle_Tower_01
       objectReference: {fileID: 0}
+    - target: {fileID: 147310, guid: b1ad8ef6890687249a641abef8e26baf, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 480734, guid: b1ad8ef6890687249a641abef8e26baf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.15589046
@@ -2444,6 +2452,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Castle_Tower_Round_Top_01
       objectReference: {fileID: 0}
+    - target: {fileID: 125690, guid: fa993d692bbb7fe4eadefb231970e8b7, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 423054, guid: fa993d692bbb7fe4eadefb231970e8b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.13870811
@@ -2506,6 +2518,10 @@ PrefabInstance:
     - target: {fileID: 106904, guid: 72e068cb4d9875a4d912ca446ea74cd8, type: 3}
       propertyPath: m_Name
       value: SM_Wep_Shield_03 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 106904, guid: 72e068cb4d9875a4d912ca446ea74cd8, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 443980, guid: 72e068cb4d9875a4d912ca446ea74cd8, type: 3}
       propertyPath: m_LocalScale.x
@@ -2582,6 +2598,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Wep_Shield_03 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 106904, guid: 72e068cb4d9875a4d912ca446ea74cd8, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 443980, guid: 72e068cb4d9875a4d912ca446ea74cd8, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.0671
@@ -2656,6 +2676,10 @@ PrefabInstance:
     - target: {fileID: 106904, guid: 72e068cb4d9875a4d912ca446ea74cd8, type: 3}
       propertyPath: m_Name
       value: SM_Wep_Shield_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 106904, guid: 72e068cb4d9875a4d912ca446ea74cd8, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 443980, guid: 72e068cb4d9875a4d912ca446ea74cd8, type: 3}
       propertyPath: m_LocalScale.x

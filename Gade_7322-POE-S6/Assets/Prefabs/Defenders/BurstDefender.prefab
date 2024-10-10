@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4566993723445705882}
   - component: {fileID: 1424461696034882677}
   - component: {fileID: 4205245619519433953}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SM_Bld_Castle_Wood_Battlement_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 900206329858093837}
   - component: {fileID: 4234967640537250587}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 4752071504879443254}
   - component: {fileID: 1096875280682731272}
   - component: {fileID: 5212986061818477284}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 7070297038769120096}
   - component: {fileID: 2864073782400155579}
   - component: {fileID: 3286684810091466715}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4434306882213892256}
   - component: {fileID: 1339755539388035138}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7518698802134791351}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5779296263205557663}
   - component: {fileID: 4980895329444697860}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 903134508924371926}
   - component: {fileID: 6906175686446494377}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 8816692355781434649}
   - component: {fileID: 4498604134673359655}
   - component: {fileID: 1963787261295835576}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 4541471864599543971}
   - component: {fileID: 110600489250577866}
   - component: {fileID: 1345160320880608449}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -693,7 +693,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4532591698173722475}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -724,7 +724,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5002011680720607915}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -757,7 +757,7 @@ GameObject:
   - component: {fileID: 960994824606144871}
   - component: {fileID: 7775775732255816721}
   - component: {fileID: 1928130938928042625}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -840,7 +840,7 @@ GameObject:
   - component: {fileID: 4098569059709416971}
   - component: {fileID: 8748096195348829818}
   - component: {fileID: 6391160369193124301}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -923,7 +923,7 @@ GameObject:
   - component: {fileID: 7518260791759946723}
   - component: {fileID: 5348146176046070031}
   - component: {fileID: 6902768583744047413}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -998,7 +998,7 @@ GameObject:
   - component: {fileID: 2280226313886479600}
   - component: {fileID: 5548620857856094637}
   - component: {fileID: 83124912121213258}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1080,7 +1080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3418727349866034716}
   - component: {fileID: 7497975267814189013}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1132,7 +1132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2253108398020652760}
   - component: {fileID: 7658933243185532583}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1184,7 +1184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4195229753739862797}
   - component: {fileID: 1708362445033552220}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1235,7 +1235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5386862297241388479}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1267,7 +1267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5145477829928584346}
   - component: {fileID: 4820419458394522688}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1319,7 +1319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4413280020118020424}
   - component: {fileID: 1871780626895918886}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1371,7 +1371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5931282630786168525}
   - component: {fileID: 6915491389079407396}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1422,7 +1422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1504161160947407831}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1455,7 +1455,7 @@ GameObject:
   - component: {fileID: 6615740729894256589}
   - component: {fileID: 7872750708632346570}
   - component: {fileID: 8430692582366715705}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1529,7 +1529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991857689291312822}
   - component: {fileID: 7971997581684546674}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1580,7 +1580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6806230171119438919}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1611,7 +1611,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2230774016929384862}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1642,7 +1642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7193170916545276024}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1678,7 +1678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2887064167310413383}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1711,7 +1711,7 @@ GameObject:
   - component: {fileID: 4183461965685188410}
   - component: {fileID: 256791054876493038}
   - component: {fileID: 6344216356899274533}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1792,7 +1792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3763520744079826889}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1824,7 +1824,7 @@ GameObject:
   m_Component:
   - component: {fileID: 447315283984708629}
   - component: {fileID: 932555323571111034}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1877,7 +1877,7 @@ GameObject:
   - component: {fileID: 2983940978223772685}
   - component: {fileID: 3146833954504474979}
   - component: {fileID: 8672905712947968209}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1960,7 +1960,7 @@ GameObject:
   - component: {fileID: 4586855617940986861}
   - component: {fileID: 7163162121324887921}
   - component: {fileID: 5727266540829475682}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2041,7 +2041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2389735334430648830}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2074,7 +2074,7 @@ GameObject:
   - component: {fileID: 3494066023186281543}
   - component: {fileID: 1265468282582111333}
   - component: {fileID: 1920371775357287787}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2156,7 +2156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5346180441679761738}
   - component: {fileID: 9031601229296091366}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2212,7 +2212,7 @@ GameObject:
   - component: {fileID: 568690809552862416}
   - component: {fileID: 5474711074505170849}
   - component: {fileID: 590960492733992684}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BurstDefender
   m_TagString: BurstDefender
   m_Icon: {fileID: 0}
@@ -2358,7 +2358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9091760526586801852}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2395,7 +2395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2763827410766010343}
   - component: {fileID: 7038061839000818484}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: DirtPath (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2450,7 +2450,7 @@ GameObject:
   - component: {fileID: 7576348040996266967}
   - component: {fileID: 7964528624762460078}
   - component: {fileID: 6327516986725702553}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2563,7 +2563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6204024211293764879}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2596,7 +2596,7 @@ GameObject:
   - component: {fileID: 2127836041266077420}
   - component: {fileID: 6099932741334998044}
   - component: {fileID: 5194451275302966649}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2679,7 +2679,7 @@ GameObject:
   - component: {fileID: 8928374114516570300}
   - component: {fileID: 8421659572045022726}
   - component: {fileID: 1118920180156484293}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SM_Env_Path_Dirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2760,7 +2760,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8760127601703660081}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2791,7 +2791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5193072744395923238}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Projectile Points
   m_TagString: Untagged
   m_Icon: {fileID: 0}

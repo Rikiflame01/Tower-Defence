@@ -16,6 +16,7 @@ TagManager:
   - WizardRangedEnemy
   - CatapultDefender
   - BurstDefender
+  - Dead
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Button
   - ClickableObject
   - Foliage
-  - 
+  - Defender
   - 
   - 
   - 

@@ -119,7 +119,8 @@ public class PrefabPlacementManager : MonoBehaviour
                     Debug.LogError("No 'Bottom' child object found on the preview instance.");
                 }
             }
-            else
+            else if (previewInstance != null)
+
             {
                 previewInstance.SetActive(false);
             }

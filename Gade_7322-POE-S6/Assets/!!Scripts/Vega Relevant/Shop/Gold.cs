@@ -37,6 +37,7 @@ public class Gold : MonoBehaviour
     {
         amount = goldAmount;
         rb = GetComponent<Rigidbody>();
+
         townHallTransform = GameObject.FindWithTag("TownHall").transform;
     }
 

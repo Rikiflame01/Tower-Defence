@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BurstProjectile : MonoBehaviour
@@ -6,6 +7,7 @@ public class BurstProjectile : MonoBehaviour
     public float speed = 10f;
     private Transform target;
     private float damage;
+    private Vector3 lastDirection;
     [SerializeField] private List<string> ignoreCollisionTags;
 
     public void SetTarget(Transform target, float damage)
@@ -32,19 +34,28 @@ public class BurstProjectile : MonoBehaviour
                 }
             }
         }
+
+        StartCoroutine(DestroyAfterTime(5f));
     }
+
+     private System.Collections.IEnumerator DestroyAfterTime(float time)
+    {
+          yield return new WaitForSeconds(time);
+          Destroy(gameObject);
+     }
 
     private void Update()
     {
         if (target != null)
         {
             Vector3 direction = (target.position - transform.position).normalized;
+            lastDirection = direction;
             transform.position += direction * speed * Time.deltaTime;
             transform.LookAt(target);
         }
-        else
+        else if (lastDirection != Vector3.zero)
         {
-            Destroy(gameObject);
+            transform.position += lastDirection * speed * Time.deltaTime;
         }
     }
 
@@ -60,6 +71,11 @@ public class BurstProjectile : MonoBehaviour
         if (health != null)
         {
             health.TakeDamage(damage);
+            if (health.GetCurrentHealth() <= 0)
+            {
+                collision.gameObject.tag = "Dead";
+            }
+            Destroy(gameObject);
         }
     }
 }

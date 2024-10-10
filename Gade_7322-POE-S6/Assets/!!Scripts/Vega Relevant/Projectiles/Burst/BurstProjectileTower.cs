@@ -15,10 +15,43 @@ public class BurstProjectileTower : MonoBehaviour
     [SerializeField] private int[] upgradeCosts = { 1000, 2000, 4000 };
 
     private float lastAttackTime;
+    private Renderer objectRenderer;
+    private Color originalEmissionColor;
+    private Material materialInstance;
+
+    private void Start()
+    {
+        objectRenderer = GetComponentInChildren<Renderer>();
+
+        if (objectRenderer != null)
+        {
+            materialInstance = objectRenderer.material;
+
+            if (materialInstance.HasProperty("_EmissionColor"))
+            {
+                originalEmissionColor = materialInstance.GetColor("_EmissionColor");
+            }
+            else
+            {
+                originalEmissionColor = Color.black;
+            }
+
+            materialInstance.EnableKeyword("_EMISSION");
+        }
+    }
 
     private void Update()
     {
         AcquireAndFireAtTarget();
+
+        if (level < upgradeCosts.Length && GoldManager.instance.HasEnoughGold(upgradeCosts[level - 1]))
+        {
+            StartPulsatingEffect();
+        }
+        else
+        {
+            StopPulsatingEffect();
+        }
     }
 
     private void AcquireAndFireAtTarget()
@@ -90,6 +123,24 @@ public class BurstProjectileTower : MonoBehaviour
         else
         {
             Debug.Log("Not enough gold to upgrade tower.");
+        }
+    }
+
+    private void StartPulsatingEffect()
+    {
+        if (materialInstance != null)
+        {
+            float pulse = Mathf.Abs(Mathf.Sin(Time.time * 5)) * 0.5f + 0.5f;
+            Color pulseColor = Color.Lerp(originalEmissionColor, Color.white, pulse);
+            materialInstance.SetColor("_EmissionColor", pulseColor);
+        }
+    }
+
+    private void StopPulsatingEffect()
+    {
+        if (materialInstance != null)
+        {
+            materialInstance.SetColor("_EmissionColor", originalEmissionColor);
         }
     }
 }
