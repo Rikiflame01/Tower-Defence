@@ -12,6 +12,7 @@ public class RangedEnemyAI : MonoBehaviour
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileForce = 1000f;
+    [SerializeField] private float homingStrength = 5f;
     private float lastAttackTime;
 
     private RarityHandler rarityHandler;
@@ -101,7 +102,7 @@ public class RangedEnemyAI : MonoBehaviour
             if (targets.Count == 0)
             {
                 Debug.LogWarning("No targets found with specified tags.");
-            } 
+            }
         }
     }
 
@@ -147,7 +148,7 @@ public class RangedEnemyAI : MonoBehaviour
         {
             animator.SetBool("IsAttacking", true);
             animator.SetBool("IsRunning", false);
-            Invoke(nameof(SpawnProjectile), 2.5f);
+            Invoke(nameof(SpawnProjectile), 2.3f);
             lastAttackTime = Time.time;
         }
         else if (Debug.isDebugBuild)
@@ -174,9 +175,36 @@ public class RangedEnemyAI : MonoBehaviour
             {
                 Vector3 direction = (target.transform.position - transform.position).normalized;
                 rb.AddForce(direction * projectileForce);
+
+                // Add homing behavior to the projectile
+                ProjectileHoming homing = projectileInstance.AddComponent<ProjectileHoming>();
+                homing.target = target;
+                homing.homingStrength = homingStrength;
             }
         }
 
         animator.SetBool("IsRunning", true);
+    }
+}
+
+public class ProjectileHoming : MonoBehaviour
+{
+    public GameObject target;
+    public float homingStrength;
+
+    private Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (target != null && rb != null)
+        {
+            Vector3 direction = (target.transform.position - transform.position).normalized;
+            rb.velocity = Vector3.Lerp(rb.velocity, direction * rb.velocity.magnitude, Time.deltaTime * homingStrength);
+        }
     }
 }

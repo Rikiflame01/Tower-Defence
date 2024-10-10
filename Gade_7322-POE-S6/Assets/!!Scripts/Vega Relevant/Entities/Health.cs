@@ -79,9 +79,31 @@ public class Health : MonoBehaviour, IHealth
             }
             EnemyManager.instance.RemoveEnemy(this.gameObject);
         }
+        if (gameObject.CompareTag("HKnightMeleeEnemy"))
+        {
+            GoldDropper goldDropper = GetComponent<GoldDropper>();
+            if (goldDropper != null)
+            {
+                goldDropper.DropGold(3);
+            }
+            EnemyManager.instance.RemoveEnemy(this.gameObject);
+        }
+        if (gameObject.CompareTag("WizardRangedEnemy"))
+        {
+            GoldDropper goldDropper = GetComponent<GoldDropper>();
+            if (goldDropper != null)
+            {
+                goldDropper.DropGold(3);
+            }
+            EnemyManager.instance.RemoveEnemy(this.gameObject);
+        }
         if (gameObject.CompareTag("ShieldDefender"))
         {
             Destroy(gameObject);
+        }
+        else if (Debug.isDebugBuild)
+        {
+            Debug.LogWarning("No behavior defined for death of " + gameObject.name);
         }
     }
 
