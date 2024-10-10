@@ -34,7 +34,12 @@ public class ShopManager : MonoBehaviour
     public static ShopManager instance;
 
     public int shieldDefenderCost = 100;
+    public int burstDefenderCost = 300;
+    public int catapultDefenderCost = 1000;
+
     public GameObject shieldDefenderPrefab;
+    public GameObject burstDefenderPrefab;
+    public GameObject catapultDefenderPrefab;
 
     private GameObject InitialChoicePanel;
     private GameObject ShopOptionsPanel;
@@ -90,6 +95,38 @@ public class ShopManager : MonoBehaviour
             else
             {
                 Debug.Log("Not enough gold to purchase Shield Defender.");
+            }
+        });
+    }
+
+    public void PurchaseBurstDefender()
+    {
+        ConfirmationManager.instance.ShowConfirmation(burstDefenderCost, () =>
+        {
+            if (GoldManager.instance.HasEnoughGold(burstDefenderCost))
+            {
+                GoldManager.instance.SpendGold(burstDefenderCost);
+                PrefabPlacementManager.instance.BeginPlacement(burstDefenderPrefab);
+            }
+            else
+            {
+                Debug.Log("Not enough gold to purchase Burst Defender.");
+            }
+        });
+    }
+
+    public void PurchaseCatapultDefender()
+    {
+        ConfirmationManager.instance.ShowConfirmation(catapultDefenderCost, () =>
+        {
+            if (GoldManager.instance.HasEnoughGold(catapultDefenderCost))
+            {
+                GoldManager.instance.SpendGold(catapultDefenderCost);
+                PrefabPlacementManager.instance.BeginPlacement(catapultDefenderPrefab);
+            }
+            else
+            {
+                Debug.Log("Not enough gold to purchase Catapult Defender.");
             }
         });
     }
@@ -181,6 +218,12 @@ public class ShopManager : MonoBehaviour
         {
             case "ShieldBuyBttn":
                 PurchaseShieldDefender();
+                break;
+            case "BurstBuyBttn":
+                PurchaseBurstDefender();
+                break;
+            case "CatapultBuyBttn":
+                PurchaseCatapultDefender();
                 break;
             case "UpgradeTownHallBttn":
                 UpgradeTownHall();
