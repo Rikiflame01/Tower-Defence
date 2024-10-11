@@ -3582,7 +3582,7 @@ Animator:
   m_GameObject: {fileID: 8906497815999223428}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
-  m_Controller: {fileID: 9100000, guid: 523c4679f6b738e49bf38947e754557a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 40ffcb80afd419a4ea026828ca138c85, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3658,9 +3658,6 @@ MonoBehaviour:
   attackCooldown: 2
   targetTags:
   - TownHall
-  - ShieldDefender
-  - CatapultDefender
-  - BurstDefender
   navMeshSearchDistance: 2
   damageTrigger: {fileID: 3991231817392261108}
 --- !u!114 &6199127281557493442
