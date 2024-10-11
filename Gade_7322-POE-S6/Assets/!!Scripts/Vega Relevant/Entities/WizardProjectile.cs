@@ -10,13 +10,15 @@ public class WizardProjectile : MonoBehaviour
     private void Start()
     {
         projectileCollider = GetComponent<Collider>();
-        if (Debug.isDebugBuild)
+        if (Debug.isDebugBuild && projectileCollider == null)
         {
-            if (projectileCollider == null)
-            {
-                Debug.LogError("No Collider attached to the projectile.");
-            } 
+            Debug.LogError("No Collider attached to the projectile.");
         }
+    }
+
+    public void SetDamage(float newDamage)
+    {
+        damage = newDamage;
     }
 
     private void OnCollisionEnter(Collision collision)

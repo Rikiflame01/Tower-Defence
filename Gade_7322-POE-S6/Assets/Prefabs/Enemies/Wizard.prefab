@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e124511f5823cc49a877e54e5ac6cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rarity: 0
+  rarity: 4
   baseHealth: 5
   baseDamage: 10
   baseSpeed: 1.5

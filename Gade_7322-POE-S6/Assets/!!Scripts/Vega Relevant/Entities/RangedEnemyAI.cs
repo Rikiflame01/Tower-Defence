@@ -168,6 +168,15 @@ public class RangedEnemyAI : MonoBehaviour
         GameObject projectileInstance = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
         Rigidbody rb = projectileInstance.GetComponent<Rigidbody>();
 
+        if (rarityHandler != null)
+        {
+            WizardProjectile wizardProjectile = projectileInstance.GetComponent<WizardProjectile>();
+            if (wizardProjectile != null)
+            {
+                wizardProjectile.SetDamage(rarityHandler.GetDamage());
+            }
+        }
+
         if (rb != null)
         {
             GameObject target = GetNearestTarget();
@@ -186,7 +195,7 @@ public class RangedEnemyAI : MonoBehaviour
     }
 }
 
-public class ProjectileHoming : MonoBehaviour
+    public class ProjectileHoming : MonoBehaviour
 {
     public GameObject target;
     public float homingStrength;

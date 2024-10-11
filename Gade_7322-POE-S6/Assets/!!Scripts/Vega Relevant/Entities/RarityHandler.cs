@@ -87,7 +87,7 @@ public class RarityHandler : MonoBehaviour
         IHealth healthComponent = GetComponent<IHealth>();
         if (healthComponent != null)
         {
-            healthComponent.TakeDamage(-health);
+            healthComponent.SetHealth(health);
         }
     }
 

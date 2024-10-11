@@ -5,6 +5,7 @@
     - GetCurrentHealth(): Returns the current health value.
     - MaxHealth: Property that gets the maximum health value.
     - Heal(): Resets health to the maximum value if below it.
+    - SetHealth(float value): Sets the current health to a specified value, clamped between 0 and maxHealth.
 
     The Health class implements the IHealth interface and manages the health of a game object.
     - maxHealth: The maximum health value, set to 5 by default.
@@ -12,9 +13,11 @@
     - TakeDamage(float amount): Reduces health, clamps it to 0, and triggers Die() if health drops to 0.
     - Heal(float amount): Increases health, clamps it to the maximum value.
     - GetCurrentHealth(): Returns the current health value.
+    - SetHealth(float value): Sets the current health directly, clamped between 0 and maxHealth.
     - Die(): Handles different behaviors based on the object's tag (e.g., triggers game over, drops gold, or destroys the object).
     - Heal(): Sets health to maximum if below it.
 */
+
 using UnityEngine;
 
 public interface IHealth
@@ -25,6 +28,7 @@ public interface IHealth
     float MaxHealth { get; }
 
     void Heal();
+    void SetHealth(float value);
 }
 
 public class Health : MonoBehaviour, IHealth
@@ -63,6 +67,12 @@ public class Health : MonoBehaviour, IHealth
         return currentHealth;
     }
 
+    public void SetHealth(float value)
+    {
+        maxHealth = value;
+        currentHealth = Mathf.Clamp(value, 0, maxHealth);
+    }
+
     private void Die()
     {
         if (gameObject.CompareTag("TownHall"))
@@ -70,7 +80,7 @@ public class Health : MonoBehaviour, IHealth
             EventManager.instance.TriggerGameOverMode();
             Destroy(gameObject);
         }
-        if (gameObject.CompareTag("KnightMeleeEnemy"))
+        else if (gameObject.CompareTag("KnightMeleeEnemy") || gameObject.CompareTag("HKnightMeleeEnemy") || gameObject.CompareTag("WizardRangedEnemy"))
         {
             GoldDropper goldDropper = GetComponent<GoldDropper>();
             if (goldDropper != null)
@@ -79,33 +89,7 @@ public class Health : MonoBehaviour, IHealth
             }
             EnemyManager.instance.RemoveEnemy(this.gameObject);
         }
-        if (gameObject.CompareTag("HKnightMeleeEnemy"))
-        {
-            GoldDropper goldDropper = GetComponent<GoldDropper>();
-            if (goldDropper != null)
-            {
-                goldDropper.DropGold(3);
-            }
-            EnemyManager.instance.RemoveEnemy(this.gameObject);
-        }
-        if (gameObject.CompareTag("WizardRangedEnemy"))
-        {
-            GoldDropper goldDropper = GetComponent<GoldDropper>();
-            if (goldDropper != null)
-            {
-                goldDropper.DropGold(3);
-            }
-            EnemyManager.instance.RemoveEnemy(this.gameObject);
-        }
-        if (gameObject.CompareTag("ShieldDefender"))
-        {
-            Destroy(gameObject);
-        }
-        if (gameObject.CompareTag("BurstDefender"))
-        {
-            Destroy(gameObject);
-        }
-        if (gameObject.CompareTag("CatapultDefender"))
+        else if (gameObject.CompareTag("ShieldDefender") || gameObject.CompareTag("BurstDefender") || gameObject.CompareTag("CatapultDefender"))
         {
             Destroy(gameObject);
         }
