@@ -337,7 +337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5699729158551310359}
   - component: {fileID: 6078523717802286982}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -826,7 +826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2029933799703934162}
   - component: {fileID: 6809138358971950415}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: GameObject (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -863,7 +863,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1445,6 +1445,7 @@ GameObject:
   - component: {fileID: 2210182587300284401}
   - component: {fileID: -3271640105593926463}
   - component: {fileID: 8245748735297890005}
+  - component: {fileID: -2258185201503814200}
   m_Layer: 11
   m_Name: ShieldDefender
   m_TagString: ShieldDefender
@@ -1551,6 +1552,38 @@ CapsuleCollider:
   m_Height: 6.24
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 1.3701136}
+--- !u!114 &-2258185201503814200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326183490584516560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ef84b7464402c4f99dba2c6931938b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowZones:
+  - {fileID: 6710107372603965718}
+  - {fileID: 6078523717802286982}
+  - {fileID: 2256514452606545535}
+  - {fileID: 6809138358971950415}
+  level: 1
+  slowEffectsPerLevel:
+  - 0.3
+  - 0.5
+  - 0.7
+  - 0.9
+  upgradeCosts: e8030000d0070000a00f0000
+  healthPerLevel:
+  - 100
+  - 200
+  - 350
+  - 500
+  ignoredLayers:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!1 &5502791660728227860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,7 +1729,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1812787510400264294}
   - component: {fileID: 6710107372603965718}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1733,7 +1766,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1749,7 +1782,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8218645276990289492}
   - component: {fileID: 2256514452606545535}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1786,7 +1819,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
