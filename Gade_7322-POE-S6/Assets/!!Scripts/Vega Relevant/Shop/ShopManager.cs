@@ -50,7 +50,9 @@ public class ShopManager : MonoBehaviour
     {
         { "Ally", 50 },
         { "TownHall", 500 },
-        { "ShieldDefender", 100 }
+        { "ShieldDefender", 1000},
+        { "BurstDefender", 1000},
+        { "CatapultDefender", 1000 }
     };
 
     private void Awake()
@@ -252,11 +254,11 @@ public class ShopManager : MonoBehaviour
     {
         switch (townHallLevel)
         {
-            case 0: return 100;
-            case 1: return 200;
-            case 2: return 400;
-            case 3: return 800;
-            default: return 1600;
+            case 0: return 800;
+            case 1: return 1600;
+            case 2: return 3000;
+            case 3: return 6000;
+            default: return 10000;
         }
     }
 
@@ -264,12 +266,12 @@ public class ShopManager : MonoBehaviour
     {
         switch (townHallProjectileData.level)
         {
-            case 0: return 150;
-            case 1: return 300;
-            case 2: return 600;
-            case 3: return 1200;
-            case 4: return 2400;
-            default: return 4800;
+            case 0: return 600;
+            case 1: return 1200;
+            case 2: return 2000;
+            case 3: return 3000;
+            case 4: return 4500;
+            default: return 10000;
         }
     }
 

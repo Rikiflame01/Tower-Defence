@@ -26,28 +26,34 @@ public class WaveManager : MonoBehaviour
     private void StartWave()
     {
         roundCounter++;
-        int enemyCount = roundCounter * 8;
+
+        int enemyCount = 8;
+
+        if (roundCounter > 3)
+        {
+            enemyCount = roundCounter * 8;
+        }
 
         float spawnDelay = Mathf.Max(0.1f, baseSpawnDelay - (roundCounter * 0.05f));
 
         int spawnPointsToUse = 1;
-        if (roundCounter >= 20)
+        if (roundCounter >= 25)
         {
             spawnPointsToUse = pathGenerator.startPositions.Count;
         }
-        else if (roundCounter >= 10)
+        else if (roundCounter >= 15)
         {
             spawnPointsToUse = Mathf.Min(3, pathGenerator.startPositions.Count);
         }
-        else if (roundCounter >= 5)
+        else if (roundCounter >= 10)
         {
             spawnPointsToUse = Mathf.Min(2, pathGenerator.startPositions.Count);
         }
 
-        StartCoroutine(SpawnEnemiesSimultaneously(enemyCount, spawnDelay, spawnPointsToUse));
+        StartCoroutine(SpawnCustomWave(enemyCount, spawnDelay, spawnPointsToUse));
     }
 
-    private IEnumerator SpawnEnemiesSimultaneously(int count, float delay, int spawnPointsToUse)
+    private IEnumerator SpawnCustomWave(int count, float delay, int spawnPointsToUse)
     {
         yield return new WaitUntil(() => gridGenerator != null && gridGenerator.IsGridGenerated());
 
@@ -59,18 +65,22 @@ public class WaveManager : MonoBehaviour
             yield break;
         }
 
-        int enemiesPerPath = count / spawnPointsToUse;
-        int remainder = count % spawnPointsToUse;
-
-        for (int j = 0; j < enemiesPerPath + (remainder > 0 ? 1 : 0); j++)
+        for (int i = 0; i < count; i++)
         {
-            for (int i = 0; i < spawnPointsToUse; i++)
+            for (int j = 0; j < spawnPointsToUse; j++)
             {
-                Vector3 spawnPosition = GetValidSpawnPosition(startPositions[i]);
+                Vector3 spawnPosition = GetValidSpawnPosition(startPositions[j]);
                 if (spawnPosition != Vector3.zero)
                 {
-                    GameObject enemyPrefab = SelectEnemyPrefab();
+                    GameObject enemyPrefab = SelectEnemyPrefabByRound();
                     GameObject enemyInstance = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+                    RarityHandler rarityHandler = enemyInstance.GetComponent<RarityHandler>();
+                    if (rarityHandler != null)
+                    {
+                        rarityHandler.SetAllowedRarities(roundCounter);
+                    }
+
                     EventManager.instance.TriggerEnemySpawned(enemyInstance);
                 }
             }
@@ -78,17 +88,24 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private Vector3 GetValidSpawnPosition(Vector3 startPosition)
+    private GameObject SelectEnemyPrefabByRound()
     {
-        Vector3 randomPosition = startPosition + Random.insideUnitSphere * spawnRadius;
-        randomPosition.y = startPosition.y;
-
-        if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, spawnRadius, NavMesh.AllAreas))
+        if (roundCounter == 1)
         {
-            return hit.position;
+            return standardWarriorPrefab;
         }
-
-        return Vector3.zero;
+        else if (roundCounter == 2)
+        {
+            return tankyKnightPrefab;
+        }
+        else if (roundCounter == 3)
+        {
+            return wizardPrefab;
+        }
+        else
+        {
+            return SelectEnemyPrefab();
+        }
     }
 
     private GameObject SelectEnemyPrefab()
@@ -107,5 +124,18 @@ public class WaveManager : MonoBehaviour
         {
             return tankyKnightPrefab;
         }
+    }
+
+    private Vector3 GetValidSpawnPosition(Vector3 startPosition)
+    {
+        Vector3 randomPosition = startPosition + Random.insideUnitSphere * spawnRadius;
+        randomPosition.y = startPosition.y;
+
+        if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, spawnRadius, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+
+        return Vector3.zero;
     }
 }
