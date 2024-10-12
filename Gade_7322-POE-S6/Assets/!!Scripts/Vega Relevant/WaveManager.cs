@@ -171,13 +171,10 @@ public class WaveManager : MonoBehaviour
         wizardRatio = shieldRatio;            // More shield defenders -> more wizards
         tankyKnightRatio = burstRatio;        // More burst towers -> more tanky knights
 
-        Debug.Log($"Adjusted Enemy Ratios - Standard Warriors: {standardWarriorRatio}, Wizards: {wizardRatio}, Tanky Knights: {tankyKnightRatio}");
-
         float totalRatio = standardWarriorRatio + wizardRatio + tankyKnightRatio;
         standardWarriorRatio /= totalRatio;
         wizardRatio /= totalRatio;
         tankyKnightRatio /= totalRatio;
 
-        Debug.Log($"Normalized Ratios - Standard Warriors: {standardWarriorRatio}, Wizards: {wizardRatio}, Tanky Knights: {tankyKnightRatio}");
     }
 }
