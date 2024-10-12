@@ -25,10 +25,13 @@ public class WizardProjectile : MonoBehaviour
     {
         GameObject target = collision.gameObject;
 
-        if (ignoreCollisionTags.Contains(target.tag))
+        if (ignoreCollisionTags != null && collision.gameObject != null && !string.IsNullOrEmpty(collision.gameObject.tag))
         {
-            Physics.IgnoreCollision(projectileCollider, collision.collider);
-            return;
+            if (ignoreCollisionTags.Contains(collision.gameObject.tag))
+            {
+                Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
+                return;
+            }
         }
 
         IHealth health = target.GetComponent<IHealth>();

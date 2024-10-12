@@ -10,11 +10,13 @@ public class BurstProjectile : MonoBehaviour
     private Vector3 lastDirection;
     [SerializeField] private List<string> ignoreCollisionTags;
 
-    public void SetTarget(Transform target, float damage)
+    public void SetTarget(Transform target, float damage, Vector3 direction)
     {
         this.target = target;
         this.damage = damage;
+        this.lastDirection = direction;
     }
+
 
     private void Start()
     {

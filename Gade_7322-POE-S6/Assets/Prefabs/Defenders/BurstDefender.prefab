@@ -2339,15 +2339,15 @@ MonoBehaviour:
   - {fileID: 8760127601703660081}
   - {fileID: 7518698802134791351}
   projectilePrefab: {fileID: 8725073122172390195, guid: eb537166775e67045a78a5d9587b3768, type: 3}
-  attackRange: 15
-  attackCooldown: 5
+  attackRange: 30
+  attackCooldown: 3
   level: 1
   projectilesPerLevel: 0300000006000000090000000f000000
   damagePerLevel:
   - 5
-  - 6
-  - 8
+  - 10
   - 15
+  - 25
   upgradeCosts: e8030000d0070000a00f0000
 --- !u!1 &7575756574761966684
 GameObject:

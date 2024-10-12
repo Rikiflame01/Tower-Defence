@@ -58,19 +58,26 @@ public class BurstProjectileTower : MonoBehaviour
     {
         List<GameObject> targets = EnemyManager.instance.GetAllEnemies();
         int projectilesToFire = projectilesPerLevel[level - 1];
-        int spawnedProjectiles = 0;
 
+        if (targets.Count == 0 || Time.time < lastAttackTime + attackCooldown)
+        {
+            return;
+        }
+
+        int spawnedProjectiles = 0;
         foreach (GameObject target in targets)
         {
-            if (spawnedProjectiles >= projectilesToFire)
+            if (target != null && spawnedProjectiles < projectilesToFire)
             {
-                break;
-            }
-
-            if (target != null && Time.time >= lastAttackTime + attackCooldown)
-            {
-                FireAtTarget(target.transform);
-                spawnedProjectiles++;
+                foreach (Transform spawnPoint in projectileSpawnPoints)
+                {
+                    FireAtTarget(target.transform, spawnPoint);
+                    spawnedProjectiles++;
+                    if (spawnedProjectiles >= projectilesToFire)
+                    {
+                        break;
+                    }
+                }
             }
         }
 
@@ -80,28 +87,20 @@ public class BurstProjectileTower : MonoBehaviour
         }
     }
 
-    private void FireAtTarget(Transform target)
+    private void FireAtTarget(Transform target, Transform spawnPoint)
     {
         float damage = damagePerLevel[level - 1];
 
-        foreach (Transform spawnPoint in projectileSpawnPoints)
+        Vector3 direction = (target.position - spawnPoint.position).normalized;
+
+        GameObject projectileInstance = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+        BurstProjectile projectile = projectileInstance.GetComponent<BurstProjectile>();
+        if (projectile != null)
         {
-            Vector3 direction = (target.position - spawnPoint.position).normalized;
-            if (Physics.Raycast(spawnPoint.position, direction, out RaycastHit hit, attackRange))
-            {
-                if (hit.transform == target)
-                {
-                    GameObject projectileInstance = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-                    BurstProjectile projectile = projectileInstance.GetComponent<BurstProjectile>();
-                    if (projectile != null)
-                    {
-                        projectile.SetTarget(target, damage);
-                    }
-                    break;
-                }
-            }
+            projectile.SetTarget(target, damage, direction);
         }
     }
+
 
     private void OnMouseDown()
     {
