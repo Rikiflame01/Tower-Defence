@@ -40,15 +40,15 @@ public class WaveManager : MonoBehaviour
         float spawnDelay = Mathf.Max(0.1f, baseSpawnDelay - (roundCounter * 0.05f));
 
         int spawnPointsToUse = 1;
-        if (roundCounter >= 20)
+        if (roundCounter >= 21)
         {
             spawnPointsToUse = pathGenerator.startPositions.Count;
         }
-        else if (roundCounter >= 10)
+        else if (roundCounter >= 14)
         {
             spawnPointsToUse = Mathf.Min(3, pathGenerator.startPositions.Count);
         }
-        else if (roundCounter >= 5)
+        else if (roundCounter >= 7)
         {
             spawnPointsToUse = Mathf.Min(2, pathGenerator.startPositions.Count);
         }
