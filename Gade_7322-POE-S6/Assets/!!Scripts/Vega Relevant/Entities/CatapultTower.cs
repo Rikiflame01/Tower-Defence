@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CatapultTower : MonoBehaviour
+public class CatapultTower : MonoBehaviour, IHealth
 {
     [SerializeField] private BoxCollider detectionZone;
     [SerializeField] private float attackCooldown = 5f;
@@ -12,6 +12,7 @@ public class CatapultTower : MonoBehaviour
     [SerializeField] private int[] targetsPerLevel = { 4, 6, 8, 10 };
     [SerializeField] private float damagePerLaunch = 1000f;
     [SerializeField] private int[] upgradeCosts = { 2000, 3000, 4000 };
+    [SerializeField] private float[] healthPerLevel = { 150f, 300f, 500f, 750f };
     [SerializeField] private LayerMask ignoredLayers;
 
     private float lastAttackTime;
@@ -19,10 +20,17 @@ public class CatapultTower : MonoBehaviour
     private Renderer objectRenderer;
     private Color originalEmissionColor;
     private Material materialInstance;
+    private Health healthComponent;
 
     private void Start()
     {
         objectRenderer = GetComponentInChildren<Renderer>();
+        healthComponent = GetComponent<Health>();
+
+        if (healthComponent != null)
+        {
+            healthComponent.SetHealth(healthPerLevel[level - 1]);
+        }
 
         if (objectRenderer != null)
         {
@@ -87,7 +95,6 @@ public class CatapultTower : MonoBehaviour
 
         yield return null;
     }
-
 
     private System.Collections.IEnumerator LaunchAfterDelay(NavMeshAgent target, float delay)
     {
@@ -175,7 +182,7 @@ public class CatapultTower : MonoBehaviour
             }
         }
 
-        if (level < targetsPerLevel.Length)
+        if (level < healthPerLevel.Length)
         {
             int upgradeCost = upgradeCosts[level - 1];
             Debug.Log("Attempting upgrade. Cost: " + upgradeCost + ", Current Gold: " + GoldManager.instance.currentGold);
@@ -193,6 +200,12 @@ public class CatapultTower : MonoBehaviour
         {
             GoldManager.instance.SpendGold(upgradeCosts[level - 1]);
             level++;
+
+            if (healthComponent != null)
+            {
+                healthComponent.SetHealth(healthPerLevel[level - 1]);
+            }
+
             Debug.Log("Tower upgraded to level " + level);
         }
         else
@@ -216,6 +229,44 @@ public class CatapultTower : MonoBehaviour
         if (materialInstance != null)
         {
             materialInstance.SetColor("_EmissionColor", originalEmissionColor);
+        }
+    }
+
+    public void TakeDamage(float amount)
+    {
+        if (healthComponent != null)
+        {
+            healthComponent.TakeDamage(amount);
+        }
+    }
+
+    public float GetCurrentHealth()
+    {
+        return healthComponent != null ? healthComponent.GetCurrentHealth() : 0f;
+    }
+
+    public float MaxHealth => healthComponent != null ? healthComponent.MaxHealth : 0f;
+
+    public void SetHealth(float value)
+    {
+        if (healthComponent != null)
+        {
+            healthComponent.SetHealth(value);
+        }
+    }
+
+    public void Heal(float amount)
+    {
+        if (healthComponent != null)
+        {
+            healthComponent.Heal(amount);
+        }
+    }
+    public void Heal()
+    {
+        if (healthComponent != null)
+        {
+            healthComponent.Heal();
         }
     }
 }
