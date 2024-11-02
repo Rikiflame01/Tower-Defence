@@ -15,6 +15,7 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager instance;
 
+    #region GameMode Events
     public UnityEvent onTutorialMode;
     public UnityEvent onCooldownMode;
     public UnityEvent onPlacementMode;
@@ -26,11 +27,11 @@ public class EventManager : MonoBehaviour
     public UnityEvent<int> onAddGold;
     public UnityEvent<int> onGoldSpend;
     public UnityEvent onDefenderPlaced;
-
     public UnityEvent<GameObject> onEnemySpawned;
-
     public UnityEvent<string> onButtonClicked;
+    #endregion
 
+    //Singleton
     private void Awake()
     {
         if (instance == null)
@@ -44,6 +45,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    //Initialize UnityEvents if they are null
     private void Start()
     {
         if (onTutorialMode == null) onTutorialMode = new UnityEvent();
@@ -61,16 +63,15 @@ public class EventManager : MonoBehaviour
         if (onDefenderPlaced == null) onDefenderPlaced = new UnityEvent();
     }
 
+    //Trigger events
     public void TriggerDefenderPlaced()
     {
         onDefenderPlaced.Invoke();
     }
-
     public void TriggerButtonClicked(string buttonName)
     {
         onButtonClicked.Invoke(buttonName);
     }
-
     public void TriggerTutorialMode()
     {
         GameManager.instance.SwitchState(GameManager.GameState.Tutorial);
@@ -113,15 +114,12 @@ public class EventManager : MonoBehaviour
         GameManager.instance.SwitchState(GameManager.GameState.Victory);
         onVictoryMode.Invoke();
     }
-
     public void TriggerAddGold(int amount)
     {
         onAddGold.Invoke(amount);
     }
-
     public void TriggerGoldSpend(int amount)
     {
         onGoldSpend.Invoke(amount);
     }
-
 }
