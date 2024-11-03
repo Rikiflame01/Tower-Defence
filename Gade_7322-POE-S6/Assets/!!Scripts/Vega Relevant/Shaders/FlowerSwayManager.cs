@@ -1,27 +1,46 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class FlowerSwayManager : MonoBehaviour
 {
-    public ComputeShader swayComputeShader;
+    public Material flowerMaterial;
     public float swayAmplitude = 0.1f;
     public float swayFrequency = 1.0f;
     public float swayHeightPercentage = 0.5f;
     public float blendZoneHeight = 0.1f;
-
+    public float updateInterval = 0.1f;
 
     private List<FlowerData> flowers = new List<FlowerData>();
-    private ComputeBuffer vertexBuffer;
-    private ComputeBuffer initialPositionsBuffer;
-    private ComputeBuffer maxHeightBuffer;
-    private int totalVertices = 0;
-    private int kernelHandle;
     private float time;
 
     void Start()
     {
-        kernelHandle = swayComputeShader.FindKernel("CSMain");
+        InvokeRepeating(nameof(UpdateSway), 0.1f, updateInterval);
     }
+
+    private void UpdateSway()
+    {
+        time += Time.deltaTime;
+
+        foreach (var flower in flowers)
+        {
+            Renderer renderer = flower.meshFilter.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
+                renderer.GetPropertyBlock(propertyBlock);
+
+                propertyBlock.SetFloat("_SwayAmplitude", swayAmplitude);
+                propertyBlock.SetFloat("_SwayFrequency", swayFrequency);
+                propertyBlock.SetFloat("_SwayHeightPercentage", swayHeightPercentage);
+                propertyBlock.SetFloat("_BlendZoneHeight", blendZoneHeight);
+                propertyBlock.SetFloat("_TimeOffset", time);
+
+                renderer.SetPropertyBlock(propertyBlock);
+            }
+        }
+    }
+
 
     public void RegisterFlower(MeshFilter flowerMeshFilter)
     {
@@ -39,80 +58,19 @@ public class FlowerSwayManager : MonoBehaviour
                 maxHeight = vertex.y;
         }
 
-        totalVertices += originalVertices.Length;
-
         var flowerData = new FlowerData
         {
             meshFilter = flowerMeshFilter,
             originalVertices = originalVertices,
-            currentVertices = new Vector3[originalVertices.Length],
             maxHeight = maxHeight
         };
         flowers.Add(flowerData);
-    }
-
-    void Update()
-    {
-        if (totalVertices == 0) return;
-
-        time += Time.deltaTime;
-
-        if (vertexBuffer == null || vertexBuffer.count < totalVertices)
-        {
-            if (vertexBuffer != null) vertexBuffer.Release();
-            if (initialPositionsBuffer != null) initialPositionsBuffer.Release();
-            if (maxHeightBuffer != null) maxHeightBuffer.Release();
-
-            vertexBuffer = new ComputeBuffer(totalVertices, sizeof(float) * 3);
-            initialPositionsBuffer = new ComputeBuffer(totalVertices, sizeof(float) * 3);
-            maxHeightBuffer = new ComputeBuffer(flowers.Count, sizeof(float));
-        }
-
-        int vertexOffset = 0;
-        List<float> maxHeights = new List<float>();
-
-        foreach (var flower in flowers)
-        {
-            initialPositionsBuffer.SetData(flower.originalVertices, 0, vertexOffset, flower.originalVertices.Length);
-            maxHeights.Add(flower.maxHeight);
-            vertexOffset += flower.originalVertices.Length;
-        }
-        maxHeightBuffer.SetData(maxHeights.ToArray());
-
-        swayComputeShader.SetFloat("time", time);
-        swayComputeShader.SetFloat("swayAmplitude", swayAmplitude);
-        swayComputeShader.SetFloat("swayFrequency", swayFrequency);
-        swayComputeShader.SetFloat("swayHeightPercentage", swayHeightPercentage);
-        swayComputeShader.SetFloat("blendZoneHeight", blendZoneHeight);
-
-        swayComputeShader.SetBuffer(kernelHandle, "vertices", vertexBuffer);
-        swayComputeShader.SetBuffer(kernelHandle, "initialPositions", initialPositionsBuffer);
-        swayComputeShader.SetBuffer(kernelHandle, "maxHeights", maxHeightBuffer);
-
-        swayComputeShader.Dispatch(kernelHandle, totalVertices / 256 + 1, 1, 1);
-
-        vertexOffset = 0;
-        foreach (var flower in flowers)
-        {
-            vertexBuffer.GetData(flower.currentVertices, 0, vertexOffset, flower.originalVertices.Length);
-            flower.meshFilter.mesh.vertices = flower.currentVertices;
-            flower.meshFilter.mesh.RecalculateNormals();
-            vertexOffset += flower.originalVertices.Length;
-        }
-    }
-
-    void OnDestroy()
-    {
-        if (vertexBuffer != null) vertexBuffer.Release();
-        if (initialPositionsBuffer != null) initialPositionsBuffer.Release();
-        if (maxHeightBuffer != null) maxHeightBuffer.Release();
     }
 
     private class FlowerData
     {
         public MeshFilter meshFilter;
         public Vector3[] originalVertices;
-        public Vector3[] currentVertices;
         public float maxHeight;
     }
 }
