@@ -19,7 +19,6 @@ public class FlowerColourChanger : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         GameObject[] flowers = GameObject.FindGameObjectsWithTag("Flower");
-        Debug.Log("Number of flowers found after delay: " + flowers.Length);
 
         foreach (GameObject flower in flowers)
         {

@@ -7,6 +7,8 @@ public class FlowerSwayManager : MonoBehaviour
     public float swayAmplitude = 0.1f;
     public float swayFrequency = 1.0f;
     public float swayHeightPercentage = 0.5f;
+    public float blendZoneHeight = 0.1f;
+
 
     private List<FlowerData> flowers = new List<FlowerData>();
     private ComputeBuffer vertexBuffer;
@@ -47,8 +49,6 @@ public class FlowerSwayManager : MonoBehaviour
             maxHeight = maxHeight
         };
         flowers.Add(flowerData);
-
-        Debug.Log($"Registered flower: {flowerMeshFilter.gameObject.name} with max height {maxHeight}");
     }
 
     void Update()
@@ -83,6 +83,7 @@ public class FlowerSwayManager : MonoBehaviour
         swayComputeShader.SetFloat("swayAmplitude", swayAmplitude);
         swayComputeShader.SetFloat("swayFrequency", swayFrequency);
         swayComputeShader.SetFloat("swayHeightPercentage", swayHeightPercentage);
+        swayComputeShader.SetFloat("blendZoneHeight", blendZoneHeight);
 
         swayComputeShader.SetBuffer(kernelHandle, "vertices", vertexBuffer);
         swayComputeShader.SetBuffer(kernelHandle, "initialPositions", initialPositionsBuffer);
