@@ -57,8 +57,6 @@ public class FoliageManager : MonoBehaviour
             yield break;
         }
 
-        Debug.Log($"Found {allNodes.Length} nodes in the scene.");
-
         foreach (var node in allNodes)
         {
             Vector3 nodePosition = node.transform.position;

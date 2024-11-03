@@ -259,14 +259,12 @@ public class PrefabPlacementManager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Invalid placement position: too far away from the Path.");
                         return false;
                     }
                 }
             }
         }
 
-        Debug.Log("Invalid placement position: too close to or directly on Path.");
         return false;
     }
     private void HandlePlacementInput()
