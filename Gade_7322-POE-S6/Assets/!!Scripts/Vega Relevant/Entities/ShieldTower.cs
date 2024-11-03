@@ -140,6 +140,7 @@ public class SlowZoneTower : MonoBehaviour, IHealth
         {
             GoldManager.instance.SpendGold(upgradeCosts[level - 1]);
             level++;
+            VFXManager.Instance.SpawnVFX("CoinBurst", transform.position, 1.0f);
 
             if (healthComponent != null)
             {
