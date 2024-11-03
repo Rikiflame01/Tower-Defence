@@ -110,10 +110,6 @@ public class FoliageManager : MonoBehaviour
             {
                 foliageInstance = Instantiate(rockPrefab, position, GetRandomYRotation(), transform);
             }
-            else
-            {
-                Debug.LogWarning("Rock prefab is not assigned or too close to TownHall.");
-            }
             MarkNodesOccupied(position, 1);
         }
         else if (noiseValue > 0.2f)

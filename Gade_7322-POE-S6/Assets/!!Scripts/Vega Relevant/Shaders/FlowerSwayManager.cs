@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 public class FlowerSwayManager : MonoBehaviour
 {
+
+    private MaterialPropertyBlock propertyBlock;
+
     public Material flowerMaterial;
     public float swayAmplitude = 0.1f;
     public float swayFrequency = 1.0f;
@@ -15,6 +18,7 @@ public class FlowerSwayManager : MonoBehaviour
 
     void Start()
     {
+        propertyBlock = new MaterialPropertyBlock();
         InvokeRepeating(nameof(UpdateSway), 0.1f, updateInterval);
     }
 
@@ -22,53 +26,44 @@ public class FlowerSwayManager : MonoBehaviour
     {
         time += Time.deltaTime;
 
+        propertyBlock.SetFloat("_SwayAmplitude", swayAmplitude);
+        propertyBlock.SetFloat("_SwayFrequency", swayFrequency);
+        propertyBlock.SetFloat("_SwayHeightPercentage", swayHeightPercentage);
+        propertyBlock.SetFloat("_BlendZoneHeight", blendZoneHeight);
+        propertyBlock.SetFloat("_TimeOffset", time);
+
         foreach (var flower in flowers)
         {
-            Renderer renderer = flower.meshFilter.GetComponent<Renderer>();
-            if (renderer != null)
+            if (flower.renderer != null)
             {
-                MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
-                renderer.GetPropertyBlock(propertyBlock);
-
-                propertyBlock.SetFloat("_SwayAmplitude", swayAmplitude);
-                propertyBlock.SetFloat("_SwayFrequency", swayFrequency);
-                propertyBlock.SetFloat("_SwayHeightPercentage", swayHeightPercentage);
-                propertyBlock.SetFloat("_BlendZoneHeight", blendZoneHeight);
-                propertyBlock.SetFloat("_TimeOffset", time);
-
-                renderer.SetPropertyBlock(propertyBlock);
+                flower.renderer.SetPropertyBlock(propertyBlock);
             }
         }
     }
 
 
+
     public void RegisterFlower(MeshFilter flowerMeshFilter)
     {
-        Vector3[] originalVertices = flowerMeshFilter.mesh.vertices;
-        if (originalVertices.Length == 0)
+        Renderer flowerRenderer = flowerMeshFilter.GetComponent<Renderer>();
+        if (flowerRenderer == null)
         {
-            Debug.LogWarning("Flower has no vertices: " + flowerMeshFilter.gameObject.name);
+            Debug.LogWarning("Flower has no renderer: " + flowerMeshFilter.gameObject.name);
             return;
-        }
-
-        float maxHeight = float.MinValue;
-        foreach (Vector3 vertex in originalVertices)
-        {
-            if (vertex.y > maxHeight)
-                maxHeight = vertex.y;
         }
 
         var flowerData = new FlowerData
         {
             meshFilter = flowerMeshFilter,
-            originalVertices = originalVertices,
-            maxHeight = maxHeight
+            renderer = flowerRenderer,
+            originalVertices = flowerMeshFilter.mesh.vertices,
         };
         flowers.Add(flowerData);
     }
 
     private class FlowerData
     {
+        public Renderer renderer;
         public MeshFilter meshFilter;
         public Vector3[] originalVertices;
         public float maxHeight;

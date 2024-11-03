@@ -864,7 +864,7 @@ PlayerSettings:
     PS5: 1
     QNX: 1
     Stadia: 1
-    Standalone: 2
+    Standalone: 1
     VisionOS: 1
     WebGL: 1
     Windows Store Apps: 1
@@ -877,7 +877,7 @@ PlayerSettings:
   useDeterministicCompilation: 1
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
-  gcIncremental: 1
+  gcIncremental: 0
   gcWBarrierValidation: 0
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
