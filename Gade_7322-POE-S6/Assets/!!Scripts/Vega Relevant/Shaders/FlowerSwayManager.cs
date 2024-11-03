@@ -1,15 +1,17 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class FlowerSwayManager : MonoBehaviour
 {
     public ComputeShader swayComputeShader;
-    public float swayAmplitude = 0.1f;      
-    public float swayFrequency = 1.0f;      
+    public float swayAmplitude = 0.1f;
+    public float swayFrequency = 1.0f;
+    public float swayHeightPercentage = 0.5f;
 
     private List<FlowerData> flowers = new List<FlowerData>();
     private ComputeBuffer vertexBuffer;
     private ComputeBuffer initialPositionsBuffer;
+    private ComputeBuffer maxHeightBuffer;
     private int totalVertices = 0;
     private int kernelHandle;
     private float time;
@@ -28,17 +30,25 @@ public class FlowerSwayManager : MonoBehaviour
             return;
         }
 
+        float maxHeight = float.MinValue;
+        foreach (Vector3 vertex in originalVertices)
+        {
+            if (vertex.y > maxHeight)
+                maxHeight = vertex.y;
+        }
+
         totalVertices += originalVertices.Length;
 
         var flowerData = new FlowerData
         {
             meshFilter = flowerMeshFilter,
             originalVertices = originalVertices,
-            currentVertices = new Vector3[originalVertices.Length]
+            currentVertices = new Vector3[originalVertices.Length],
+            maxHeight = maxHeight
         };
         flowers.Add(flowerData);
 
-        Debug.Log("Registered flower: " + flowerMeshFilter.gameObject.name + " with " + originalVertices.Length + " vertices.");
+        Debug.Log($"Registered flower: {flowerMeshFilter.gameObject.name} with max height {maxHeight}");
     }
 
     void Update()
@@ -51,24 +61,32 @@ public class FlowerSwayManager : MonoBehaviour
         {
             if (vertexBuffer != null) vertexBuffer.Release();
             if (initialPositionsBuffer != null) initialPositionsBuffer.Release();
+            if (maxHeightBuffer != null) maxHeightBuffer.Release();
 
             vertexBuffer = new ComputeBuffer(totalVertices, sizeof(float) * 3);
             initialPositionsBuffer = new ComputeBuffer(totalVertices, sizeof(float) * 3);
+            maxHeightBuffer = new ComputeBuffer(flowers.Count, sizeof(float));
         }
 
         int vertexOffset = 0;
+        List<float> maxHeights = new List<float>();
+
         foreach (var flower in flowers)
         {
             initialPositionsBuffer.SetData(flower.originalVertices, 0, vertexOffset, flower.originalVertices.Length);
+            maxHeights.Add(flower.maxHeight);
             vertexOffset += flower.originalVertices.Length;
         }
+        maxHeightBuffer.SetData(maxHeights.ToArray());
 
         swayComputeShader.SetFloat("time", time);
         swayComputeShader.SetFloat("swayAmplitude", swayAmplitude);
         swayComputeShader.SetFloat("swayFrequency", swayFrequency);
+        swayComputeShader.SetFloat("swayHeightPercentage", swayHeightPercentage);
 
         swayComputeShader.SetBuffer(kernelHandle, "vertices", vertexBuffer);
         swayComputeShader.SetBuffer(kernelHandle, "initialPositions", initialPositionsBuffer);
+        swayComputeShader.SetBuffer(kernelHandle, "maxHeights", maxHeightBuffer);
 
         swayComputeShader.Dispatch(kernelHandle, totalVertices / 256 + 1, 1, 1);
 
@@ -86,6 +104,7 @@ public class FlowerSwayManager : MonoBehaviour
     {
         if (vertexBuffer != null) vertexBuffer.Release();
         if (initialPositionsBuffer != null) initialPositionsBuffer.Release();
+        if (maxHeightBuffer != null) maxHeightBuffer.Release();
     }
 
     private class FlowerData
@@ -93,5 +112,6 @@ public class FlowerSwayManager : MonoBehaviour
         public MeshFilter meshFilter;
         public Vector3[] originalVertices;
         public Vector3[] currentVertices;
+        public float maxHeight;
     }
 }

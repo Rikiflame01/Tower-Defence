@@ -2,20 +2,26 @@
 
 RWStructuredBuffer<float3> vertices;
 RWStructuredBuffer<float3> initialPositions;
+StructuredBuffer<float> maxHeights;
 
 float time;
 float swayAmplitude = 0.1;
 float swayFrequency = 1.0;
+float swayHeightPercentage = 0.5;
 
 [numthreads(256, 1, 1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
     float3 originalPosition = initialPositions[id.x];
+    float maxHeight = maxHeights[id.x / 256];
 
-    float swayOffset = sin(time * swayFrequency + id.x * 0.1) * swayAmplitude;
+    float heightThreshold = maxHeight * swayHeightPercentage;
 
-    float3 newPosition = originalPosition;
-    newPosition.x += swayOffset;
+    if (originalPosition.y > heightThreshold)
+    {
+        float swayOffset = sin(time * swayFrequency + id.x * 0.1) * swayAmplitude;
+        originalPosition.x += swayOffset;
+    }
 
-    vertices[id.x] = newPosition;
+    vertices[id.x] = originalPosition;
 }

@@ -77,10 +77,6 @@ public class THProjectile : MonoBehaviour
                 health.TakeDamage(projectileData.GetDamage());
                 Destroy(gameObject);
             }
-            else
-            {
-                Debug.LogWarning("No IHealth component found on target.");
-            }
         }
 
         if (projectileData.hasHoming == false) { 

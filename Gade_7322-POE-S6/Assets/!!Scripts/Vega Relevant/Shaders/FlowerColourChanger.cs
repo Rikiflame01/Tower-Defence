@@ -28,7 +28,6 @@ public class FlowerColourChanger : MonoBehaviour
             {
                 rend.material = new Material(rend.material);
                 flowerDataList.Add(new FlowerData(rend, rend.material.color));
-                Debug.Log("Flower material instance created for: " + flower.name);
             }
             else
             {
