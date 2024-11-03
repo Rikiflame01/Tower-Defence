@@ -2561,6 +2561,9 @@ MonoBehaviour:
   ignoredLayers:
     serializedVersion: 2
     m_Bits: 4096
+  Level2Objects: {fileID: 3906583212106056368}
+  Level3Objects: {fileID: 269235238017499646}
+  Level4Objects: {fileID: 6556400474915610440}
 --- !u!1 &8418620878160992474
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,6 +22,10 @@ public class CatapultTower : MonoBehaviour, IHealth
     private Material materialInstance;
     private Health healthComponent;
 
+    public GameObject Level2Objects;
+    public GameObject Level3Objects;
+    public GameObject Level4Objects;
+
     private void Start()
     {
         objectRenderer = GetComponentInChildren<Renderer>();
@@ -201,6 +205,19 @@ public class CatapultTower : MonoBehaviour, IHealth
             GoldManager.instance.SpendGold(upgradeCosts[level - 1]);
             level++;
             VFXManager.Instance.SpawnVFX("CoinBurst", transform.position, 1.0f);
+
+            if (level == 2)
+            {
+                Level2Objects.SetActive(true);
+            }
+            if (level == 3)
+            {
+                Level3Objects.SetActive(true);
+            }
+            if (level == 4)
+            {
+                Level4Objects.SetActive(true);
+            }
 
             if (healthComponent != null)
             {

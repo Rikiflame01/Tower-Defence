@@ -15,6 +15,9 @@ public class BurstProjectileTower : MonoBehaviour, IHealth
     [SerializeField] private int[] upgradeCosts = { 1000, 2000, 4000 };
     [SerializeField] private float[] healthPerLevel = { 100f, 200f, 300f, 500f };
 
+    public GameObject Level2Objects;
+    public GameObject Level3Objects;
+
     private float lastAttackTime;
     private Renderer objectRenderer;
     private Color originalEmissionColor;
@@ -125,6 +128,15 @@ public class BurstProjectileTower : MonoBehaviour, IHealth
             GoldManager.instance.SpendGold(upgradeCosts[level - 1]);
             level++;
             VFXManager.Instance.SpawnVFX("CoinBurst", transform.position, 1.0f);
+
+            if (level == 2)
+            {
+                Level2Objects.SetActive(true);
+            }
+            if (level == 3)
+            {
+                Level3Objects.SetActive(true);
+            }
 
             if (healthComponent != null)
             {

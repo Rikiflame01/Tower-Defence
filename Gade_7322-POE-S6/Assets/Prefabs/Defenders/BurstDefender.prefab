@@ -2423,6 +2423,8 @@ MonoBehaviour:
   - 200
   - 300
   - 500
+  Level2Objects: {fileID: 3318212518728576766}
+  Level3Objects: {fileID: 6057797161407795563}
 --- !u!1 &7575756574761966684
 GameObject:
   m_ObjectHideFlags: 0
