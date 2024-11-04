@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2235054728149049456}
   m_Layer: 0
   m_Name: Gold (120)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 2668424697562930965}
   m_Layer: 0
   m_Name: Gold (80)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 8842924385539968676}
   m_Layer: 0
   m_Name: Gold (83)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 2358195730321193349}
   m_Layer: 0
   m_Name: Gold (117)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -547,7 +547,7 @@ GameObject:
   - component: {fileID: 8178085411687414482}
   m_Layer: 0
   m_Name: Gold (101)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 8759430827378091815}
   m_Layer: 0
   m_Name: Gold (95)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -813,7 +813,7 @@ GameObject:
   - component: {fileID: 3743886524547854335}
   m_Layer: 0
   m_Name: Gold (84)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -946,7 +946,7 @@ GameObject:
   - component: {fileID: 1808496832608122878}
   m_Layer: 0
   m_Name: Gold (110)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1079,7 +1079,7 @@ GameObject:
   - component: {fileID: 5810158862021319063}
   m_Layer: 0
   m_Name: Gold (112)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1212,7 +1212,7 @@ GameObject:
   - component: {fileID: 5039571818159596422}
   m_Layer: 0
   m_Name: Gold (113)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1345,7 +1345,7 @@ GameObject:
   - component: {fileID: 1372227750592793918}
   m_Layer: 0
   m_Name: Gold (87)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1478,7 +1478,7 @@ GameObject:
   - component: {fileID: 9045152500401891303}
   m_Layer: 0
   m_Name: Gold (89)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1611,7 +1611,7 @@ GameObject:
   - component: {fileID: 899531768939779325}
   m_Layer: 0
   m_Name: Gold (121)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1744,7 +1744,7 @@ GameObject:
   - component: {fileID: 4670360528820449084}
   m_Layer: 0
   m_Name: Gold (114)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1877,7 +1877,7 @@ GameObject:
   - component: {fileID: 2186421744455924364}
   m_Layer: 0
   m_Name: Gold (109)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2010,7 +2010,7 @@ GameObject:
   - component: {fileID: 1752118121765259785}
   m_Layer: 0
   m_Name: Gold (116)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2143,7 +2143,7 @@ GameObject:
   - component: {fileID: 8221104499962579861}
   m_Layer: 0
   m_Name: Gold (69)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2276,7 +2276,7 @@ GameObject:
   - component: {fileID: 6314984281736883336}
   m_Layer: 0
   m_Name: Gold (94)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2409,7 +2409,7 @@ GameObject:
   - component: {fileID: 2375335958963618159}
   m_Layer: 0
   m_Name: Gold (111)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2542,7 +2542,7 @@ GameObject:
   - component: {fileID: 6111035689131743156}
   m_Layer: 0
   m_Name: Gold (100)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2675,7 +2675,7 @@ GameObject:
   - component: {fileID: 6940752904320599825}
   m_Layer: 0
   m_Name: Gold (74)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2808,7 +2808,7 @@ GameObject:
   - component: {fileID: 2500115944945653485}
   m_Layer: 0
   m_Name: Gold (88)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2941,7 +2941,7 @@ GameObject:
   - component: {fileID: 6931829995411057217}
   m_Layer: 0
   m_Name: Gold (103)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3074,7 +3074,7 @@ GameObject:
   - component: {fileID: 5680422624281038779}
   m_Layer: 0
   m_Name: Gold (96)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3207,7 +3207,7 @@ GameObject:
   - component: {fileID: 8379712530573469452}
   m_Layer: 0
   m_Name: Gold (68)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3340,7 +3340,7 @@ GameObject:
   - component: {fileID: 9194827015828201501}
   m_Layer: 0
   m_Name: Gold (104)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3473,7 +3473,7 @@ GameObject:
   - component: {fileID: 4309652483870092670}
   m_Layer: 0
   m_Name: Gold (119)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3606,7 +3606,7 @@ GameObject:
   - component: {fileID: 1910575340070305422}
   m_Layer: 0
   m_Name: Gold (98)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3739,7 +3739,7 @@ GameObject:
   - component: {fileID: 7936713777508931875}
   m_Layer: 0
   m_Name: Gold (92)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3872,7 +3872,7 @@ GameObject:
   - component: {fileID: 1734012843945081678}
   m_Layer: 0
   m_Name: Gold (93)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4090,7 +4090,7 @@ GameObject:
   - component: {fileID: 1441276798384620721}
   m_Layer: 0
   m_Name: Gold (102)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4223,7 +4223,7 @@ GameObject:
   - component: {fileID: 5193291129858252410}
   m_Layer: 0
   m_Name: Gold (72)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4356,7 +4356,7 @@ GameObject:
   - component: {fileID: 5421193886897580339}
   m_Layer: 0
   m_Name: Gold (77)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4489,7 +4489,7 @@ GameObject:
   - component: {fileID: 6244812089207337706}
   m_Layer: 0
   m_Name: Gold (76)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4622,7 +4622,7 @@ GameObject:
   - component: {fileID: 3372810044687400368}
   m_Layer: 0
   m_Name: Gold (78)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4755,7 +4755,7 @@ GameObject:
   - component: {fileID: 925969718042127232}
   m_Layer: 0
   m_Name: Gold (108)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4888,7 +4888,7 @@ GameObject:
   - component: {fileID: 3860207582853541145}
   m_Layer: 0
   m_Name: Gold (118)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5021,7 +5021,7 @@ GameObject:
   - component: {fileID: 7648403318987573435}
   m_Layer: 0
   m_Name: Gold (99)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5154,7 +5154,7 @@ GameObject:
   - component: {fileID: 2212112227917249924}
   m_Layer: 0
   m_Name: Gold (85)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5287,7 +5287,7 @@ GameObject:
   - component: {fileID: 8653516584194576090}
   m_Layer: 0
   m_Name: Gold (73)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5420,7 +5420,7 @@ GameObject:
   - component: {fileID: 2785116145115399764}
   m_Layer: 0
   m_Name: Gold (91)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5553,7 +5553,7 @@ GameObject:
   - component: {fileID: 9198342089214132755}
   m_Layer: 0
   m_Name: Gold (97)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5686,7 +5686,7 @@ GameObject:
   - component: {fileID: 6346616317856846582}
   m_Layer: 0
   m_Name: Gold (106)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5819,7 +5819,7 @@ GameObject:
   - component: {fileID: 6051950423385730211}
   m_Layer: 0
   m_Name: Gold (79)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5952,7 +5952,7 @@ GameObject:
   - component: {fileID: 3376182102280623735}
   m_Layer: 0
   m_Name: Gold (81)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6085,7 +6085,7 @@ GameObject:
   - component: {fileID: 462298541499320929}
   m_Layer: 0
   m_Name: Gold (71)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6218,7 +6218,7 @@ GameObject:
   - component: {fileID: 8965501612679701535}
   m_Layer: 0
   m_Name: Gold (82)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6351,7 +6351,7 @@ GameObject:
   - component: {fileID: 4691535112621152933}
   m_Layer: 0
   m_Name: Gold (115)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6484,7 +6484,7 @@ GameObject:
   - component: {fileID: 5510054091571920372}
   m_Layer: 0
   m_Name: Gold (70)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6617,7 +6617,7 @@ GameObject:
   - component: {fileID: 3458156295297748378}
   m_Layer: 0
   m_Name: Gold (105)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6750,7 +6750,7 @@ GameObject:
   - component: {fileID: 2296816732332742333}
   m_Layer: 0
   m_Name: Gold (107)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6883,7 +6883,7 @@ GameObject:
   - component: {fileID: 2270509429767276105}
   m_Layer: 0
   m_Name: Gold (86)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7016,7 +7016,7 @@ GameObject:
   - component: {fileID: 6322843545472100260}
   m_Layer: 0
   m_Name: Gold (75)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7149,7 +7149,7 @@ GameObject:
   - component: {fileID: 3176334531563589496}
   m_Layer: 0
   m_Name: Gold (90)
-  m_TagString: Untagged
+  m_TagString: CoinPusherGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
