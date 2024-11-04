@@ -18,6 +18,8 @@ TagManager:
   - BurstDefender
   - Dead
   - Flower
+  - CoinPusherSword
+  - CoinPusherShield
   layers:
   - Default
   - TransparentFX
