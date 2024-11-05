@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
     [Range(0, 1)] private float wizardRatio = 0.3f;
     [Range(0, 1)] private float tankyKnightRatio = 0.2f;
 
-    [SerializeField] private bool testDynamicRatioSystem = false; //Toggle to test dynamic ratio system
+    [SerializeField] private bool testDynamicRatioSystem = false;
 
     private void Start()
     {
@@ -53,7 +53,6 @@ public class WaveManager : MonoBehaviour
             spawnPointsToUse = Mathf.Min(2, pathGenerator.startPositions.Count);
         }
 
-        //Apply dynamic ratio system if round is 25 or above, or if the testing toggle is active
         if (roundCounter >= 25 || testDynamicRatioSystem)
         {
             AdjustEnemyRatiosBasedOnPlayerBuildings();

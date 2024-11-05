@@ -44,6 +44,7 @@ public class ShopManager : MonoBehaviour
     private GameObject InitialChoicePanel;
     private GameObject ShopOptionsPanel;
     private GameObject TowerUpgradeOptionsPanel;
+    private GameObject CoinPusherPanel;
 
     private int townHallLevel = 0;
     private Dictionary<string, int> healingCosts = new Dictionary<string, int>
@@ -83,6 +84,7 @@ public class ShopManager : MonoBehaviour
         InitialChoicePanel = GameObject.Find("InitialChoice");
         ShopOptionsPanel = GameObject.Find("ShopOptions");
         TowerUpgradeOptionsPanel = GameObject.Find("TowerUpgradeOptions");
+        CoinPusherPanel = GameObject.Find("CoinPusherPanel");
     }
 
     public void PurchaseShieldDefender()
@@ -214,7 +216,7 @@ public class ShopManager : MonoBehaviour
         });
     }
 
-    private void HandleButtonClicked(string buttonName)
+    public void HandleButtonClicked(string buttonName)
     {
         switch (buttonName)
         {
@@ -243,6 +245,17 @@ public class ShopManager : MonoBehaviour
             case "TUpgradesBttn":
                 ClosePanel(InitialChoicePanel);
                 OpenPanel(TowerUpgradeOptionsPanel);
+                break;
+            case "CoinPusherBttn":
+                CoinPusherPanel.SetActive(true);
+                EventManager.instance.TriggerCoinPusherBttn();
+                break;
+            case "DropCoinBttn":
+                EventManager.instance.TriggerDropCoin();
+                break;
+            case "TransitionBack":
+                EventManager.instance.TriggerTransitionBack();
+                CoinPusherPanel.SetActive(false);
                 break;
             default:
                 Debug.LogWarning($"Unhandled button clicked: {buttonName}");

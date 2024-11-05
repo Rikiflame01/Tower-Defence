@@ -29,6 +29,9 @@ public class EventManager : MonoBehaviour
     public UnityEvent onDefenderPlaced;
     public UnityEvent<GameObject> onEnemySpawned;
     public UnityEvent<string> onButtonClicked;
+    public UnityEvent onCoinPusherBttn;
+    public UnityEvent onTransitionBack;
+    public UnityEvent onDropCoin;
     #endregion
 
     //Singleton
@@ -61,9 +64,26 @@ public class EventManager : MonoBehaviour
         if (onGoldSpend == null) onGoldSpend = new UnityEvent<int>();
         if (onButtonClicked == null) onButtonClicked = new UnityEvent<string>();
         if (onDefenderPlaced == null) onDefenderPlaced = new UnityEvent();
+        if (onCoinPusherBttn == null) onCoinPusherBttn = new UnityEvent();
+        if (onTransitionBack == null) onTransitionBack = new UnityEvent();
+        if (onDropCoin == null) onDropCoin = new UnityEvent();
     }
 
     //Trigger events
+    public void TriggerTransitionBack()
+    {
+        onTransitionBack.Invoke();
+    }
+
+    public void TriggerDropCoin()
+    {
+        onDropCoin.Invoke();
+    }
+
+    public void TriggerCoinPusherBttn()
+    {
+        onCoinPusherBttn.Invoke();
+    }
     public void TriggerDefenderPlaced()
     {
         onDefenderPlaced.Invoke();

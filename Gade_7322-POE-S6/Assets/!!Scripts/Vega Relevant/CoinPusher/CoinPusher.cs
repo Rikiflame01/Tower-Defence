@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Unity.VisualScripting;
 
 public class CoinPusher : MonoBehaviour
 {
@@ -30,6 +31,21 @@ public class CoinPusher : MonoBehaviour
     [Header("Coin Drop Settings")]
     public Transform[] coinDropTransforms;
     public GameObject coinPrefab;
+
+    [Header("Wave Settings")]
+    public int waveCounter = 0;
+
+    private void OnEnable()
+    {
+        EventManager.instance.onDropCoin.AddListener(DropCoins);
+        EventManager.instance.onWaveMode.AddListener(IncrementWave);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.instance.onDropCoin.RemoveListener(DropCoins);
+        EventManager.instance.onWaveMode.RemoveListener(IncrementWave);
+    }
 
     private void Start()
     {
@@ -68,13 +84,28 @@ public class CoinPusher : MonoBehaviour
         }
     }
 
-    public void DropCoins(int numCoins)
+    private void IncrementWave()
     {
+        waveCounter++;
+    }
+
+    public void DropCoins()
+    {
+        if (waveCounter <= 0)
+        {
+            Debug.LogWarning("No waves left! Cannot drop coins.");
+            return;
+        }
+
+        waveCounter--;
+
+        int numCoins = Random.Range(10, 100);
         for (int i = 0; i < numCoins; i++)
         {
             int dropIndex = Random.Range(0, coinDropTransforms.Length);
             Instantiate(coinPrefab, coinDropTransforms[dropIndex].position, Quaternion.identity);
         }
+
     }
 
     private void SpawnRewards()
@@ -122,22 +153,4 @@ public class CoinPusher : MonoBehaviour
         return null;
     }
 
-    [CustomEditor(typeof(CoinPusher))]
-    public class CoinPusherEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-
-            CoinPusher script = (CoinPusher)target;
-            if (GUILayout.Button("Drop 10 Coins"))
-            {
-                script.DropCoins(10);
-            }
-            if (GUILayout.Button("Drop 20 Coins"))
-            {
-                script.DropCoins(20);
-            }
-        }
-    }
 }

@@ -24,6 +24,7 @@ public class ButtonManager : MonoBehaviour
     private GameObject InitialChoicePanel;
     private GameObject ShopOptionsPanel;
     private GameObject TowerUpgradeOptionsPanel;
+    private GameObject CoinPusherPanel;
 
     private List<GameObject> openPanels = new List<GameObject>();
 
@@ -52,6 +53,7 @@ public class ButtonManager : MonoBehaviour
         InitialChoicePanel = GameObject.Find("InitialChoice");
         ShopOptionsPanel = GameObject.Find("ShopOptions");
         TowerUpgradeOptionsPanel = GameObject.Find("TowerUpgradeOptions");
+        CoinPusherPanel = GameObject.Find("CoinPusherPanel");
 
         Button[] allButtons = FindObjectsOfType<Button>();
 
@@ -59,7 +61,8 @@ public class ButtonManager : MonoBehaviour
         {
             button.onClick.AddListener(() => OnButtonClicked(button));
         }
-        
+
+        CoinPusherPanel.SetActive(false);
         ShopOptionsPanel.SetActive(false);
         TowerUpgradeOptionsPanel.SetActive(false);
 
@@ -159,6 +162,18 @@ public class ButtonManager : MonoBehaviour
             panel.SetActive(false);
         }
         openPanels.Clear();
+    }
+
+    private void CloseCoinPusherPanel()
+    {
+        if (CoinPusherPanel != null)
+        {
+            CoinPusherPanel.SetActive(false);
+        }
+        else if (Debug.isDebugBuild)
+        {
+            Debug.LogError("ButtonManager: Coin Pusher panel is not assigned.");
+        }
     }
 
     private void ToggleSpecificCanvas()

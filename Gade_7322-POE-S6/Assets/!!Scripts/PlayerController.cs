@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform defaultCameraTarget;
     [SerializeField] private float cameraTransitionSpeed = 2f;
 
+    public Transform CoinPusherTarget;
+
     private bool isFreeLookActive = false;
     private Vector3 lastMousePosition;
     private bool isInPlacementMode = false;
@@ -29,11 +32,46 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.instance.onDefenderPlaced.AddListener(TransitionBack);
+        EventManager.instance.onCoinPusherBttn.AddListener(CoinPusherTransition);
+        EventManager.instance.onTransitionBack.AddListener(CoinPusherTransitionBack);
+
     }
 
     private void OnDisable()
     {
         EventManager.instance.onDefenderPlaced.RemoveListener(TransitionBack);
+        EventManager.instance.onCoinPusherBttn.RemoveListener(CoinPusherTransition);
+        EventManager.instance.onTransitionBack.RemoveListener(CoinPusherTransitionBack);
+    }
+
+    private void CoinPusherTransition() {
+        if (!isInPlacementMode)
+        {
+            if (placementCameraTarget != null)
+            {
+                StartCoroutine(TransitionCamera(CoinPusherTarget.position, Quaternion.Euler(0f, 0f, 0f), 97f));
+            }
+            else
+            {
+                Debug.LogWarning("Placement camera target is not set.");
+            }
+        }
+    }
+
+    private void CoinPusherTransitionBack()
+    {
+        if (!isInPlacementMode)
+        {
+            if (placementCameraTarget != null)
+            {
+                Quaternion targetRotation = Quaternion.Euler(defaultCameraTarget.rotation.eulerAngles.x, 90f, defaultCameraTarget.rotation.eulerAngles.z);
+                StartCoroutine(TransitionCamera(defaultCameraTarget.position, targetRotation, 60f));
+            }
+            else
+            {
+                Debug.LogWarning("Placement camera target is not set.");
+            }
+        }
     }
 
     private void TransitionBack()
