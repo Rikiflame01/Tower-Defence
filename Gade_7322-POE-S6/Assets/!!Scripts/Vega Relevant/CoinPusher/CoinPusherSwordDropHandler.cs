@@ -54,7 +54,6 @@ public class CoinPusherSwordDropHandler : MonoBehaviour
     private IEnumerator EliminateEnemiesInIntervals()
     {
         isProcessing = true;
-
         while (enemiesToEliminate > 0)
         {
             if (GameManager.instance.GetCurrentState() == GameManager.GameState.Wave)
