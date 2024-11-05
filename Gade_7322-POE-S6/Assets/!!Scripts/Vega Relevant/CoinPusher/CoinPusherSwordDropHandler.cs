@@ -9,6 +9,10 @@ public class CoinPusherSwordDropHandler : MonoBehaviour
     private int totalWaveEnemies = 0;
     private bool isProcessing = false;
 
+    public GameObject vfxPrefab;
+    public int rewardMinAmount = 1;
+    public int rewardMaxAmount = 5;
+
     private void OnEnable()
     {
         EventManager.instance.onCoinPusherSwordDrop.AddListener(OnCoinPusherSwordDrop);
@@ -68,8 +72,28 @@ public class CoinPusherSwordDropHandler : MonoBehaviour
                         if (enemies.Count > 0)
                         {
                             GameObject enemy = enemies[0];
+
+                            if (vfxPrefab != null)
+                            {
+                                Renderer enemyRenderer = enemy.GetComponent<Renderer>();
+                                Vector3 vfxPosition = enemy.transform.position;
+
+                                if (enemyRenderer != null)
+                                {
+                                    vfxPosition.y = enemyRenderer.bounds.center.y;
+                                }
+
+                                Instantiate(vfxPrefab, vfxPosition, Quaternion.identity);
+                            }
+                            int rewardAmount = Random.Range(rewardMinAmount, rewardMaxAmount + 1);
+                            GoldDropper goldDropper = enemy.GetComponent<GoldDropper>();
+                            if (goldDropper != null)
+                            {
+                                goldDropper.DropGold(rewardAmount);
+                            }
+
                             EnemyManager.instance.RemoveEnemy(enemy);
-                            Debug.Log("Enemy removed" + enemy.tag.ToString());
+                            Debug.Log("Enemy removed: " + enemy.tag);
                             enemiesToEliminate--;
                         }
                         else
