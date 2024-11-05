@@ -32,6 +32,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent onCoinPusherBttn;
     public UnityEvent onTransitionBack;
     public UnityEvent onDropCoin;
+    public UnityEvent onCoinPusherSwordDrop;
     #endregion
 
     //Singleton
@@ -67,9 +68,18 @@ public class EventManager : MonoBehaviour
         if (onCoinPusherBttn == null) onCoinPusherBttn = new UnityEvent();
         if (onTransitionBack == null) onTransitionBack = new UnityEvent();
         if (onDropCoin == null) onDropCoin = new UnityEvent();
+        if (onCoinPusherSwordDrop == null) onCoinPusherSwordDrop = new UnityEvent();
     }
 
+
+
     //Trigger events
+
+    public void TriggerCoinPusherSwordDrop()
+    {
+        onCoinPusherSwordDrop.Invoke();
+    }
+
     public void TriggerTransitionBack()
     {
         onTransitionBack.Invoke();

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CollectionTrigger : MonoBehaviour
 {
+
+    private string[] tags = { "ShieldDefender", "TownHall", "BurstDefender","CatapultDefender" };
+
     private void OnTriggerEnter(Collider other)
     {
         string rewardTag = other.gameObject.tag;
@@ -14,11 +17,11 @@ public class CollectionTrigger : MonoBehaviour
                 Destroy(other.gameObject);
                 break;
             case "CoinPusherSword":
-                Debug.Log("Sword Collected");
+                RemoveEnemies();
                 Destroy(other.gameObject);
                 break;
             case "CoinPusherShield":
-                Debug.Log("Shield Collected");
+                HealDefenders();
                 Destroy(other.gameObject);
                 break;
             default:
@@ -26,4 +29,26 @@ public class CollectionTrigger : MonoBehaviour
         }
         
     }
+
+    void HealDefenders()
+    {
+        foreach (string tag in tags)
+        {
+            var objectsToHeal = GameObject.FindGameObjectsWithTag(tag);
+            foreach (var obj in objectsToHeal)
+            {
+                var health = obj.GetComponent<IHealth>();
+                if (health != null)
+                {
+                    health.Heal();
+                }
+            } 
+        }
+    }
+
+    void RemoveEnemies()
+    {
+        EventManager.instance.onCoinPusherSwordDrop.Invoke();
+    }
+
 }
