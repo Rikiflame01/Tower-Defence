@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using Unity.VisualScripting;
 
 public class CoinPusher : MonoBehaviour
 {
@@ -34,6 +32,13 @@ public class CoinPusher : MonoBehaviour
 
     [Header("Wave Settings")]
     public int waveCounter = 0;
+
+    [Header("Reward Respawn Settings")]
+    [Tooltip("Set how often the rewards respawn in waves. If set to 5, rewards will respawn on the 5th, 10th, 15th wave, etc.")]
+    public int respawnInterval = 5;
+
+    [Header("Wave Tracking")]
+    public int totalWaves = 0;
 
     private void OnEnable()
     {
@@ -86,7 +91,12 @@ public class CoinPusher : MonoBehaviour
 
     private void IncrementWave()
     {
+        totalWaves++;
         waveCounter++;
+        if (respawnInterval > 0 && totalWaves % respawnInterval == 0)
+        {
+            SpawnRewards();
+        }
     }
 
     public void DropCoins()
@@ -105,7 +115,6 @@ public class CoinPusher : MonoBehaviour
             int dropIndex = Random.Range(0, coinDropTransforms.Length);
             Instantiate(coinPrefab, coinDropTransforms[dropIndex].position, Quaternion.identity);
         }
-
     }
 
     private void SpawnRewards()
@@ -152,5 +161,4 @@ public class CoinPusher : MonoBehaviour
         }
         return null;
     }
-
 }
