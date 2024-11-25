@@ -21,6 +21,7 @@ TagManager:
   - CoinPusherSword
   - CoinPusherShield
   - CoinPusherGold
+  - AudioSources
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,7 @@
 /*
     The StartGame class handles user interaction and spinning behavior for a game object.
     - The object spins when clicked, with spin speed easing in and out over a specified duration.
-    - The object’s position is locked to a specified Transform position.
+    - The objectï¿½s position is locked to a specified Transform position.
     - The spinning effect is achieved by rotating the object with an eased speed.
     - When clicked, the object starts spinning and triggers cooldown behavior if applicable.
     
@@ -75,7 +75,7 @@ public class StartGame : MonoBehaviour
 
     private void StartSpinning()
     {
-        Debug.Log("StartSpinning called, object should start spinning.");
+        SoundManager.Instance.PlaySFX("Spin");
         isSpinning = true;
         spinTimeElapsed = 0f;
         initialRotation = transform.rotation;

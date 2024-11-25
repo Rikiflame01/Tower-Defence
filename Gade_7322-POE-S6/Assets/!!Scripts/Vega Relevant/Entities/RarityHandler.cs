@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RarityHandler : MonoBehaviour
 {
@@ -13,8 +12,15 @@ public class RarityHandler : MonoBehaviour
     }
 
     [SerializeField] private RarityType rarity = RarityType.Normal;
-    [SerializeField] private GameObject rarityCanvas;
-    private Image rarityImage;
+
+    // References to the particle prefabs for each rarity (except Normal)
+    [SerializeField] private GameObject empoweredParticlePrefab;
+    [SerializeField] private GameObject mythicParticlePrefab;
+    [SerializeField] private GameObject legendaryParticlePrefab;
+    [SerializeField] private GameObject godlikeParticlePrefab;
+
+    // Adjustable Y offset for particle positioning
+    [SerializeField] private float yOffset = 0f;
 
     [SerializeField] private float baseHealth = 100f;
     [SerializeField] private float baseDamage = 10f;
@@ -26,21 +32,11 @@ public class RarityHandler : MonoBehaviour
 
     private int currentRound = 1;
 
+    // Reference to the currently spawned particle effect
+    private GameObject currentParticleEffect;
+
     private void Awake()
     {
-        if (rarityCanvas != null)
-        {
-            rarityImage = rarityCanvas.GetComponentInChildren<Image>();
-            if (rarityImage == null && Debug.isDebugBuild)
-            {
-                Debug.LogError("No Image component found on the assigned Canvas.");
-            }
-        }
-        else if (Debug.isDebugBuild)
-        {
-            Debug.LogWarning("Rarity canvas not assigned.");
-        }
-
         ApplyRarity();
         UpdateRarityVisuals();
     }
@@ -59,46 +55,46 @@ public class RarityHandler : MonoBehaviour
 
         if (currentRound <= 5)
         {
-            rarity = RarityType.Normal;  //Only Normal for rounds 1-5
+            rarity = RarityType.Normal; // Only Normal for rounds 1-5
         }
         else if (currentRound <= 10)
         {
-            //Empowered and Mythic introduced from rounds 6-10
+            // Empowered and Mythic introduced from rounds 6-10
             if (randomValue <= 20f)
             {
-                rarity = RarityType.Empowered;  //20% chance for Empowered
+                rarity = RarityType.Empowered; // 20% chance for Empowered
             }
             else if (randomValue <= 30f)
             {
-                rarity = RarityType.Mythic;     //10% chance for Mythic
+                rarity = RarityType.Mythic; // 10% chance for Mythic
             }
             else
             {
-                rarity = RarityType.Normal;     //Remaining chance for Normal
+                rarity = RarityType.Normal; // Remaining chance for Normal
             }
         }
         else
         {
-            //Godlike and Legendary introduced from round 11 onward
+            // Godlike and Legendary introduced from round 11 onward
             if (randomValue <= 0.5f)
             {
-                rarity = RarityType.Godlike;    // 0.5% chance for Godlike
+                rarity = RarityType.Godlike; // 0.5% chance for Godlike
             }
             else if (randomValue <= 3.5f)
             {
-                rarity = RarityType.Legendary;  // 3% chance for Legendary
+                rarity = RarityType.Legendary; // 3% chance for Legendary
             }
             else if (randomValue <= 13.5f)
             {
-                rarity = RarityType.Mythic;     // 10% chance for Mythic
+                rarity = RarityType.Mythic; // 10% chance for Mythic
             }
             else if (randomValue <= 33.5f)
             {
-                rarity = RarityType.Empowered;  // 20% chance for Empowered
+                rarity = RarityType.Empowered; // 20% chance for Empowered
             }
             else
             {
-                rarity = RarityType.Normal;     //Remaining chance for Normal
+                rarity = RarityType.Normal; // Remaining chance for Normal
             }
         }
     }
@@ -146,33 +142,44 @@ public class RarityHandler : MonoBehaviour
 
     private void UpdateRarityVisuals()
     {
-        if (rarityImage == null) return;
+        // Destroy existing particle effect
+        if (currentParticleEffect != null)
+        {
+            Destroy(currentParticleEffect);
+        }
 
-        Color rarityColor;
+        GameObject particlePrefab = null;
 
         switch (rarity)
         {
-            case RarityType.Normal:
-                rarityColor = new Color(0f, 0f, 0f, 0f); // Fully transparent
-                break;
             case RarityType.Empowered:
-                rarityColor = new Color(0.5f, 0.5f, 1f, 0.5f); // Light blue with transparency
+                particlePrefab = empoweredParticlePrefab;
                 break;
             case RarityType.Mythic:
-                rarityColor = new Color(0.8f, 0.2f, 1f, 0.6f); // Purple with more opacity
+                particlePrefab = mythicParticlePrefab;
                 break;
             case RarityType.Legendary:
-                rarityColor = new Color(1f, 0.84f, 0f, 0.8f); // Gold with higher opacity
+                particlePrefab = legendaryParticlePrefab;
                 break;
             case RarityType.Godlike:
-                rarityColor = new Color(1f, 0f, 0f, 1f); // Fully opaque red
+                particlePrefab = godlikeParticlePrefab;
                 break;
             default:
-                rarityColor = new Color(0f, 0f, 0f, 0f); // Default to fully transparent
-                break;
+                // Do nothing for Normal rarity
+                return;
         }
 
-        rarityImage.color = rarityColor;
+        if (particlePrefab != null)
+        {
+            // Instantiate the particle effect as a child of this object
+            currentParticleEffect = Instantiate(particlePrefab, transform);
+            // Adjust the local position with the Y offset
+            currentParticleEffect.transform.localPosition = new Vector3(0f, yOffset, 0f);
+        }
+        else
+        {
+            Debug.LogWarning("Particle prefab not assigned for rarity: " + rarity.ToString());
+        }
     }
 
     public float GetDamage()

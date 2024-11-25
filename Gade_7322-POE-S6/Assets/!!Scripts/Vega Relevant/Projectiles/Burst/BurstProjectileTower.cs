@@ -100,6 +100,7 @@ public class BurstProjectileTower : MonoBehaviour, IHealth
 
     private void FireAtTarget(Transform target, Transform spawnPoint)
     {
+        SoundManager.Instance.PlaySFX("Cannon2", 0.05f);
         float damage = damagePerLevel[level - 1];
 
         Vector3 direction = (target.position - spawnPoint.position).normalized;

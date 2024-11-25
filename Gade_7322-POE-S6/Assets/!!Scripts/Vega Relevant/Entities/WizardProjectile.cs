@@ -7,6 +7,8 @@ public class WizardProjectile : MonoBehaviour
     [SerializeField] private List<string> ignoreCollisionTags = new List<string>();
     private Collider projectileCollider;
 
+    public new ParticleSystem particleSystem;
+    
     private void Start()
     {
         projectileCollider = GetComponent<Collider>();
@@ -38,11 +40,30 @@ public class WizardProjectile : MonoBehaviour
         if (health != null)
         {
             health.TakeDamage(damage);
-            Destroy(gameObject);
+            StartCoroutine(DestroyProjectile());
             if (Debug.isDebugBuild)
             {
                 Debug.Log($"{target.name} took {damage} damage.");
             }
         }
+        else {
+            Destroy(gameObject);
+        }
     }
+
+private System.Collections.IEnumerator DestroyProjectile()
+{
+    particleSystem = GetComponent<ParticleSystem>();
+    if (particleSystem != null)
+    {
+        var mainModule = particleSystem.main;
+        mainModule.startSizeMultiplier *= 0.5f;
+        mainModule.startSpeedMultiplier *= 0.5f;
+        SoundManager.Instance.PlaySFX("wizardprojectile", 0.5f);
+        particleSystem.Play();
+    }
+    yield return new WaitForSeconds(1f);
+    Destroy(gameObject);
+}
+
 }

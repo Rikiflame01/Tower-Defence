@@ -105,6 +105,8 @@ public class CatapultTower : MonoBehaviour, IHealth
         yield return new WaitForSeconds(delay);
         if (target != null && target.gameObject.activeInHierarchy)
         {
+            SoundManager.Instance.PlaySFX("Catapult", 0.5f);
+
             Rigidbody targetRb = target.GetComponent<Rigidbody>();
             NavMeshAgent targetAgent = target.GetComponent<NavMeshAgent>();
 

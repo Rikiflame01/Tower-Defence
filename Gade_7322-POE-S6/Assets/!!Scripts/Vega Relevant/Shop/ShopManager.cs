@@ -222,39 +222,49 @@ public class ShopManager : MonoBehaviour
         {
             case "ShieldBuyBttn":
                 PurchaseShieldDefender();
+                SoundManager.Instance.PlaySFX("Page Turn 2");
                 break;
             case "BurstBuyBttn":
                 PurchaseBurstDefender();
+                SoundManager.Instance.PlaySFX("Page Turn 2");
                 break;
             case "CatapultBuyBttn":
                 PurchaseCatapultDefender();
+                SoundManager.Instance.PlaySFX("Page Turn 2");
                 break;
             case "UpgradeTownHallBttn":
                 UpgradeTownHall();
+                SoundManager.Instance.PlaySFX("Page Turn 2");
                 break;
             case "UpgradeProjectileBttn":
                 UpgradeProjectile();
+                SoundManager.Instance.PlaySFX("Page Turn 2");
                 break;
             case "HealAllyBttn":
                 HealObjectsWithTags(new List<string> { "TownHall", "ShieldDefender", "Defender" });
+                SoundManager.Instance.PlaySFX("Page Turn 2");
                 break;
             case "ShopPanelBttn":
                 ClosePanel(InitialChoicePanel);
                 OpenPanel(ShopOptionsPanel);
+                SoundManager.Instance.PlaySFX("Page Turn 2");
                 break;
             case "TUpgradesBttn":
                 ClosePanel(InitialChoicePanel);
                 OpenPanel(TowerUpgradeOptionsPanel);
+                SoundManager.Instance.PlaySFX("Page Turn 2");
                 break;
             case "CoinPusherBttn":
                 CoinPusherPanel.SetActive(true);
                 EventManager.instance.TriggerCoinPusherBttn();
+                SoundManager.Instance.PlaySFX("Page Turn 2");
                 break;
             case "DropCoinBttn":
                 EventManager.instance.TriggerDropCoin();
                 break;
             case "TransitionBack":
                 EventManager.instance.TriggerTransitionBack();
+                SoundManager.Instance.PlaySFX("Page Turn 2");
                 CoinPusherPanel.SetActive(false);
                 break;
             default:

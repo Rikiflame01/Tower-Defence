@@ -79,10 +79,13 @@ public class GoldCollectionTrigger : MonoBehaviour
                 {
                     Gold gold = collider.GetComponent<Gold>();
                     if (gold != null)
-                    {
+                    {   
                         gold.TriggerCollection();
                     }
                 }
+                if (goldColliders.Length > 0){                
+                    SoundManager.Instance.PlaySFXRandomTiming("CoinDrop3", 1f);}
+
             }
             else
             {

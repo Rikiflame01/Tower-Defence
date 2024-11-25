@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6492487190181094326}
   - component: {fileID: 3930631943762124008}
   - component: {fileID: 8874193421455913511}
+  - component: {fileID: 1599518387258688748}
   m_Layer: 0
   m_Name: CoinPusherGold
   m_TagString: CoinPusherGold
@@ -133,3 +134,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &1599518387258688748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7272378888717646695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406b243c8ccf26e41a1307c7bd187f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

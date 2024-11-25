@@ -17,10 +17,12 @@ public class CollectionTrigger : MonoBehaviour
                 Destroy(other.gameObject);
                 break;
             case "CoinPusherSword":
+                SoundManager.Instance.PlaySFX("key1", 2f, transform.position);
                 RemoveEnemies();
                 Destroy(other.gameObject);
                 break;
             case "CoinPusherShield":
+                SoundManager.Instance.PlaySFX("key1", 2f, transform.position);
                 HealDefenders();
                 Destroy(other.gameObject);
                 break;

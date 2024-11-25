@@ -3508,6 +3508,7 @@ GameObject:
   - component: {fileID: 471496905840633121}
   - component: {fileID: 2436117889524925619}
   - component: {fileID: 7093486450121374613}
+  - component: {fileID: 8201345441440184921}
   m_Layer: 0
   m_Name: CoinPusherBttn
   m_TagString: Untagged
@@ -3617,6 +3618,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8201345441440184921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7395206692639905149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &7648814313647719846
 GameObject:
   m_ObjectHideFlags: 0
@@ -4018,6 +4032,7 @@ GameObject:
   - component: {fileID: 6534022161010640062}
   - component: {fileID: 7984296954406455732}
   - component: {fileID: 3615891751349370028}
+  - component: {fileID: 1156583228326540475}
   m_Layer: 0
   m_Name: TUpgradesBttn
   m_TagString: Untagged
@@ -4127,6 +4142,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1156583228326540475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444845364102704684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &9046569062239157855
 GameObject:
   m_ObjectHideFlags: 0

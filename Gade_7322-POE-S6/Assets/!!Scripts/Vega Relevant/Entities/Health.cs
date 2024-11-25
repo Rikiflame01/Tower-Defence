@@ -77,6 +77,7 @@ public class Health : MonoBehaviour, IHealth
     {
         if (gameObject.CompareTag("TownHall"))
         {
+                        SoundManager.Instance.PlaySFX("BuildingDestroyed", 0.5f);
             EventManager.instance.TriggerGameOverMode();
             Destroy(gameObject);
         }
@@ -91,6 +92,8 @@ public class Health : MonoBehaviour, IHealth
         }
         else if (gameObject.CompareTag("ShieldDefender") || gameObject.CompareTag("BurstDefender") || gameObject.CompareTag("CatapultDefender"))
         {
+            SoundManager.Instance.PlaySFX("BuildingDestroyed", 0.5f);
+            Debug.Log("Defender destroyed");
             Destroy(gameObject);
         }
         else if (Debug.isDebugBuild)

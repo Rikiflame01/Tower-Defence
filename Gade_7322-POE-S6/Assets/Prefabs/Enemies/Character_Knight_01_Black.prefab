@@ -963,7 +963,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rarity: 0
-  rarityCanvas: {fileID: 5961481880811223613}
+  empoweredParticlePrefab: {fileID: 119818, guid: d338c2a60ef417d45a03d2a93b533c32, type: 3}
+  mythicParticlePrefab: {fileID: 159196, guid: d838ca967dde6f741b7c35c71dc97235, type: 3}
+  legendaryParticlePrefab: {fileID: 194316, guid: 6b4f5051e60e9ec44a4e2081d620542a, type: 3}
+  godlikeParticlePrefab: {fileID: 173814, guid: c9101b04af7c2c6489fd803c8f6d406a, type: 3}
+  yOffset: 0
   baseHealth: 5
   baseDamage: 10
   baseSpeed: 2
@@ -3867,15 +3871,11 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6896085825216320136, guid: 0447d83e653a9ed47a46262f0bafca5e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0447d83e653a9ed47a46262f0bafca5e, type: 3}
---- !u!1 &5961481880811223613 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5758617949706862815, guid: 0447d83e653a9ed47a46262f0bafca5e, type: 3}
-  m_PrefabInstance: {fileID: 2112690344391441122}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6681997923057752037 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4749873850585984263, guid: 0447d83e653a9ed47a46262f0bafca5e, type: 3}

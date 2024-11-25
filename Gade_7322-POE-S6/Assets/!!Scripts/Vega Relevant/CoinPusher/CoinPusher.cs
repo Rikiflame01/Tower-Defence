@@ -108,7 +108,7 @@ public class CoinPusher : MonoBehaviour
         }
 
         waveCounter--;
-
+        SoundManager.Instance.PlaySFX("CoinSpill");
         int numCoins = Random.Range(10, 100);
         for (int i = 0; i < numCoins; i++)
         {
