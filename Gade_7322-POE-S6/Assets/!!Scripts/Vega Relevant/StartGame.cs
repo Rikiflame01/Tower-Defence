@@ -18,7 +18,7 @@ public class StartGame : MonoBehaviour
     [SerializeField] private float maxSpinSpeed = 900f;
     [SerializeField] private Transform lockTransform;
     private bool isSpinning = false;
-    private float spinDuration = 2f;
+    private float spinDuration = 4f;
     private float spinTimeElapsed = 0f;
     private Quaternion initialRotation;
 
@@ -75,7 +75,7 @@ public class StartGame : MonoBehaviour
 
     private void StartSpinning()
     {
-        SoundManager.Instance.PlaySFX("Spin");
+        SoundManager.Instance.PlaySFX("Spin", 3f);
         isSpinning = true;
         spinTimeElapsed = 0f;
         initialRotation = transform.rotation;

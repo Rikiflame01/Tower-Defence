@@ -119,7 +119,6 @@ private void InitializeRagdoll(bool isActive)
         if (animator != null) animator.enabled = true;
     }
 
-    // Ensure main collider remains enabled for targeting
     Collider mainCollider = GetComponent<Collider>();
     if (mainCollider != null)
     {
@@ -127,63 +126,60 @@ private void InitializeRagdoll(bool isActive)
     }
 }
 
-    private void Update()
+private void Update()
+{
+    if (targets.Count == 0)
     {
-        if (targets.Count == 0)
-        {
-            FindTargets();
-            return;
-        }
+        FindTargets();
+        return;
+    }
 
-        GameObject nearestTarget = GetNearestTarget();
-        if (nearestTarget != null)
-        {
-            Vector3 targetPosition = GetClosestPointOnTarget(nearestTarget);
+    GameObject nearestTarget = GetNearestTarget();
+    if (nearestTarget != null)
+    {
+        Vector3 targetPosition = GetClosestPointOnTarget(nearestTarget);
 
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(targetPosition, out hit, navMeshSearchDistance, NavMesh.AllAreas) && navMeshAgent != null && navMeshAgent.enabled)
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(targetPosition, out hit, navMeshSearchDistance, NavMesh.AllAreas) && navMeshAgent != null && navMeshAgent.enabled)
+        {
+            navMeshAgent.SetDestination(hit.position);
+
+            float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
+            if (distanceToTarget <= attackRange + 0.1f)
             {
-                navMeshAgent.SetDestination(hit.position);
-
-                float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
-                if (distanceToTarget <= attackRange + 0.1f)
+                if (Time.time >= lastAttackTime + attackCooldown)
                 {
-                    if (!animator.GetBool("IsAttacking"))
-                    {
-                        AttackTarget(nearestTarget);
-                    }
-                }
-                else
-                {
-                    if (animator.GetBool("IsAttacking"))
-                    {
-                        animator.SetBool("IsAttacking", false);
-                    }
-                }
-            }
-            else if (Debug.isDebugBuild)
-            {
-                Debug.LogWarning("No valid NavMesh position found near target.");
-            }
-        }
-
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-        {
-            animator.SetBool("IsAttacking", false);
-        }
-
-        if (enemiesInRange.Count > 0 && Time.time >= lastAttackTime + attackCooldown)
-        {
-            foreach (GameObject enemy in enemiesInRange)
-            {
-                if (enemy != null && enemy.activeInHierarchy)
-                {
-                    AttackTarget(enemy);
-                    break;
+                    AttackTarget(nearestTarget);
                 }
             }
         }
     }
+
+    if (animator != null && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            animator.SetBool("IsAttacking", false);
+        }
+    }
+
+    if (enemiesInRange.Count > 0 && Time.time >= lastAttackTime + attackCooldown)
+    {
+        foreach (GameObject enemy in enemiesInRange)
+        {
+            if (enemy != null && enemy.activeInHierarchy && enemy.GetComponent<IHealth>().GetCurrentHealth() >= 0)
+            {
+                AttackTarget(enemy);
+                break;
+            }
+            else if (enemy.GetComponent<IHealth>().GetCurrentHealth() <= 0)
+            {
+                enemiesInRange.Remove(enemy);
+                break;
+            }
+        }
+    }
+}
 
     private void FindTargets()
     {
@@ -243,23 +239,32 @@ private void InitializeRagdoll(bool isActive)
         return target.transform.position;
     }
 
-    private void AttackTarget(GameObject target)
+private void AttackTarget(GameObject target)
+{
+    if (target == null || !target.activeInHierarchy)
+        return;
+
+    if (Time.time >= lastAttackTime + attackCooldown)
     {
-        if (Time.time >= lastAttackTime + attackCooldown)
+        // Apply damage
+        IHealth health = target.GetComponent<IHealth>();
+        if (health != null)
         {
-            IHealth health = target.GetComponent<IHealth>();
-            if (health != null)
+            health.TakeDamage(damage);
+            lastAttackTime = Time.time;
+
+            // Trigger attack animation
+            if (animator != null)
             {
-                health.TakeDamage(damage);
-                lastAttackTime = Time.time;
                 animator.SetBool("IsAttacking", true);
             }
-            else if (Debug.isDebugBuild)
-            {
-                Debug.LogWarning("Target does not have an IHealth component.");
-            }
+        }
+        else if (Debug.isDebugBuild)
+        {
+            Debug.LogWarning("Target does not have an IHealth component.");
         }
     }
+}
 
     private void OnTriggerEnter(Collider other)
     {

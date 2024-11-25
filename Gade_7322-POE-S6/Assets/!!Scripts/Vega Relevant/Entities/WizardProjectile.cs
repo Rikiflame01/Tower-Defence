@@ -35,7 +35,7 @@ public class WizardProjectile : MonoBehaviour
                 return;
             }
         }
-
+        Debug.Log("Collision detected with " + target.tag);
         IHealth health = target.GetComponent<IHealth>();
         if (health != null)
         {

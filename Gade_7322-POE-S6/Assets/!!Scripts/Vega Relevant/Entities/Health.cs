@@ -76,9 +76,9 @@ private void Die()
 {
     if (gameObject.CompareTag("TownHall"))
     {
-        SoundManager.Instance.PlaySFX("BuildingDestroyed", 0.5f);
         EventManager.instance.TriggerGameOverMode();
-        Destroy(gameObject);
+
+        StartCoroutine(HandleBuildingDestruction());
     }
     else if (gameObject.CompareTag("KnightMeleeEnemy") || gameObject.CompareTag("HKnightMeleeEnemy") || gameObject.CompareTag("WizardRangedEnemy"))
     {
@@ -93,14 +93,15 @@ private void Die()
     else if (gameObject.CompareTag("ShieldDefender") || gameObject.CompareTag("BurstDefender") || gameObject.CompareTag("CatapultDefender"))
     {
         SoundManager.Instance.PlaySFX("BuildingDestroyed", 0.5f);
-        Debug.Log("Defender destroyed");
-        Destroy(gameObject);
+
+        StartCoroutine(HandleBuildingDestruction());
     }
     else if (Debug.isDebugBuild)
     {
         Debug.LogWarning("No behavior defined for death of " + gameObject.name);
     }
 }
+
 
 private System.Collections.IEnumerator HandleRagdollAndDestroy()
 {
@@ -138,6 +139,42 @@ EnemyManager.instance.RemoveEnemy(this.gameObject);
     Destroy(gameObject);
 }
 
+private System.Collections.IEnumerator HandleBuildingDestruction()
+{
+    NavMeshAgent agent = GetComponent<NavMeshAgent>();
+    if (agent != null) agent.enabled = false;
+
+    Animator animator = GetComponent<Animator>();
+    if (animator != null) animator.enabled = false;
+
+    foreach (Transform child in transform)
+    {
+
+        Rigidbody rb = child.gameObject.GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = child.gameObject.AddComponent<Rigidbody>();
+            rb.mass = 40f;
+        }
+
+        Collider col = child.gameObject.GetComponent<Collider>();
+        if (col == null)
+        {
+            col = child.gameObject.AddComponent<BoxCollider>();
+        }
+
+        Vector3 randomDirection = new Vector3(
+            Random.Range(-1f, 1f),
+            Random.Range(0.5f, 1f),
+            Random.Range(-1f, 1f)
+        ).normalized;
+
+        rb.AddForce(randomDirection * 50, ForceMode.Impulse);
+    }
+    SoundManager.Instance.PlaySFX("BuildingDestroyed", 0.5f);
+    yield return new WaitForSeconds(1f);
+    Destroy(gameObject);
+}
 
     public void Heal()
     {

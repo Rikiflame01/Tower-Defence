@@ -61,7 +61,6 @@ public class TownHallProjectileSpawner : MonoBehaviour
             if (Time.time - lastShotTime >= townHallLevelData.interval)
             {
                 Shoot(nearestEnemy.transform);
-                SoundManager.Instance.PlaySFX("Cannon1", 0.1f);
                 lastShotTime = Time.time;
             }
         }
@@ -122,6 +121,7 @@ public class TownHallProjectileSpawner : MonoBehaviour
         {
             Vector3 direction = (target.position - shootPoint.position).normalized;
             rb.AddForce(direction * projectileForce);
+            SoundManager.Instance.PlaySFX("Cannon1", 0.1f);
         }
     }
 
