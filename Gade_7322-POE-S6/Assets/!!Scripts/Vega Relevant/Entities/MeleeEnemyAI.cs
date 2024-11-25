@@ -49,6 +49,9 @@ public class MeleeEnemyAI : MonoBehaviour
     [SerializeField] private BoxCollider damageTrigger;
     private List<GameObject> enemiesInRange = new List<GameObject>();
 
+    private Rigidbody[] ragdollRigidbodies;
+    private Collider[] ragdollColliders;
+
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -81,7 +84,48 @@ public class MeleeEnemyAI : MonoBehaviour
                 Debug.LogError("No trigger collider found on damageTrigger object.");
             }
         }
+
+        InitializeRagdoll(false);
     }
+
+private void InitializeRagdoll(bool isActive)
+{
+    if (ragdollRigidbodies == null || ragdollColliders == null)
+    {
+        ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
+        ragdollColliders = GetComponentsInChildren<Collider>();
+    }
+
+    foreach (var rb in ragdollRigidbodies)
+    {
+        rb.isKinematic = !isActive;
+        rb.useGravity = isActive;
+    }
+
+    foreach (var col in ragdollColliders)
+    {
+        col.enabled = isActive;
+    }
+
+    // Enable/Disable AI Components
+    if (isActive)
+    {
+        if (navMeshAgent != null) navMeshAgent.enabled = false;
+        if (animator != null) animator.enabled = false;
+    }
+    else
+    {
+        if (navMeshAgent != null) navMeshAgent.enabled = true;
+        if (animator != null) animator.enabled = true;
+    }
+
+    // Ensure main collider remains enabled for targeting
+    Collider mainCollider = GetComponent<Collider>();
+    if (mainCollider != null)
+    {
+        mainCollider.enabled = !isActive;
+    }
+}
 
     private void Update()
     {

@@ -73,9 +73,9 @@ public class THProjectile : MonoBehaviour
         {
             IHealth health = collision.gameObject.GetComponent<IHealth>();
             if (health != null)
-            {
+            {   
                 health.TakeDamage(projectileData.GetDamage());
-                Destroy(gameObject);
+                StartCoroutine(StartDespawn());
             }
         }
 

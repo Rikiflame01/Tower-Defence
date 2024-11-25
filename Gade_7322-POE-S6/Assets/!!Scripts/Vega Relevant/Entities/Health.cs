@@ -19,6 +19,7 @@
 */
 
 using UnityEngine;
+using UnityEngine.AI;
 
 public interface IHealth
 {
@@ -48,8 +49,6 @@ public class Health : MonoBehaviour, IHealth
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        //Debug.Log($"{gameObject.name} took {amount} damage. Current health: {currentHealth}");
-
         if (currentHealth <= 0)
         {
             Die();
@@ -73,34 +72,72 @@ public class Health : MonoBehaviour, IHealth
         currentHealth = Mathf.Clamp(value, 0, maxHealth);
     }
 
-    private void Die()
+private void Die()
+{
+    if (gameObject.CompareTag("TownHall"))
     {
-        if (gameObject.CompareTag("TownHall"))
+        SoundManager.Instance.PlaySFX("BuildingDestroyed", 0.5f);
+        EventManager.instance.TriggerGameOverMode();
+        Destroy(gameObject);
+    }
+    else if (gameObject.CompareTag("KnightMeleeEnemy") || gameObject.CompareTag("HKnightMeleeEnemy") || gameObject.CompareTag("WizardRangedEnemy"))
+    {
+        StartCoroutine(HandleRagdollAndDestroy());
+
+        GoldDropper goldDropper = GetComponent<GoldDropper>();
+        if (goldDropper != null)
         {
-                        SoundManager.Instance.PlaySFX("BuildingDestroyed", 0.5f);
-            EventManager.instance.TriggerGameOverMode();
-            Destroy(gameObject);
-        }
-        else if (gameObject.CompareTag("KnightMeleeEnemy") || gameObject.CompareTag("HKnightMeleeEnemy") || gameObject.CompareTag("WizardRangedEnemy"))
-        {
-            GoldDropper goldDropper = GetComponent<GoldDropper>();
-            if (goldDropper != null)
-            {
-                goldDropper.DropGold(3);
-            }
-            EnemyManager.instance.RemoveEnemy(this.gameObject);
-        }
-        else if (gameObject.CompareTag("ShieldDefender") || gameObject.CompareTag("BurstDefender") || gameObject.CompareTag("CatapultDefender"))
-        {
-            SoundManager.Instance.PlaySFX("BuildingDestroyed", 0.5f);
-            Debug.Log("Defender destroyed");
-            Destroy(gameObject);
-        }
-        else if (Debug.isDebugBuild)
-        {
-            Debug.LogWarning("No behavior defined for death of " + gameObject.name);
+            goldDropper.DropGold(3);
         }
     }
+    else if (gameObject.CompareTag("ShieldDefender") || gameObject.CompareTag("BurstDefender") || gameObject.CompareTag("CatapultDefender"))
+    {
+        SoundManager.Instance.PlaySFX("BuildingDestroyed", 0.5f);
+        Debug.Log("Defender destroyed");
+        Destroy(gameObject);
+    }
+    else if (Debug.isDebugBuild)
+    {
+        Debug.LogWarning("No behavior defined for death of " + gameObject.name);
+    }
+}
+
+private System.Collections.IEnumerator HandleRagdollAndDestroy()
+{
+    NavMeshAgent agent = GetComponent<NavMeshAgent>();
+    if (agent != null) agent.enabled = false;
+
+    Animator animator = GetComponent<Animator>();
+    if (animator != null) animator.enabled = false;
+
+    Rigidbody[] rigidbodies = GetComponentsInChildren<Rigidbody>();
+    foreach (var rb in rigidbodies)
+    {
+        rb.isKinematic = false;
+        rb.useGravity = true;
+    }
+
+    Collider[] colliders = GetComponentsInChildren<Collider>();
+    foreach (var col in colliders)
+    {
+        col.enabled = true;
+    }
+
+foreach (var rb in rigidbodies)
+{
+    Vector3 randomDirection = new Vector3(
+        Random.Range(-1f, 1f), 
+        Random.Range(0.5f, 1f), 
+        Random.Range(-1f, 1f)
+    ).normalized;
+    rb.AddForce(randomDirection * 500);
+}
+EnemyManager.instance.RemoveEnemy(this.gameObject);
+
+    yield return new WaitForSeconds(2f);
+    Destroy(gameObject);
+}
+
 
     public void Heal()
     {

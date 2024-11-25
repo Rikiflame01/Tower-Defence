@@ -20,6 +20,9 @@ public class RangedEnemyAI : MonoBehaviour
     [SerializeField] private List<string> targetTags;
     [SerializeField] private float navMeshSearchDistance = 2.0f;
 
+    private Rigidbody[] ragdollRigidbodies;
+    private Collider[] ragdollColliders;
+
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -38,7 +41,47 @@ public class RangedEnemyAI : MonoBehaviour
         navMeshAgent.stoppingDistance = attackRange - 0.1f;
 
         FindTargets();
+
+        InitializeRagdoll(false);
     }
+
+private void InitializeRagdoll(bool isActive)
+{
+    if (ragdollRigidbodies == null || ragdollColliders == null)
+    {
+        ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
+        ragdollColliders = GetComponentsInChildren<Collider>();
+    }
+
+    foreach (var rb in ragdollRigidbodies)
+    {
+        rb.isKinematic = !isActive;
+        rb.useGravity = isActive;
+    }
+
+    foreach (var col in ragdollColliders)
+    {
+        col.enabled = isActive;
+    }
+
+    if (isActive)
+    {
+        if (navMeshAgent != null) navMeshAgent.enabled = false;
+        if (animator != null) animator.enabled = false;
+    }
+    else
+    {
+        if (navMeshAgent != null) navMeshAgent.enabled = true;
+        if (animator != null) animator.enabled = true;
+    }
+
+    Collider mainCollider = GetComponent<Collider>();
+    if (mainCollider != null)
+    {
+        mainCollider.enabled = !isActive;
+    }
+}
+
 
     private void Update()
     {

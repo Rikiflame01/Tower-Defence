@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BurstProjectile : MonoBehaviour
@@ -48,7 +49,7 @@ public class BurstProjectile : MonoBehaviour
 
     private void Update()
     {
-        if (target != null)
+        if (target != null && target.gameObject.GetComponent<IHealth>().GetCurrentHealth() > 0)
         {
             Vector3 direction = (target.position - transform.position).normalized;
             lastDirection = direction;
@@ -77,7 +78,7 @@ public class BurstProjectile : MonoBehaviour
             {
                 collision.gameObject.tag = "Dead";
             }
-            Destroy(gameObject);
+            StartCoroutine(DestroyAfterTime(5f));
         }
     }
 }
