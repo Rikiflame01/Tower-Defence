@@ -7,12 +7,14 @@
     - Handles the instantiation and placement of foliage prefabs.
     - Provides methods for checking conditions around paths, the TownHall, and existing foliage.
     - Uses raycasting and sphere checks to determine if positions meet specific criteria.
+    - Includes a loading bar that displays the progress of foliage generation.
+    - Processes a limited number of nodes per frame to prevent freezing.
 */
-
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; // For UI elements
 
 public class FoliageManager : MonoBehaviour
 {
@@ -31,8 +33,18 @@ public class FoliageManager : MonoBehaviour
     private Dictionary<Vector3, GameObject> occupiedNodes = new Dictionary<Vector3, GameObject>();
     private Transform townHallTransform;
 
+    // References for the loading bar
+    public Canvas loadingBarCanvas; // Reference to your loading bar canvas
+    public Slider loadingBar;       // If using a Slider UI element
+
     void Start()
     {
+        // Activate the loading bar canvas at the start
+        if (loadingBarCanvas != null)
+        {
+            loadingBarCanvas.gameObject.SetActive(true);
+        }
+
         GameObject townHall = GameObject.FindGameObjectWithTag("TownHall");
         if (townHall != null)
         {
@@ -57,24 +69,58 @@ public class FoliageManager : MonoBehaviour
             yield break;
         }
 
-        foreach (var node in allNodes)
+        int totalNodes = allNodes.Length;
+        int nodesProcessed = 0;
+        int nodesPerFrame = 350;
+
+        while (nodesProcessed < totalNodes)
         {
-            Vector3 nodePosition = node.transform.position;
+            int nodesToProcess = Mathf.Min(nodesPerFrame, totalNodes - nodesProcessed);
 
-            PlaceGrass(node, nodePosition);
-
-            if (node.isOccupied || IsPositionNearPath(nodePosition))
-                continue;
-
-            float noiseValue = Mathf.PerlinNoise(nodePosition.x / perlinScale, nodePosition.z / perlinScale);
-
-            if (noiseValue > foliageDensity)
+            for (int i = 0; i < nodesToProcess; i++)
             {
-                if (TryPlaceFoliage(node, nodePosition, noiseValue))
-                {
+                Node node = allNodes[nodesProcessed];
+                nodesProcessed++;
+
+                Vector3 nodePosition = node.transform.position;
+
+                PlaceGrass(node, nodePosition);
+
+                if (node.isOccupied || IsPositionNearPath(nodePosition))
                     continue;
+
+                float noiseValue = Mathf.PerlinNoise(nodePosition.x / perlinScale, nodePosition.z / perlinScale);
+
+                if (noiseValue > foliageDensity)
+                {
+                    if (TryPlaceFoliage(node, nodePosition, noiseValue))
+                    {
+                        continue;
+                    }
                 }
             }
+
+            // Update the loading bar
+            float progress = (float)nodesProcessed / totalNodes;
+
+            if (loadingBar != null)
+            {
+                loadingBar.value = progress;
+            }
+
+            yield return null; // Wait for the next frame to allow UI update
+        }
+
+        // Ensure the progress bar is full at the end
+        if (loadingBar != null)
+        {
+            loadingBar.value = 1f;
+        }
+
+        // Disable the loading bar canvas
+        if (loadingBarCanvas != null)
+        {
+            loadingBarCanvas.gameObject.SetActive(false);
         }
     }
 
@@ -166,7 +212,7 @@ public class FoliageManager : MonoBehaviour
         {
             if (node.Value != null && node.Value.CompareTag("Tree") && Vector3.Distance(node.Key, position) < minDistanceBetweenTrees)
             {
-                Debug.Log($"Tree found near position {position}, cannot place another tree.");
+                // Debug.Log($"Tree found near position {position}, cannot place another tree.");
                 return true;
             }
         }
