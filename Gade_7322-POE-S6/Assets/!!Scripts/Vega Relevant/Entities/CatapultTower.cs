@@ -26,8 +26,13 @@ public class CatapultTower : MonoBehaviour, IHealth
     public GameObject Level3Objects;
     public GameObject Level4Objects;
 
+    public new ParticleSystem particleSystem;
+
     private void Start()
     {
+        particleSystem = GetComponent<ParticleSystem>();
+        particleSystem.Stop();
+
         objectRenderer = GetComponentInChildren<Renderer>();
         healthComponent = GetComponent<Health>();
 
@@ -106,6 +111,7 @@ public class CatapultTower : MonoBehaviour, IHealth
         if (target != null && target.gameObject.activeInHierarchy)
         {
             SoundManager.Instance.PlaySFX("Catapult", 0.5f);
+            particleSystem.Play();
 
             Rigidbody targetRb = target.GetComponent<Rigidbody>();
             NavMeshAgent targetAgent = target.GetComponent<NavMeshAgent>();
@@ -132,6 +138,8 @@ public class CatapultTower : MonoBehaviour, IHealth
         {
             Debug.LogWarning("Target is null or inactive when attempting to launch.");
         }
+        yield return new WaitForSeconds(1f);
+        particleSystem.Stop();
     }
 
     private System.Collections.IEnumerator ApplyDamageAfterDelay(NavMeshAgent target, float delay)

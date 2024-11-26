@@ -11,6 +11,9 @@ public class BurstProjectile : MonoBehaviour
     private Vector3 lastDirection;
     [SerializeField] private List<string> ignoreCollisionTags;
 
+    private float lastSoundTime;
+    private float soundCooldown = 0.1f;
+
     public void SetTarget(Transform target, float damage, Vector3 direction)
     {
         this.target = target;
@@ -79,6 +82,22 @@ public class BurstProjectile : MonoBehaviour
                 collision.gameObject.tag = "Dead";
             }
             StartCoroutine(DestroyAfterTime(5f));
+        }
+        if (collision.gameObject.tag == "HKnightMeleeEnemy" || collision.gameObject.tag == "KnightMeleeEnemy" || collision.gameObject.tag == "WizardRangedEnemy")
+        {
+                        if (Time.time >= lastSoundTime + soundCooldown)
+            {
+                int randomChance = UnityEngine.Random.Range(0, 20);
+                if (randomChance == 0)
+                {
+                    SoundManager.Instance.PlaySFX("BowlingStrike", 0.5f);
+                }
+                else
+                {
+                    SoundManager.Instance.PlaySFX("Impact1", 0.5f);
+                }
+                lastSoundTime = Time.time;
+            }
         }
     }
 }

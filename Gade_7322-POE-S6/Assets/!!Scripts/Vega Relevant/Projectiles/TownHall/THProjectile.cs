@@ -25,6 +25,8 @@ public class THProjectile : MonoBehaviour
     public TownHallProjectileSO projectileData;
     public float speed = 10f;
     private GameObject target;
+    private float lastSoundTime;
+    private float soundCooldown = 0.1f;
 
     private void Start()
     {
@@ -71,15 +73,33 @@ public class THProjectile : MonoBehaviour
         if (collision.gameObject.tag != "ShieldDefender" && collision.gameObject.tag != 
             "TownHall" && collision.gameObject.tag != "BurstDefender" && collision.gameObject.tag != "CatapultDefender")
         {
+
             IHealth health = collision.gameObject.GetComponent<IHealth>();
             if (health != null)
-            {   
+            {
                 health.TakeDamage(projectileData.GetDamage());
                 StartCoroutine(StartDespawn());
             }
         }
+        if (collision.gameObject.tag == "HKnightMeleeEnemy" || collision.gameObject.tag == "KnightMeleeEnemy" || collision.gameObject.tag == "WizardRangedEnemy")
+        {
+                        if (Time.time >= lastSoundTime + soundCooldown)
+            {
+                int randomChance = Random.Range(0, 20);
+                if (randomChance == 0)
+                {
+                    SoundManager.Instance.PlaySFX("BowlingStrike", 0.5f);
+                }
+                else
+                {
+                    SoundManager.Instance.PlaySFX("Impact1", 0.5f);
+                }
+                lastSoundTime = Time.time;
+            }
+        }
 
-        if (projectileData.hasHoming == false) { 
+        if (!projectileData.hasHoming)
+        {
             StartCoroutine(StartDespawn());
         }
     }
