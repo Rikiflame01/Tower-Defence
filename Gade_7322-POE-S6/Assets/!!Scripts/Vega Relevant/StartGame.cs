@@ -34,6 +34,11 @@ public class StartGame : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.currentState == GameManager.GameState.GameOver)
+        {
+            Debug.LogWarning("Game is over, cannot skip wave");
+            return;
+        }
         if (lockTransform != null)
         {
             transform.position = lockTransform.position;

@@ -76,12 +76,14 @@ private void Die()
 {
     if (gameObject.CompareTag("TownHall"))
     {
+        this.gameObject.tag = "Dead";
         EventManager.instance.TriggerGameOverMode();
 
         StartCoroutine(HandleBuildingDestruction());
     }
     else if (gameObject.CompareTag("KnightMeleeEnemy") || gameObject.CompareTag("HKnightMeleeEnemy") || gameObject.CompareTag("WizardRangedEnemy"))
     {
+        this.gameObject.tag = "Dead";
         StartCoroutine(HandleRagdollAndDestroy());
 
         GoldDropper goldDropper = GetComponent<GoldDropper>();
@@ -92,6 +94,7 @@ private void Die()
     }
     else if (gameObject.CompareTag("ShieldDefender") || gameObject.CompareTag("BurstDefender") || gameObject.CompareTag("CatapultDefender"))
     {
+        this.gameObject.tag = "Dead";
         SoundManager.Instance.PlaySFX("BuildingDestroyed", 0.5f);
 
         StartCoroutine(HandleBuildingDestruction());
@@ -154,7 +157,7 @@ private System.Collections.IEnumerator HandleBuildingDestruction()
         if (rb == null)
         {
             rb = child.gameObject.AddComponent<Rigidbody>();
-            rb.mass = 40f;
+            rb.mass = 35f;
         }
 
         Collider col = child.gameObject.GetComponent<Collider>();

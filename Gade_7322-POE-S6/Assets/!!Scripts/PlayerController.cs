@@ -110,6 +110,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePause()
     {
+        if (GameManager.instance.currentState == GameManager.GameState.GameOver)
+        {
+            Debug.LogWarning("Game is over, cannot pause");
+            return;
+        }
         if (GameManager.instance != null)
         {
             if (GameManager.instance.currentState != GameManager.GameState.Placement)
@@ -139,6 +144,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleFreeLook()
     {
+        if (GameManager.instance.currentState == GameManager.GameState.GameOver)
+        {
+            Debug.LogWarning("Game is over, cannot free look.");
+            return;
+        }
         if (Input.GetMouseButtonDown(1))
         {
             isFreeLookActive = true;

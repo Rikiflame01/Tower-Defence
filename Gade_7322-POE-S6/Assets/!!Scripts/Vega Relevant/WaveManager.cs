@@ -28,6 +28,12 @@ public class WaveManager : MonoBehaviour
 
     private void StartWave()
     {
+        if (GameManager.instance.currentState == GameManager.GameState.GameOver)
+        {
+            Debug.LogWarning("Game is over, cannot start a new wave.");
+            return;
+        }
+
         roundCounter++;
 
         int enemyCount = roundCounter + 8;
